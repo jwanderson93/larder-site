@@ -4,15 +4,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#1A1208">
   <title>Larder</title>
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="assets/site.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
-<body>
-  <div class="wrap">
+<body class="app">
+  <main class="wrap" id="home">
     <img class="mascot" src="img/stockpot.jpg" alt="Larder stockpot">
     <h1>Larder</h1>
-    <p class="lede">Open the link in the email from Larder to see this week's dinners. There is nothing to sign in to.</p>
-  </div>
+    <p class="lede" id="home-card">This week's dinners are in the email from Larder. There is nothing to sign in to.</p>
+  </main>
+  <script src="assets/pwa.js"></script>
+  <script>
+  (function () {
+    var last = localStorage.getItem("larder-last-week");
+    var card = document.getElementById("home-card");
+    if (!last || !card) return;
+    var link = document.createElement("a");
+    link.className = "button";
+    link.href = last;
+    link.textContent = "Back to this week's dinners";
+    card.appendChild(document.createElement("br"));
+    card.appendChild(link);
+  })();
+  </script>
 </body>
 </html>

@@ -4,33 +4,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#1A1208">
   <title>Lamb and carrot meatballs in tomato sauce with tagliatelle</title>
+  <link rel="manifest" href="../../../manifest.webmanifest">
   <link rel="stylesheet" href="../../../assets/site.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
-<body data-recipe="R15">
-  <div class="wrap">
+<body class="app" data-recipe="R15">
+  <main class="wrap">
     <p class="kicker"><a href="../">Back to the week</a> · R15 · Thu 26 Nov</p>
     <h1>Lamb and carrot meatballs in tomato sauce with tagliatelle</h1>
     <p class="lede">Sunday: 30 min to roll and bake. Cook day: 20 min. · Serves 2 + Jude</p>
 <div class="flags"><span class="flag">Quick</span><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">3 for £10</span></div>    <img src="../../../img/R15_lamb-carrot-meatballs-tagliatelle.jpg" alt="Lamb and carrot meatballs in tomato sauce with tagliatelle">
-<p>Lamb mince 300 g £3.34 (3 for £10); Tagliatelle 500 g £2.40. About half used</p>    <p class="card"><span class="jude">Jude, before step 5:</span> Lift Jude&#39;s meatballs and a spoon of sauce out before you season.</p>
+    <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
+    <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
+<details><summary>What it cost</summary><p>Lamb mince 300 g £3.34 (3 for £10); Tagliatelle 500 g £2.40. About half used</p></details>    <p class="card"><span class="jude">Jude, before step 5:</span> Lift Jude&#39;s meatballs and a spoon of sauce out before you season.</p>
 
     <h2>Ingredients</h2>
+    <h3>For this sitting</h3>
     <ul>
-      <li><label><input type="checkbox" data-tick="ing-1"> 300 g lamb mince</label></li>
-      <li><label><input type="checkbox" data-tick="ing-2"> 1 carrot (finely grated and squeezed dry)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-3"> ½ onion (finely grated and squeezed dry)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-4"> 1 clove garlic (crushed)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-5"> 1 tbsp plain flour (or 2 tbsp oats)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-6"> ½ tsp each ground cumin and oregano</label></li>
-      <li><label><input type="checkbox" data-tick="ing-7"> about 500 g tomato sauce or passata</label></li>
-      <li><label><input type="checkbox" data-tick="ing-8"> about 220 g tagliatelle (plus a small handful for Jude)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-9"> to taste grated cheese</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-1"> 300 g lamb mince</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-2"> 1 carrot (finely grated and squeezed dry)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-3"> ½ onion (finely grated and squeezed dry)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-4"> 1 clove garlic (crushed)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-5"> 1 tbsp plain flour (or 2 tbsp oats)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-6"> ½ tsp each ground cumin and oregano</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-7"> about 500 g tomato sauce or passata</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-8"> about 220 g tagliatelle (plus a small handful for Jude)</label></li>
+    </ul>
+    <h3>After his portion</h3>
+    <ul>
+      <li><label><input type="checkbox" data-tick="ing-adults_only-1"> to taste grated cheese</label></li>
     </ul>
 
     <h2>Method</h2>
-    <p class="no-print"><button type="button" id="cook-mode">Cook</button></p>
+    <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
+    <p id="step-count" aria-live="polite"></p>
     <ol id="method">
       <li class="">
         <label><input type="checkbox" data-tick="step-1"> Mix the lamb, carrot, onion, garlic, flour and spices. No salt in the mix, so every meatball works for Jude.</label>
@@ -55,8 +64,16 @@
     <h2>Jude's plate</h2>
     <p><span class="jude">Jude:</span> 2–3 plain soft meatballs, mashed or quartered, with a spoon of unseasoned sauce and short pieces of soft tagliatelle.</p>
 <p>Shop-bought tomato sauce can carry a little salt, so keep his sauce to a spoon.</p>    <p><strong>Keeping it:</strong> Cooked meatballs: freezer 3 months. Once defrosted, eat within 24 hours.</p>
+    <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
     <footer><a href="../">Back to the week</a></footer>
-  </div>
+  </main>
+  <nav class="tabbar" aria-label="Larder">
+    <a href="../#tonight">Tonight</a>
+    <a href="../#dinners">Week</a>
+    <a href="../sunday/">Sunday</a>
+    <a href="../shop/">Shop</a>
+  </nav>
   <script src="../../../assets/card.js"></script>
+  <script src="../../../assets/pwa.js"></script>
 </body>
 </html>

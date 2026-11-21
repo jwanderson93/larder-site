@@ -4,34 +4,46 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#1A1208">
   <title>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</title>
+  <link rel="manifest" href="../../../manifest.webmanifest">
   <link rel="stylesheet" href="../../../assets/site.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
-<body data-recipe="R12">
-  <div class="wrap">
+<body class="app" data-recipe="R12">
+  <main class="wrap">
     <p class="kicker"><a href="../">Back to the week</a> · R12 · Sun 22 Nov</p>
     <h1>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</h1>
     <p class="lede">About 1 hr 45 min (40 min hands-on) · Serves 2 + Jude, plus leftovers</p>
 <div class="flags"><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">Leaves leftovers</span></div>    <img src="../../../img/R12_corn-fed-roast-chicken.jpg" alt="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
-<p>The Best corn-fed chicken 1.75 kg £12.22. Shared with Tuesday&#39;s shawarma. Not bought again.</p>    <p class="card"><span class="jude">Jude, before step 6:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p>
+    <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
+    <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
+<details><summary>What it cost</summary><p>The Best corn-fed chicken 1.75 kg £12.22. Shared with Tuesday&#39;s shawarma. Not bought again.</p></details>    <p class="card"><span class="jude">Jude, before step 6:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p>
 
     <h2>Ingredients</h2>
+    <h3>For this sitting</h3>
     <ul>
-      <li><label><input type="checkbox" data-tick="ing-1"> 1.75 kg corn-fed free-range chicken</label></li>
-      <li><label><input type="checkbox" data-tick="ing-2"> 1 lemon (halved, for the cavity)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-3"> 3 cloves garlic (for the cavity)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-4"> about 1 kg Maris Piper potatoes (peeled and halved)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-5"> 2 potatoes (kept back for Jude&#39;s plain mash)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-6"> 4–5 carrots (batons)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-7"> 200 g tenderstem broccoli</label></li>
-      <li><label><input type="checkbox" data-tick="ing-8"> 2–3 tbsp olive oil</label></li>
-      <li><label><input type="checkbox" data-tick="ing-9"> a splash whole milk (for Jude&#39;s mash)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-10"> to taste black pepper and thyme or oregano</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-1"> 1.75 kg corn-fed free-range chicken</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-2"> 1 lemon (halved, for the cavity)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-3"> 3 cloves garlic (for the cavity)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-4"> about 1 kg Maris Piper potatoes (peeled and halved)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-5"> 4–5 carrots (batons)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-6"> 200 g tenderstem broccoli</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-7"> 2–3 tbsp olive oil</label></li>
+    </ul>
+    <h3>His plate</h3>
+    <ul>
+      <li><label><input type="checkbox" data-tick="ing-jude-1"> 2 potatoes (kept back for Jude&#39;s plain mash)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-jude-2"> a splash whole milk (for Jude&#39;s mash)</label></li>
+    </ul>
+    <h3>After his portion</h3>
+    <ul>
+      <li><label><input type="checkbox" data-tick="ing-adults_only-1"> to taste black pepper and thyme or oregano</label></li>
     </ul>
 
     <h2>Method</h2>
-    <p class="no-print"><button type="button" id="cook-mode">Cook</button></p>
+    <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
+    <p id="step-count" aria-live="polite"></p>
     <ol id="method">
       <li class="">
         <label><input type="checkbox" data-tick="step-1"> Take the chicken out of the fridge 30 min ahead. Heat the oven to 200°C fan.</label>
@@ -59,8 +71,16 @@
     <h2>Jude's plate</h2>
     <p><span class="jude">Jude:</span> Finely chopped chicken, no skin, stirred through plain mash with a little milk or unsalted stock. Soft carrot and tenderstem florets as finger food.</p>
 <p>He manages chicken better when it is chopped very small into mash.</p>    <p><strong>Keeping it:</strong> Leftover chicken: fridge, eat by Tuesday. Stock: fridge 3 days or freezer 3 months.</p>
+    <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
     <footer><a href="../">Back to the week</a></footer>
-  </div>
+  </main>
+  <nav class="tabbar" aria-label="Larder">
+    <a href="../#tonight">Tonight</a>
+    <a href="../#dinners">Week</a>
+    <a href="../sunday/">Sunday</a>
+    <a href="../shop/">Shop</a>
+  </nav>
   <script src="../../../assets/card.js"></script>
+  <script src="../../../assets/pwa.js"></script>
 </body>
 </html>

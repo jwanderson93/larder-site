@@ -4,38 +4,50 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#1A1208">
   <title>Gochujang pork shoulder stew with hand-ripped noodles</title>
+  <link rel="manifest" href="../../../manifest.webmanifest">
   <link rel="stylesheet" href="../../../assets/site.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
-<body data-recipe="R16">
-  <div class="wrap">
+<body class="app" data-recipe="R16">
+  <main class="wrap">
     <p class="kicker"><a href="../">Back to the week</a> · R16 · Fri 27 Nov</p>
     <h1>Gochujang pork shoulder stew with hand-ripped noodles</h1>
     <p class="lede">Sunday: 15 min hands-on, 1 hr 15 min simmer. Cook day: 40 min including noodles. · Serves 2 + Jude</p>
 <div class="flags"><span class="flag">Quick</span><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">3 for £10</span><span class="flag">Uses the veg box</span></div>    <img src="../../../img/R16_gochujang-pork-shoulder-stew.jpg" alt="Gochujang pork shoulder stew with hand-ripped noodles">
-<p>Pork shoulder steaks 500 g £3.40 (3 for £10); Unsalted chicken stock 300–500 ml. From Sunday&#39;s roast carcass</p>    <p class="card"><span class="jude">Jude, before step 3:</span> Take Jude&#39;s plain pork, carrot and broth out before the gochujang.</p>
+    <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
+    <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
+<details><summary>What it cost</summary><p>Pork shoulder steaks 500 g £3.40 (3 for £10); Unsalted chicken stock 300–500 ml. From Sunday&#39;s roast carcass</p></details>    <p class="card"><span class="jude">Jude, before step 3:</span> Take Jude&#39;s plain pork, carrot and broth out before the gochujang.</p>
 
     <h2>Ingredients</h2>
+    <h3>For this sitting</h3>
     <ul>
-      <li><label><input type="checkbox" data-tick="ing-1"> 500 g pork shoulder steaks (3 cm chunks)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-2"> 1 onion (sliced)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-3"> 4 cloves garlic</label></li>
-      <li><label><input type="checkbox" data-tick="ing-4"> a thumb fresh ginger (grated)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-5"> 2 carrots (thick coins)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-6"> 1 potato (chunks, optional)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-7"> about 700 ml water</label></li>
-      <li><label><input type="checkbox" data-tick="ing-8"> 2–3 tbsp gochujang</label></li>
-      <li><label><input type="checkbox" data-tick="ing-9"> 1 tbsp soy sauce</label></li>
-      <li><label><input type="checkbox" data-tick="ing-10"> 1 tsp sesame oil</label></li>
-      <li><label><input type="checkbox" data-tick="ing-11"> a bunch spring onions</label></li>
-      <li><label><input type="checkbox" data-tick="ing-12"> a handful greens (from the veg box)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-13"> 300 g plain flour (noodles)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-14"> about 165 ml water (noodles)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-1"> 500 g pork shoulder steaks (3 cm chunks)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-2"> 1 onion (sliced)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-3"> 4 cloves garlic</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-4"> 2 carrots (thick coins)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-5"> 1 potato (chunks, optional)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-6"> about 700 ml water</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-7"> a handful greens (from the veg box)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-8"> 300 g plain flour (noodles)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-9"> about 165 ml water (noodles)</label></li>
+    </ul>
+    <h3>After his portion</h3>
+    <ul>
+      <li><label><input type="checkbox" data-tick="ing-adults_only-1"> 1 tbsp soy sauce</label></li>
+      <li><label><input type="checkbox" data-tick="ing-adults_only-2"> 1 tsp sesame oil</label></li>
+    </ul>
+    <h3>Pick up if you need it</h3>
+    <ul>
+      <li><label><input type="checkbox" data-tick="ing-topup-1"> a thumb fresh ginger (grated)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-topup-2"> 2–3 tbsp gochujang</label></li>
+      <li><label><input type="checkbox" data-tick="ing-topup-3"> a bunch spring onions</label></li>
     </ul>
 
     <h2>Method</h2>
-    <p class="no-print"><button type="button" id="cook-mode">Cook</button></p>
+    <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
+    <p id="step-count" aria-live="polite"></p>
     <ol id="method">
       <li class="">
         <label><input type="checkbox" data-tick="step-1"> Brown the pork in 1 tbsp oil, in batches. Add the onion, garlic, ginger and carrots for 3 min.</label>
@@ -63,8 +75,16 @@
     <h2>Jude's plate</h2>
     <p><span class="jude">Jude:</span> Plain pork, shredded very fine or mashed into a little broth, with soft short noodle pieces and soft carrot.</p>
 <p>The noodle dough has no salt, so he can share it.</p>    <p><strong>Keeping it:</strong> Stew base: freezer 3 months; once defrosted, fridge up to 24 hours.</p>
+    <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
     <footer><a href="../">Back to the week</a></footer>
-  </div>
+  </main>
+  <nav class="tabbar" aria-label="Larder">
+    <a href="../#tonight">Tonight</a>
+    <a href="../#dinners">Week</a>
+    <a href="../sunday/">Sunday</a>
+    <a href="../shop/">Shop</a>
+  </nav>
   <script src="../../../assets/card.js"></script>
+  <script src="../../../assets/pwa.js"></script>
 </body>
 </html>

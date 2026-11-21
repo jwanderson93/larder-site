@@ -90,11 +90,54 @@ footer { color: var(--muted); font-size: 0.85rem; text-align: center; margin-top
 @media (max-width: 520px) {
   .counter { grid-template-columns: 1fr; }
 }
-body.cooking .step { opacity: 0.35; }
-body.cooking .step.current { opacity: 1; font-size: 1.35rem; }
-body.cooking .step.current button { font-size: 1rem; }
+body.cooking .step[hidden] { display: none; }
+body.cooking .step.current { font-size: 1.35rem; }
+.cookbar {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 3.4rem;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--paper);
+  z-index: 6;
+}
+body.cooking .cookbar { display: flex; }
+.cookbar button { flex: 1; }
+.tabbar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  z-index: 7;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tabbar a {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem 0.2rem;
+  min-height: 48px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+body.app .wrap { padding-bottom: 6rem; }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+.counter-line { font-size: 1rem; }
+.when { font-weight: 800; margin: 0.8rem 0 0.2rem; }
+.rates { display: none; }
+.dinner.is-cooked .rates { display: flex; }
+label { min-height: 44px; }
+.shop button { margin-top: 0.3rem; }
 @media print {
   body { background: white; }
-  button, .actions, .rates, .move, .no-print { display: none !important; }
+  button, .actions, .rates, .move, .no-print, .tabbar, .cookbar, .visually-hidden { display: none !important; }
   .dinner, .card { break-inside: avoid; }
+  body.cooking .step { display: block !important; opacity: 1 !important; }
 }

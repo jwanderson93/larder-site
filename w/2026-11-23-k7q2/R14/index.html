@@ -4,30 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#1A1208">
   <title>Harissa salmon with crushed potatoes</title>
+  <link rel="manifest" href="../../../manifest.webmanifest">
   <link rel="stylesheet" href="../../../assets/site.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
-<body data-recipe="R14">
-  <div class="wrap">
+<body class="app" data-recipe="R14">
+  <main class="wrap">
     <p class="kicker"><a href="../">Back to the week</a> · R14 · Wed 25 Nov</p>
     <h1>Harissa salmon with crushed potatoes</h1>
     <p class="lede">30 min · Serves 2 + Jude</p>
 <div class="flags"><span class="flag">Quick</span><span class="flag">Jude&#39;s plate</span><span class="flag">3 for £10</span></div>    <img src="../../../img/R14_harissa-salmon.jpg" alt="Harissa salmon with crushed potatoes">
-<p>Salmon fillets 220 g £3.26 (3 for £10)</p>    <p class="card"><span class="jude">Jude, before step 3:</span> Cut Jude&#39;s piece of salmon and bake it plain, before the harissa.</p>
+    <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
+    <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
+<details><summary>What it cost</summary><p>Salmon fillets 220 g £3.26 (3 for £10)</p></details>    <p class="card"><span class="jude">Jude, before step 3:</span> Cut Jude&#39;s piece of salmon and bake it plain, before the harissa.</p>
 
     <h2>Ingredients</h2>
+    <h3>For this sitting</h3>
     <ul>
-      <li><label><input type="checkbox" data-tick="ing-1"> 2 salmon fillets (220 g, frozen on arrival)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-2"> 1–2 tsp harissa (mixed with 1 tsp oil)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-3"> about 500 g Maris Piper potatoes (chunks)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-4"> 1 tbsp olive oil</label></li>
-      <li><label><input type="checkbox" data-tick="ing-5"> ½ lemon</label></li>
-      <li><label><input type="checkbox" data-tick="ing-6"> a handful lettuce or tenderstem</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-1"> 2 salmon fillets (220 g, frozen on arrival)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-2"> about 500 g Maris Piper potatoes (chunks)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-3"> 1 tbsp olive oil</label></li>
+      <li><label><input type="checkbox" data-tick="ing-main-4"> a handful lettuce or tenderstem</label></li>
+    </ul>
+    <h3>After his portion</h3>
+    <ul>
+      <li><label><input type="checkbox" data-tick="ing-adults_only-1"> 1–2 tsp harissa (mixed with 1 tsp oil)</label></li>
+      <li><label><input type="checkbox" data-tick="ing-adults_only-2"> ½ lemon</label></li>
     </ul>
 
     <h2>Method</h2>
-    <p class="no-print"><button type="button" id="cook-mode">Cook</button></p>
+    <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
+    <p id="step-count" aria-live="polite"></p>
     <ol id="method">
       <li class="">
         <label><input type="checkbox" data-tick="step-1"> Move the salmon from the freezer to the fridge on Tuesday night.</label>
@@ -49,8 +58,16 @@
     <h2>Jude's plate</h2>
     <p><span class="jude">Jude:</span> Plain salmon, skin off and every bone checked, flaked into plain crushed potato with a little yoghurt or milk. No harissa and no pepper.</p>
 <p>Check every bone.</p>    <p><strong>Keeping it:</strong> Eat the same night. Do not refreeze salmon that has been defrosted.</p>
+    <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
     <footer><a href="../">Back to the week</a></footer>
-  </div>
+  </main>
+  <nav class="tabbar" aria-label="Larder">
+    <a href="../#tonight">Tonight</a>
+    <a href="../#dinners">Week</a>
+    <a href="../sunday/">Sunday</a>
+    <a href="../shop/">Shop</a>
+  </nav>
   <script src="../../../assets/card.js"></script>
+  <script src="../../../assets/pwa.js"></script>
 </body>
 </html>

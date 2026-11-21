@@ -117,7 +117,11 @@
         item.querySelectorAll("[data-status]").forEach(function (other) {
           other.setAttribute("aria-pressed", other === button ? "true" : "false");
         });
+        item.classList.toggle("is-cooked", record.status === "cooked");
+        var skipWhere = item.querySelector(".skip-where");
+        if (skipWhere) skipWhere.hidden = record.status !== "skipped";
         save();
+        refreshDraft();
       });
     });
     item.querySelectorAll("[data-verdict]").forEach(function (button) {
@@ -133,6 +137,33 @@
           other.setAttribute("aria-pressed", other.getAttribute("data-status") === "cooked" ? "true" : "false");
         });
         save();
+      });
+    });
+    item.querySelectorAll("[data-jude]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        record.judeLeft = true;
+        state.dinners[key] = record;
+        button.textContent = "Chosen: he left this";
+        save();
+        refreshDraft();
+      });
+    });
+    item.querySelectorAll("[data-short]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        record.short = true;
+        state.dinners[key] = record;
+        button.textContent = "Chosen: not enough left";
+        save();
+        refreshDraft();
+      });
+    });
+    item.querySelectorAll("[data-skip-to]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        record.skipTo = button.getAttribute("data-skip-to");
+        record.status = "skipped";
+        state.dinners[key] = record;
+        save();
+        refreshDraft();
       });
     });
     var note = item.querySelector("[data-note]");
@@ -185,11 +216,46 @@
     if (cooked.length) lines.push("cooked: " + cooked.join(", "));
     if (skipped.length) lines.push("skipped: " + skipped.join(", "));
     if (state.missing) lines.push("missing: " + String(state.missing).replace(/\s+/g, " "));
+    var jude = [];
+    var shorts = [];
+    Object.keys(state.dinners).forEach(function (key) {
+      var row = state.dinners[key];
+      if (row.judeLeft) jude.push(key);
+      if (row.short) shorts.push(key);
+      if (row.skipTo) lines.push("skip_to: " + key + " " + row.skipTo);
+    });
+    if (jude.length) lines.push("jude_left: " + jude.join(", "));
+    shorts.forEach(function (key) { lines.push("short: " + key); });
+    if (state.late) lines.push("late: after 7pm");
+    var shopMissing = localStorage.getItem("larder-missing-lines");
+    if (shopMissing) lines.push("missing: " + shopMissing);
     return lines.join("\n");
   }
 
+  function plainNote(text) {
+    var box = document.getElementById("plain-note");
+    if (!box) return;
+    var lines = ["Saved on this phone only, until you email it."];
+    if (state.late) lines.push("The shop arrived after 7pm, so cooking starts tomorrow.");
+    Object.keys(state.dinners).forEach(function (key) {
+      var row = state.dinners[key];
+      var name = key;
+      var card = document.querySelector('[data-key="' + key + '"] h3');
+      if (card) name = card.textContent;
+      if (row.status) lines.push(name + ": " + row.status + (row.skipTo ? ", " + row.skipTo : ""));
+      if (row.verdict) lines.push(name + ": " + row.verdict.replace("make_again", "make again").replace("dont_offer", "don't offer again"));
+      if (row.judeLeft) lines.push(name + ": he left this. The dinner stays in the list.");
+      if (row.short) lines.push(name + ": not enough left. Use the spare pie. It is not bought again.");
+    });
+    box.textContent = lines.join(" ");
+  }
+
   var draft = document.getElementById("tweak-draft");
-  function refreshDraft() { if (draft) draft.value = formatTweaks(); }
+  function refreshDraft() {
+    var text = formatTweaks();
+    if (draft) draft.value = text;
+    plainNote(text);
+  }
   refreshDraft();
   list.addEventListener("click", function () { window.setTimeout(refreshDraft, 0); });
   list.addEventListener("change", refreshDraft);
@@ -244,5 +310,40 @@
   if (still) {
     var count = slots().filter(function (slot) { return slot.getAttribute("data-date") >= today; }).length;
     still.textContent = count + " still to come from today.";
+  }
+
+  var upcoming = slots().filter(function (slot) { return slot.getAttribute("data-date") >= today; })[0];
+  var tonight = document.getElementById("tonight-body");
+  if (upcoming && tonight) {
+    var title = upcoming.querySelector("h3");
+    var jude = upcoming.querySelector(".jude-line");
+    tonight.textContent = "";
+    var heading = document.createElement("h3");
+    heading.textContent = title ? title.textContent : "Dinner";
+    tonight.appendChild(heading);
+    if (jude) tonight.appendChild(jude.cloneNode(true));
+    var jump = document.createElement("a");
+    jump.href = "#" + upcoming.querySelector(".dinner").id;
+    jump.textContent = "Open this dinner";
+    tonight.appendChild(jump);
+  }
+  var finished = document.getElementById("week-finished");
+  if (finished && slots().length && slots().every(function (slot) { return slot.getAttribute("data-date") < today; })) {
+    finished.hidden = false;
+  }
+  try { localStorage.setItem("larder-last-week", location.pathname); } catch (e) {}
+
+  var late = document.getElementById("arrived-late");
+  if (late) {
+    late.addEventListener("click", function () {
+      state.late = true;
+      var bumped = addDays(plan.delivery.window.date, 1);
+      if (bumped > start) start = bumped;
+      lockSlots();
+      late.textContent = "Chosen: arrived after 7pm";
+      save();
+      refreshDraft();
+      if (banner) banner.textContent = "The shop arrived after 7pm. Cook dates start " + pretty(start) + ".";
+    });
   }
 })();
