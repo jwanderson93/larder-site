@@ -33,11 +33,19 @@
     return start;
   }
 
+  function pretty(iso) {
+    var parts = iso.split("-");
+    var dt = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2]));
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return days[dt.getUTCDay()] + " " + dt.getUTCDate() + " " + months[dt.getUTCMonth()];
+  }
+
   var today = todayISO();
   var start = earliest(plan.delivery, today);
   var banner = document.getElementById("cook-from");
   if (banner) {
-    banner.textContent = "Cook dates start " + start + ". Days before that stay put, including anything already past.";
+    banner.textContent = "Cook dates start " + pretty(start) + ". Days before that stay put, including anything already past.";
   }
 
   var list = document.getElementById("dinners");
@@ -222,6 +230,15 @@
       refreshDraft();
     });
   }
+
+  slots().forEach(function (slot) {
+    if (slot.getAttribute("data-date") === today) {
+      var title = slot.querySelector("h3");
+      if (title && title.textContent.indexOf("Tonight") !== 0) {
+        title.textContent = "Tonight. " + title.textContent;
+      }
+    }
+  });
 
   var still = document.getElementById("still-ahead");
   if (still) {

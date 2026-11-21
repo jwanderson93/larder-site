@@ -90,6 +90,9 @@ footer { color: var(--muted); font-size: 0.85rem; text-align: center; margin-top
 @media (max-width: 520px) {
   .counter { grid-template-columns: 1fr; }
 }
+body.cooking .step { opacity: 0.35; }
+body.cooking .step.current { opacity: 1; font-size: 1.35rem; }
+body.cooking .step.current button { font-size: 1rem; }
 @media print {
   body { background: white; }
   button, .actions, .rates, .move, .no-print { display: none !important; }

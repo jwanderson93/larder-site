@@ -14,6 +14,35 @@
     });
   });
 
+  var steps = Array.prototype.slice.call(document.querySelectorAll("#method > li"));
+  steps.forEach(function (step) { step.classList.add("step"); });
+  var cursor = 0;
+  function show(index) {
+    cursor = index;
+    steps.forEach(function (step, i) { step.classList.toggle("current", i === index); });
+  }
+  var cook = document.getElementById("cook-mode");
+  if (cook && steps.length) {
+    cook.addEventListener("click", function () {
+      var on = document.body.classList.toggle("cooking");
+      cook.textContent = on ? "Show every step" : "Cook";
+      show(cursor);
+    });
+    var bar = document.createElement("p");
+    bar.className = "actions no-print";
+    var prev = document.createElement("button");
+    prev.type = "button";
+    prev.textContent = "Previous step";
+    var next = document.createElement("button");
+    next.type = "button";
+    next.textContent = "Next step";
+    prev.addEventListener("click", function () { if (cursor > 0) show(cursor - 1); });
+    next.addEventListener("click", function () { if (cursor < steps.length - 1) show(cursor + 1); });
+    bar.appendChild(prev);
+    bar.appendChild(next);
+    document.getElementById("method").insertAdjacentElement("beforebegin", bar);
+  }
+
   var running = null;
   document.querySelectorAll("[data-timer]").forEach(function (button) {
     button.addEventListener("click", function () {
