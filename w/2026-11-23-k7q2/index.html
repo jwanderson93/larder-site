@@ -2,6 +2,14 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <script>
+  (function () {
+    var q = new URLSearchParams(location.search).get("theme");
+    var t = q || localStorage.getItem("larder-theme") || "";
+    if (q) localStorage.setItem("larder-theme", q);
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#1A1208">
@@ -13,13 +21,14 @@
 </head>
 <body class="app">
   <main class="wrap" id="week">
+    <p class="themes no-print">Directions <a href="?theme=01">Feast</a> <a href="?theme=02">Tin</a> <a href="?theme=03">Poster</a> <a href="?theme=04">Book</a> <a href="?theme=05">Desk</a></p>
     <img class="mascot" src="../../img/stockpot.jpg" alt="Larder stockpot">
     <p class="kicker">Larder</p>
     <h1>This week's dinners</h1>
     <p class="lede">Week of Monday 23 November. Shop arriving Friday 20 November, 16:00–20:00.</p>
     <p class="banner">Choices agreed. The choose-by date was Tuesday 17 November.</p>
-    <p class="banner" id="cook-from">Cook dates start from the delivery, never from a day that has already passed.</p>
-    <p class="banner" id="week-finished" hidden>This week has finished. The current week is the link in the latest email.</p>
+    <p class="banner" id="cook-from">Cooking starts the day the shop arrives. Earlier days stay as they are.</p>
+    <p class="banner" id="week-finished" hidden>This week is done. The next one is in the latest email.</p>
     <p class="no-print"><button type="button" id="arrived-late">Arrived after 7pm</button></p>
 
     <section id="tonight">
@@ -30,7 +39,7 @@
     <p class="counter-line"><strong>9</strong> dinners · 2 leftovers, 5 to cook, 2 from the freezer · spare in the freezer: 1 · shop by 27 November</p>
 
     <h2 id="dinners-heading">The week</h2>
-    <p>Use Up and Down to change the order. The day stays put. Then say how it went. It saves on this phone only, until you email it.</p>
+    <p>Move a dinner up or down if the day does not suit. The date stays put. What you mark stays on this phone until you email it.</p>
     <p class="no-print"><button type="button" id="suggest-order">Put the shortest-dated first</button></p>
     <div id="dinners">
       <div class="slot" data-date="2026-11-20">

@@ -1,0 +1,164 @@
+/* Five directions. None is the default. Add ?theme=01 … 05 */
+
+[data-theme="01"] {
+  --paper: #f3ecdf;
+  --ink: #1a120b;
+  --surface: transparent;
+  --muted: #4a3b32;
+  --line: #1a120b;
+  --teal: #1f5c4a;
+  --accent: #7a2e1e;
+  --accent-ink: #f8f1e6;
+  --display: "Newsreader", Georgia, serif;
+  --text: "Source Sans 3", sans-serif;
+  --radius: 0;
+  --photo-radius: 0;
+  --shadow: none;
+  --dish-size: 1.85rem;
+  --h1-size: 2.6rem;
+}
+[data-theme="01"] body { background: var(--paper); }
+[data-theme="01"] .dinner, [data-theme="01"] .banner, [data-theme="01"] .card {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+[data-theme="01"] .dinner img {
+  width: calc(100% + 2rem);
+  max-width: none;
+  margin-left: -1rem;
+  border-radius: 0;
+}
+[data-theme="01"] h1, [data-theme="01"] h3 { font-family: var(--display); font-weight: 560; letter-spacing: -0.02em; }
+[data-theme="01"] .glance { font-family: var(--display); font-style: italic; }
+[data-theme="01"] .mascot { width: 2.5rem; margin: 0 0 0.4rem; }
+[data-theme="01"] .kicker, [data-theme="01"] h1, [data-theme="01"] .lede { text-align: left; }
+
+[data-theme="02"] {
+  --paper: #f4ecd8;
+  --ink: #243044;
+  --surface: transparent;
+  --muted: #3d4c63;
+  --line: #243044;
+  --teal: #1f5c4a;
+  --accent: #243044;
+  --accent-ink: #f4ecd8;
+  --display: "Literata", Georgia, serif;
+  --text: "Source Sans 3", sans-serif;
+  --radius: 0;
+  --photo-radius: 2px;
+  --dish-size: 1.55rem;
+  --h1-size: 2rem;
+}
+[data-theme="02"] body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(90deg, transparent 0 1.15rem, #b64b4b 1.15rem 1.28rem, transparent 1.28rem),
+    repeating-linear-gradient(to bottom, transparent 0 31px, rgba(36, 48, 68, 0.18) 31px 32px);
+}
+[data-theme="02"] .wrap { padding-left: 1.7rem; }
+[data-theme="02"] .dinner, [data-theme="02"] .banner {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(36, 48, 68, 0.35);
+}
+[data-theme="02"] .when { font-family: var(--display); }
+[data-theme="02"] .mascot { display: none; }
+[data-theme="02"] .kicker, [data-theme="02"] h1, [data-theme="02"] .lede { text-align: left; }
+[data-theme="02"] button { border-radius: 0; background: transparent; }
+
+[data-theme="03"] {
+  --paper: #ffffff;
+  --ink: #111111;
+  --surface: #ffffff;
+  --muted: #111111;
+  --line: #111111;
+  --teal: #111111;
+  --accent: #d0121a;
+  --accent-ink: #ffffff;
+  --display: "Archivo", "Arial Narrow", sans-serif;
+  --text: "Archivo", "Helvetica Neue", sans-serif;
+  --radius: 0;
+  --photo-radius: 0;
+  --shadow: none;
+  --dish-size: 2rem;
+  --h1-size: 3.1rem;
+}
+[data-theme="03"] .mascot { display: none; }
+[data-theme="03"] .kicker, [data-theme="03"] h1, [data-theme="03"] .lede,
+[data-theme="03"] h3, [data-theme="03"] .when { text-align: left; text-transform: uppercase; letter-spacing: -0.04em; }
+[data-theme="03"] h1 { line-height: 0.88; font-weight: 760; }
+[data-theme="03"] h2 { text-transform: uppercase; letter-spacing: 0; color: var(--ink); font-size: 0.95rem; }
+[data-theme="03"] .dinner, [data-theme="03"] .banner, [data-theme="03"] .card {
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  border: 0;
+  border-bottom: 2px solid #111;
+}
+[data-theme="03"] .flag { border-radius: 0; border-width: 2px; }
+[data-theme="03"] .tabbar { background: #111; }
+[data-theme="03"] .tabbar a { color: #fff; }
+[data-theme="03"] .jude { color: #111; border-bottom: 3px solid #d0121a; }
+
+[data-theme="04"] {
+  --paper: #f7f0e6;
+  --ink: #3a2616;
+  --surface: #fffaf3;
+  --muted: #5c4636;
+  --line: #3a2616;
+  --teal: #2f6a4a;
+  --accent: #9a4630;
+  --accent-ink: #fffaf3;
+  --display: "Fraunces", Georgia, serif;
+  --text: "Literata", Georgia, serif;
+  --radius: 0;
+  --photo-radius: 0;
+  --dish-size: 1.7rem;
+  --h1-size: 2.4rem;
+}
+[data-theme="04"] .dinner, [data-theme="04"] .card {
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+[data-theme="04"] .banner { background: transparent; border-left: 4px solid var(--accent); border-radius: 0; }
+[data-theme="04"] .kicker, [data-theme="04"] h1, [data-theme="04"] .lede { text-align: left; }
+[data-theme="04"] .mascot { width: 3rem; margin: 0 0 0.5rem; }
+[data-theme="04"] .flag { border-radius: 0; }
+
+[data-theme="05"] {
+  --paper: #f3f1ec;
+  --ink: #1c2834;
+  --surface: #f3f1ec;
+  --muted: #3d4b59;
+  --line: #1c2834;
+  --teal: #1e4d3d;
+  --accent: #1c2834;
+  --accent-ink: #f3f1ec;
+  --display: "Newsreader", Georgia, serif;
+  --text: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --radius: 0;
+  --photo-radius: 0;
+  --shadow: none;
+  --dish-size: 1.25rem;
+  --h1-size: 1.65rem;
+}
+[data-theme="05"] .mascot { width: 2rem; margin: 0; }
+[data-theme="05"] .kicker { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.72rem; text-align: left; }
+[data-theme="05"] h1, [data-theme="05"] .lede, [data-theme="05"] h3 { text-align: left; }
+[data-theme="05"] .dinner, [data-theme="05"] .banner, [data-theme="05"] .card {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--ink);
+}
+[data-theme="05"] #tonight { border-top: 3px solid #8d6a3a; }
+[data-theme="05"] button { border-radius: 0; background: transparent; }
+[data-theme="05"] .tabbar { background: var(--paper); }

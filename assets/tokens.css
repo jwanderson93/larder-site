@@ -1,12 +1,26 @@
-/* Larder design tokens. Paper, ink, mustard for the chosen thing, teal for Jude. */
+/* Larder design tokens. Directions override these on html[data-theme]. */
 :root {
-  --ink: #1A1208;
-  --paper: #F2F1EF;
-  --muted: #5C564E;
-  --mustard: #E3B23C;
-  --teal: #1F6B5C;
-  --alarm: #C23B22;
-  --white: #ffffff;
-  --line: #DDD9D3;
-  --font: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --paper: #f6f3ee;
+  --ink: #1a1612;
+  --surface: #fffcf7;
+  --muted: #4e463f;
+  --line: #5c564e;
+  --teal: #1b5e45;
+  --accent: #1a1612;
+  --accent-ink: #f6f3ee;
+  --mustard: var(--accent);
+  --white: var(--surface);
+  --alarm: #8d2b1f;
+  --display: "Newsreader", Georgia, "Iowan Old Style", serif;
+  --text: "Source Sans 3", "Segoe UI", sans-serif;
+  --font: var(--text);
+  --radius: 2px;
+  --photo-radius: 0px;
+  --shadow: none;
+  --space: 8px;
+  --title-align: left;
+  --dish-size: 1.45rem;
+  --h1-size: 2.15rem;
+  --motion: 160ms;
+  --elevate: 0 1px 0 var(--line);
 }

@@ -2,6 +2,14 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
+  <script>
+  (function () {
+    var q = new URLSearchParams(location.search).get("theme");
+    var t = q || localStorage.getItem("larder-theme") || "";
+    if (q) localStorage.setItem("larder-theme", q);
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#1A1208">
@@ -12,6 +20,7 @@
 </head>
 <body class="app" data-recipe="R14">
   <main class="wrap">
+    <p class="themes no-print">Directions <a href="?theme=01">Feast</a> <a href="?theme=02">Tin</a> <a href="?theme=03">Poster</a> <a href="?theme=04">Book</a> <a href="?theme=05">Desk</a></p>
     <p class="kicker"><a href="../">Back to the week</a> · R14 · Wed 25 Nov</p>
     <h1>Harissa salmon with crushed potatoes</h1>
     <p class="lede">30 min · Serves 2 + Jude</p>
