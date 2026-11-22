@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var mode = q.get("mode");
+    if (mode !== "dark" && mode !== "light") mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-mode", mode);
+    var theme = q.get("theme") || localStorage.getItem("larder-theme") || "night";
+    if (theme === "poster" || theme === "market" || theme === "03") theme = "poster";
+    else theme = "night";
+    localStorage.setItem("larder-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (q.get("shot") === "1") document.documentElement.setAttribute("data-shot", "1");
+  })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Cookbook</title>
+  <link rel="manifest" href="../../../manifest.webmanifest">
+  <link rel="stylesheet" href="../../../assets/site.css">
+  <link rel="stylesheet" href="../../../assets/layouts.css">
+</head>
+<body class="app">
+  <header class="nav">
+    <a class="nav-back" href="../?view=home">Tonight</a>
+    <span class="nav-inline" id="nav-inline">Cookbook</span>
+  </header>
+  <main class="wrap book">
+    <h1 class="large-title">Cookbook</h1>
+    <p class="lede">Loved, Fine, and Not again live on this phone until you send them.</p>
+    <label class="search">Search
+      <input id="recipe-search" type="search" aria-label="Search recipes">
+    </label>
+    <div class="filters" role="group" aria-label="Filters">
+      <button type="button" data-filter="quick" aria-pressed="false">Quick</button>
+      <button type="button" data-filter="batch" aria-pressed="false">Batch</button>
+      <button type="button" data-filter="freezer" aria-pressed="false">Freezer</button>
+      <button type="button" data-filter="jude" aria-pressed="false">Jude's plate</button>
+    </div>
+    <div class="filters">
+      <label>Cuisine <select id="filter-cuisine" aria-label="Cuisine"><option value="">Any</option></select></label>
+      <label>Protein <select id="filter-protein" aria-label="Protein"><option value="">Any</option></select></label>
+      <label>Effort <select id="filter-effort" aria-label="Effort"><option value="">Any</option><option>quick</option><option>mid</option><option>long</option></select></label>
+      <label>Cost <select id="filter-cost" aria-label="Cost"><option value="">Any</option><option>low</option><option>mid</option><option>high</option></select></label>
+      <label>Sort <select id="sort-by" aria-label="Sort"><option value="rating">Rating</option><option value="last">Last cooked</option><option value="times">Times cooked</option></select></label>
+    </div>
+    <section id="pinned-strip"><h2>Pinned for next week</h2><ul id="pinned-list"></ul></section>
+    <section id="group-loved"><h2>Loved</h2><ul class="group" data-group="make_again"></ul></section>
+    <section id="group-fine"><h2>Fine</h2><ul class="group" data-group="fine"></ul></section>
+    <section id="group-no"><h2>Not again</h2><ul class="group" data-group="dont_offer"></ul></section>
+    <section id="group-new"><h2>Not rated yet</h2><ul class="group" data-group=""></ul></section>
+    <ul id="library" hidden>
+      <li class="recipe-row" data-id="R12" data-title="Roast chicken" data-search="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem british chicken chicken british sunday-prep batch leftovers" data-cuisine="british" data-protein="chicken" data-effort="long" data-cost="high" data-quick="false" data-batch="true" data-freezer="true" data-jude="true">
+        <a href="../R12/"><img src="../../../img/R12_corn-fed-roast-chicken.jpg" alt=""> <strong>Roast chicken</strong></a>
+        <p class="facets">british · chicken · long · high · Jude's plate</p>
+        <p class="counts" aria-live="polite"></p>
+        <div class="rates">
+          <button type="button" data-rate="make_again">Loved</button>
+          <button type="button" data-rate="fine">Fine</button>
+          <button type="button" data-rate="dont_offer">Not again</button>
+          <button type="button" data-pin>Pin for next week</button>
+        </div>
+        <label>Note <input type="text" data-recipe-note aria-label="Note on Roast chicken"></label>
+      </li>
+      <li class="recipe-row" data-id="R13" data-title="Chicken shawarma bowls" data-search="Chicken shawarma bowls with flatbreads and houmous levantine chicken chicken levantine leftovers quick" data-cuisine="levantine" data-protein="chicken" data-effort="quick" data-cost="mid" data-quick="true" data-batch="false" data-freezer="false" data-jude="true">
+        <a href="../R13/"><img src="../../../img/R13_chicken-shawarma-bowls.jpg" alt=""> <strong>Chicken shawarma bowls</strong></a>
+        <p class="facets">levantine · chicken · quick · mid · Jude's plate</p>
+        <p class="counts" aria-live="polite"></p>
+        <div class="rates">
+          <button type="button" data-rate="make_again">Loved</button>
+          <button type="button" data-rate="fine">Fine</button>
+          <button type="button" data-rate="dont_offer">Not again</button>
+          <button type="button" data-pin>Pin for next week</button>
+        </div>
+        <label>Note <input type="text" data-recipe-note aria-label="Note on Chicken shawarma bowls"></label>
+      </li>
+      <li class="recipe-row" data-id="R14" data-title="Harissa salmon" data-search="Harissa salmon with crushed potatoes north-african fish fish north-african quick" data-cuisine="north-african" data-protein="fish" data-effort="quick" data-cost="low" data-quick="true" data-batch="false" data-freezer="false" data-jude="true">
+        <a href="../R14/"><img src="../../../img/R14_harissa-salmon.jpg" alt=""> <strong>Harissa salmon</strong></a>
+        <p class="facets">north-african · fish · quick · low · Jude's plate</p>
+        <p class="counts" aria-live="polite"></p>
+        <div class="rates">
+          <button type="button" data-rate="make_again">Loved</button>
+          <button type="button" data-rate="fine">Fine</button>
+          <button type="button" data-rate="dont_offer">Not again</button>
+          <button type="button" data-pin>Pin for next week</button>
+        </div>
+        <label>Note <input type="text" data-recipe-note aria-label="Note on Harissa salmon"></label>
+      </li>
+      <li class="recipe-row" data-id="R15" data-title="Lamb and carrot meatballs in tomato sauce" data-search="Lamb and carrot meatballs in tomato sauce with tagliatelle italian lamb lamb italian mince batch freezer sunday-prep pasta" data-cuisine="italian" data-protein="lamb" data-effort="mid" data-cost="low" data-quick="false" data-batch="true" data-freezer="true" data-jude="true">
+        <a href="../R15/"><img src="../../../img/R15_lamb-carrot-meatballs-tagliatelle.jpg" alt=""> <strong>Lamb and carrot meatballs in tomato sauce</strong></a>
+        <p class="facets">italian · lamb · mid · low · Jude's plate</p>
+        <p class="counts" aria-live="polite"></p>
+        <div class="rates">
+          <button type="button" data-rate="make_again">Loved</button>
+          <button type="button" data-rate="fine">Fine</button>
+          <button type="button" data-rate="dont_offer">Not again</button>
+          <button type="button" data-pin>Pin for next week</button>
+        </div>
+        <label>Note <input type="text" data-recipe-note aria-label="Note on Lamb and carrot meatballs in tomato sauce"></label>
+      </li>
+      <li class="recipe-row" data-id="R16" data-title="Gochujang pork shoulder stew" data-search="Gochujang pork shoulder stew with hand-ripped noodles korean pork pork korean batch freezer sunday-prep noodles veg-box" data-cuisine="korean" data-protein="pork" data-effort="mid" data-cost="low" data-quick="false" data-batch="true" data-freezer="true" data-jude="true">
+        <a href="../R16/"><img src="../../../img/R16_gochujang-pork-shoulder-stew.jpg" alt=""> <strong>Gochujang pork shoulder stew</strong></a>
+        <p class="facets">korean · pork · mid · low · Jude's plate</p>
+        <p class="counts" aria-live="polite"></p>
+        <div class="rates">
+          <button type="button" data-rate="make_again">Loved</button>
+          <button type="button" data-rate="fine">Fine</button>
+          <button type="button" data-rate="dont_offer">Not again</button>
+          <button type="button" data-pin>Pin for next week</button>
+        </div>
+        <label>Note <input type="text" data-recipe-note aria-label="Note on Gochujang pork shoulder stew"></label>
+      </li>
+    </ul>
+    <section>
+      <h2>By week</h2>
+      <ul>
+        <li>Week of 23 November 2026 · this week</li>
+      </ul>
+      <h2>By date</h2>
+      <ul>
+        <li>2026-11-20 · Fri 20 Nov · Lemon chicken traybake from the fridge</li>
+        <li>2026-11-21 · Sat 21 Nov · Filled pasta from the fridge</li>
+        <li>2026-11-22 · Sun 22 Nov · Roast chicken</li>
+        <li>2026-11-23 · Mon 23 Nov · Shepherd&#39;s pie</li>
+        <li>2026-11-24 · Tue 24 Nov · Chicken shawarma bowls</li>
+        <li>2026-11-25 · Wed 25 Nov · Harissa salmon</li>
+        <li>2026-11-26 · Thu 26 Nov · Lamb and carrot meatballs in tomato sauce</li>
+        <li>2026-11-27 · Fri 27 Nov · Gochujang pork shoulder stew</li>
+        <li>2026-11-28 · Sat 28 Nov · Lasagne</li>
+      </ul>
+    </section>
+    <p><button type="button" id="send-library">Send to Larder</button></p>
+  </main>
+  <nav class="tabbar" aria-label="Larder">
+    <a href="../?view=week"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>This week</a>
+    <a href="../?view=choose"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Choose</a>
+    <a href="./"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5h9.5A3.5 3.5 0 0 1 18 8v11.5H8A3 3 0 0 0 5 17z"/><path d="M5 4.5v12.5"/></svg>Cookbook</a>
+    <a href="../shop/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5A3 3 0 0 1 12 3.5 3 3 0 0 1 15 6.5V8"/></svg>Shop</a>
+  </nav>
+  <script type="application/json" id="larder-plan">{"counter": {"cooked": 5, "dinners_covered": 9, "freezer": 2, "leftovers": 2}, "delivery": {"arrived_at": null, "window": {"date": "2026-11-20", "from": "16:00", "to": "20:00"}}, "dinners": [{"date": "2026-11-20", "key": "fri-leftovers", "kind": "leftover", "movable": false, "recipe": null, "shop": false, "title": "Fridge leftovers: lemon chicken traybake", "use_by_order": null}, {"date": "2026-11-21", "key": "sat-leftovers", "kind": "leftover", "movable": false, "recipe": null, "shop": false, "title": "Fridge leftovers: filled pasta", "use_by_order": null}, {"date": "2026-11-22", "key": "R12", "kind": "dinner", "movable": false, "recipe": "R12", "shop": "full", "title": "Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem", "use_by_order": null}, {"date": "2026-11-23", "key": "shepherds-pie", "kind": "freezer", "movable": false, "recipe": null, "shop": false, "title": "Freezer shepherd\u0027s pie", "use_by_order": null}, {"date": "2026-11-24", "key": "R13", "kind": "dinner", "movable": false, "recipe": "R13", "shop": "extras", "title": "Chicken shawarma bowls with flatbreads and houmous", "use_by_order": null}, {"date": "2026-11-25", "key": "R14", "kind": "dinner", "movable": true, "recipe": "R14", "shop": "full", "title": "Harissa salmon with crushed potatoes", "use_by_order": 3}, {"date": "2026-11-26", "key": "R15", "kind": "dinner", "movable": true, "recipe": "R15", "shop": "full", "title": "Lamb and carrot meatballs in tomato sauce with tagliatelle", "use_by_order": 1}, {"date": "2026-11-27", "key": "R16", "kind": "dinner", "movable": true, "recipe": "R16", "shop": "full", "title": "Gochujang pork shoulder stew with hand-ripped noodles", "use_by_order": 2}, {"date": "2026-11-28", "key": "lasagne", "kind": "freezer", "movable": true, "recipe": null, "shop": false, "title": "Freezer lasagne", "use_by_order": 4}], "picked": ["R12", "R13", "R14", "R15", "R16"], "week": "2026-11-23"}</script>
+  <script src="../../../assets/design.js"></script>
+  <script src="../../../assets/pwa.js"></script>
+</body>
+</html>

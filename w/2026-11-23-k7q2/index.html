@@ -4,442 +4,386 @@
   <meta charset="utf-8">
   <script>
   (function () {
-    var q = new URLSearchParams(location.search).get("theme");
-    var t = q || localStorage.getItem("larder-theme") || "";
-    if (q) localStorage.setItem("larder-theme", q);
-    if (t) document.documentElement.setAttribute("data-theme", t);
+    var q = new URLSearchParams(location.search);
+    var mode = q.get("mode");
+    if (mode !== "dark" && mode !== "light") {
+      mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.setAttribute("data-mode", mode);
+    var theme = q.get("theme") || localStorage.getItem("larder-theme") || "night";
+    if (theme === "poster" || theme === "market" || theme === "03") theme = "poster";
+    else theme = "night";
+    localStorage.setItem("larder-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute("data-view", q.get("view") || "home");
+    if (q.get("shot") === "1") document.documentElement.setAttribute("data-shot", "1");
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", mode === "dark" ? "#000000" : "#f2f2f7");
   })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="theme-color" content="#1A1208">
+  <meta name="theme-color" content="#f2f2f7">
   <title>This week's dinners · Week of Monday 23 November</title>
   <link rel="manifest" href="../../manifest.webmanifest">
   <link rel="stylesheet" href="../../assets/site.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/layouts.css">
 </head>
 <body class="app">
-  <main class="wrap" id="week">
-    <p class="themes no-print">Directions <a href="?theme=01">Feast</a> <a href="?theme=02">Tin</a> <a href="?theme=03">Poster</a> <a href="?theme=04">Book</a> <a href="?theme=05">Desk</a></p>
-    <img class="mascot" src="../../img/stockpot.jpg" alt="Larder stockpot">
-    <p class="kicker">Larder</p>
-    <h1>This week's dinners</h1>
-    <p class="lede">Week of Monday 23 November. Shop arriving Friday 20 November, 16:00–20:00.</p>
-    <p class="banner">Choices agreed. The choose-by date was Tuesday 17 November.</p>
-    <p class="banner" id="cook-from">Cooking starts the day the shop arrives. Earlier days stay as they are.</p>
-    <p class="banner" id="week-finished" hidden>This week is done. The next one is in the latest email.</p>
-    <p class="no-print"><button type="button" id="arrived-late">Arrived after 7pm</button></p>
+  <header class="nav">
+    <span class="nav-inline" id="nav-inline">Tonight</span>
+  </header>
 
-    <section id="tonight">
-      <h2>Tonight</h2>
-      <div id="tonight-body" class="dinner"><p>Today's dinner is marked on this phone.</p></div>
+  <section class="view-home">
+    <h1 class="large-title" id="home-when">Tonight</h1>
+    <article class="home" id="home">
+      <figure class="hero-shot">
+        <img id="home-photo" src="../../img/R12_corn-fed-roast-chicken.jpg" alt="Roast chicken">
+      </figure>
+      <div class="hero-copy">
+        <h2 id="home-name">Roast chicken</h2>
+        <p class="time" id="home-time">About 1 hr 45 min (40 min hands-on).</p>
+        <p id="home-jude"><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p>
+<a class="go" id="home-go" href="R12/">Start cooking</a>      </div>
+    </article>
+    <section class="glance" aria-label="The week at a glance">
+      <h2>The week</h2>
+      <ol>
+        <li><a href="?view=week#d-fri-leftovers"><span>Fri 20 Nov</span> Lemon chicken traybake from the fridge</a></li>
+        <li><a href="?view=week#d-sat-leftovers"><span>Sat 21 Nov</span> Filled pasta from the fridge</a></li>
+        <li><a href="?view=week#d-R12"><span>Sun 22 Nov</span> Roast chicken</a></li>
+        <li><a href="?view=week#d-shepherds-pie"><span>Mon 23 Nov</span> Shepherd&#39;s pie</a></li>
+        <li><a href="?view=week#d-R13"><span>Tue 24 Nov</span> Chicken shawarma bowls</a></li>
+        <li><a href="?view=week#d-R14"><span>Wed 25 Nov</span> Harissa salmon</a></li>
+        <li><a href="?view=week#d-R15"><span>Thu 26 Nov</span> Lamb and carrot meatballs in tomato sauce</a></li>
+        <li><a href="?view=week#d-R16"><span>Fri 27 Nov</span> Gochujang pork shoulder stew</a></li>
+        <li><a href="?view=week#d-lasagne"><span>Sat 28 Nov</span> Lasagne</a></li>
+      </ol>
+      <p><a href="sunday/">Sunday prep</a></p>
     </section>
+  </section>
 
-    <p class="counter-line"><strong>9</strong> dinners · 2 leftovers, 5 to cook, 2 from the freezer · spare in the freezer: 1 · shop by 27 November</p>
+  <section class="view-choose">
+    <h1 class="large-title">Choose</h1>
+    <p class="how visually-hidden">Swipe right to keep a dinner, or left to skip it. Keep and Skip do the same thing.</p>
+    <p>Choices agreed. The choose-by date was Tuesday 17 November.</p>
+    <div class="stack" id="choose-stack">
+      <article class="choice-card" tabindex="0" data-recipe="R12" aria-label="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
+<img src="../../img/R12_corn-fed-roast-chicken.jpg" alt="">        <div class="choice-copy">
+          <h2>Roast chicken</h2>
+          <p>About 1 hr 45 min (40 min hands-on).</p>
+        </div>
+      </article>
+      <article class="choice-card" tabindex="0" data-recipe="R13" aria-label="Chicken shawarma bowls with flatbreads and houmous">
+<img src="../../img/R13_chicken-shawarma-bowls.jpg" alt="">        <div class="choice-copy">
+          <h2>Chicken shawarma bowls</h2>
+          <p>25 min.</p>
+        </div>
+      </article>
+      <article class="choice-card" tabindex="0" data-recipe="R14" aria-label="Harissa salmon with crushed potatoes">
+<img src="../../img/R14_harissa-salmon.jpg" alt="">        <div class="choice-copy">
+          <h2>Harissa salmon</h2>
+          <p>30 min.</p>
+        </div>
+      </article>
+      <article class="choice-card" tabindex="0" data-recipe="R15" aria-label="Lamb and carrot meatballs in tomato sauce with tagliatelle">
+<img src="../../img/R15_lamb-carrot-meatballs-tagliatelle.jpg" alt="">        <div class="choice-copy">
+          <h2>Lamb and carrot meatballs in tomato sauce</h2>
+          <p>Sunday: 30 min to roll and bake.</p>
+        </div>
+      </article>
+      <article class="choice-card" tabindex="0" data-recipe="R16" aria-label="Gochujang pork shoulder stew with hand-ripped noodles">
+<img src="../../img/R16_gochujang-pork-shoulder-stew.jpg" alt="">        <div class="choice-copy">
+          <h2>Gochujang pork shoulder stew</h2>
+          <p>Sunday: 15 min hands-on, 1 hr 15 min simmer.</p>
+        </div>
+      </article>
+    </div>
+    <div class="thumb" role="group" aria-label="Keep or skip">
+      <button type="button" data-choice="skip">Skip</button>
+      <button type="button" data-choice="keep">Keep</button>
+    </div>
+    <p class="decide" aria-live="polite"></p>
+  </section>
 
-    <h2 id="dinners-heading">The week</h2>
-    <p>Move a dinner up or down if the day does not suit. The date stays put. What you mark stays on this phone until you email it.</p>
-    <p class="no-print"><button type="button" id="suggest-order">Put the shortest-dated first</button></p>
+  <section class="view-week">
+    <h1 class="large-title">This week</h1>
+    <p class="how visually-hidden">Drag a dinner up or down. Move up and Move down do the same. Skip and Freezer are buttons.</p>
+    <p id="cook-from">Cooking starts the day the shop arrives. Earlier days stay as they are.</p>
+    <p id="week-finished" hidden>This week is done. The next one is in the latest email.</p>
     <div id="dinners">
       <div class="slot" data-date="2026-11-20">
-        <p class="when">Fri 20</p>
-        <article class="dinner" id="d-fri-leftovers" data-key="fri-leftovers" data-movable="false" data-use-by="" data-kind="leftover">
-          <header>
-            <span class="tag">Already in · Leftovers, not shopped again</span>
-          </header>
-          <h3>Fridge leftovers: lemon chicken traybake</h3>
-          <p class="glance">Delivery 16:00–20:00. Salmon straight into the freezer.</p>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Fridge leftovers: lemon chicken traybake: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Fridge leftovers: lemon chicken traybake: skipped">Skipped</button>
+        <article class="dinner" id="d-fri-leftovers" data-key="fri-leftovers" data-movable="false" data-use-by="" data-short="Lemon chicken traybake from the fridge" data-time="Already in the fridge" data-image="" data-recipe="" data-jude="">
+          <div class="row-main">
+            <p class="when">Fri 20 Nov</p>
+            <h3>Fridge leftovers: lemon chicken traybake</h3>
+            <p>Lemon chicken traybake from the fridge. Already in the fridge.</p>
           </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+          <div class="row-actions">
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Fridge leftovers: lemon chicken traybake">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Fridge leftovers: lemon chicken traybake">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Fridge leftovers: lemon chicken traybake">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-21">
-        <p class="when">Sat 21</p>
-        <article class="dinner" id="d-sat-leftovers" data-key="sat-leftovers" data-movable="false" data-use-by="" data-kind="leftover">
-          <header>
-            <span class="tag">Already in · Leftovers, not shopped again</span>
-          </header>
-          <h3>Fridge leftovers: filled pasta</h3>
-          <p class="glance">Read the meat labels before Sunday&#39;s order of work.</p>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Fridge leftovers: filled pasta: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Fridge leftovers: filled pasta: skipped">Skipped</button>
+        <article class="dinner" id="d-sat-leftovers" data-key="sat-leftovers" data-movable="false" data-use-by="" data-short="Filled pasta from the fridge" data-time="Already in the fridge" data-image="" data-recipe="" data-jude="">
+          <div class="row-main">
+            <p class="when">Sat 21 Nov</p>
+            <h3>Fridge leftovers: filled pasta</h3>
+            <p>Filled pasta from the fridge. Already in the fridge.</p>
           </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+          <div class="row-actions">
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Fridge leftovers: filled pasta">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Fridge leftovers: filled pasta">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Fridge leftovers: filled pasta">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-22">
-        <p class="when">Sun 22</p>
-        <article class="dinner" id="d-R12" data-key="R12" data-movable="false" data-use-by="" data-kind="dinner">
-          <header>
-            <span class="tag">Prep day roast</span>
-          </header>
-          <img src="../../img/R12_corn-fed-roast-chicken.jpg" alt="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
-          <h3>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</h3>
-<p><a href="R12/">Open the card</a></p>          <p class="glance">Prep day. Meatballs and pork stew base go into the freezer.</p>
-          <div class="flags"><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">Leaves leftovers</span></div>
-<p class="jude-line"><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p>          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem: skipped">Skipped</button>
-          </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+        <article class="dinner" id="d-R12" data-key="R12" data-movable="false" data-use-by="" data-short="Roast chicken" data-time="About 1 hr 45 min (40 min hands-on)" data-image="R12_corn-fed-roast-chicken.jpg" data-recipe="R12" data-jude="Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.">
+          <div class="row-main">
+            <p class="when">Sun 22 Nov</p>
+            <h3>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</h3>
+            <p>Roast chicken. About 1 hr 45 min (40 min hands-on).</p>
+<p class="jude-line"><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p><p><a href="R12/">Open the card</a></p>          </div>
+          <img class="thumb-pic" src="../../img/R12_corn-fed-roast-chicken.jpg" alt="Roast chicken">
+          <div class="row-actions">
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-23">
-        <p class="when">Mon 23</p>
-        <article class="dinner" id="d-shepherds-pie" data-key="shepherds-pie" data-movable="false" data-use-by="" data-kind="freezer">
-          <header>
-            <span class="tag">Football night · From the freezer · Reheat only</span>
-          </header>
-          <img src="../../img/shepherds-pie.jpg" alt="Freezer shepherd&#39;s pie">
-          <h3>Freezer shepherd&#39;s pie</h3>
-          <p class="glance">Football night: reheat only. Out of the freezer on Sunday night.</p>
-          <p>Reheat only. From the fridge, 180°C fan for 35–45 minutes, until piping hot in the middle. If the centre is still frozen, give it longer.</p>
-          <p class="jude-line"><span class="jude">Jude:</span> Soft mash or the soft filling from the edge. No extra salt.</p>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Freezer shepherd&#39;s pie: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Freezer shepherd&#39;s pie: skipped">Skipped</button>
+        <article class="dinner" id="d-shepherds-pie" data-key="shepherds-pie" data-movable="false" data-use-by="" data-short="Shepherd&#39;s pie" data-time="35 to 45 minutes" data-image="shepherds-pie.jpg" data-recipe="" data-jude="">
+          <div class="row-main">
+            <p class="when">Mon 23 Nov</p>
+            <h3>Freezer shepherd&#39;s pie</h3>
+            <p>Shepherd&#39;s pie. 35 to 45 minutes.</p>
           </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+          <img class="thumb-pic" src="../../img/shepherds-pie.jpg" alt="Shepherd&#39;s pie">
+          <div class="row-actions">
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Freezer shepherd&#39;s pie">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Freezer shepherd&#39;s pie">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Freezer shepherd&#39;s pie">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-24">
-        <p class="when">Tue 24</p>
-        <article class="dinner" id="d-R13" data-key="R13" data-movable="false" data-use-by="" data-kind="dinner">
-          <header>
-            <span class="tag">Leftovers night</span>
-          </header>
-          <img src="../../img/R13_chicken-shawarma-bowls.jpg" alt="Chicken shawarma bowls with flatbreads and houmous">
-          <h3>Chicken shawarma bowls with flatbreads and houmous</h3>
-<p><a href="R13/">Open the card</a></p>          <p class="glance">Uses Sunday&#39;s chicken. Keep it within 2 days of the roast. The chicken is not bought again.</p>
-          <div class="flags"><span class="flag">Quick</span><span class="flag">Jude&#39;s plate</span></div>
-<p>Uses leftovers from Sunday. The main pack is not bought again.</p><p class="jude-line"><span class="jude">Jude:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>          <p>This stays on its day. The chicken is only good for two days after the roast.</p>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Chicken shawarma bowls with flatbreads and houmous: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Chicken shawarma bowls with flatbreads and houmous: skipped">Skipped</button>
-          </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+        <article class="dinner" id="d-R13" data-key="R13" data-movable="false" data-use-by="" data-short="Chicken shawarma bowls" data-time="25 min" data-image="R13_chicken-shawarma-bowls.jpg" data-recipe="R13" data-jude="Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.">
+          <div class="row-main">
+            <p class="when">Tue 24 Nov</p>
+            <h3>Chicken shawarma bowls with flatbreads and houmous</h3>
+            <p>Chicken shawarma bowls. 25 min.</p>
+<p class="jude-line"><span class="jude">Jude:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p><p><a href="R13/">Open the card</a></p>          </div>
+          <img class="thumb-pic" src="../../img/R13_chicken-shawarma-bowls.jpg" alt="Chicken shawarma bowls">
+          <div class="row-actions">
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Chicken shawarma bowls with flatbreads and houmous">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <p><button type="button" data-short>Not enough left</button> The spare pie can cover the night. It is not bought again.</p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Chicken shawarma bowls with flatbreads and houmous">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+<button type="button" data-short>Not enough left</button>            </div>
+            <input data-note type="text" aria-label="Note on Chicken shawarma bowls with flatbreads and houmous">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-25">
-        <p class="when">Wed 25</p>
-        <article class="dinner" id="d-R14" data-key="R14" data-movable="true" data-use-by="3" data-kind="dinner">
-          <header>
-            <span class="tag">Midweek</span>
-          </header>
-          <img src="../../img/R14_harissa-salmon.jpg" alt="Harissa salmon with crushed potatoes">
-          <h3>Harissa salmon with crushed potatoes</h3>
-<p><a href="R14/">Open the card</a></p>          <p class="glance">Defrost on Tuesday night. Can swap with Thursday or Friday.</p>
-          <div class="flags"><span class="flag">Quick</span><span class="flag">Jude&#39;s plate</span><span class="flag">3 for £10</span></div>
-<p class="jude-line"><span class="jude">Jude:</span> Cut Jude&#39;s piece of salmon and bake it plain, before the harissa.</p>          <div class="move">
-            <button type="button" data-move="up" aria-label="Move Harissa salmon with crushed potatoes up">Up</button>
-            <button type="button" data-move="down" aria-label="Move Harissa salmon with crushed potatoes down">Down</button>
-          </div>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Harissa salmon with crushed potatoes: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Harissa salmon with crushed potatoes: skipped">Skipped</button>
-          </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+        <article class="dinner" id="d-R14" data-key="R14" data-movable="true" data-use-by="3" data-short="Harissa salmon" data-time="30 min" data-image="R14_harissa-salmon.jpg" data-recipe="R14" data-jude="Cut Jude&#39;s piece of salmon and bake it plain, before the harissa.">
+<div class="grip" aria-hidden="true"></div>          <div class="row-main">
+            <p class="when">Wed 25 Nov</p>
+            <h3>Harissa salmon with crushed potatoes</h3>
+            <p>Harissa salmon. 30 min.</p>
+<p class="jude-line"><span class="jude">Jude:</span> Cut Jude&#39;s piece of salmon and bake it plain, before the harissa.</p><p><a href="R14/">Open the card</a></p>          </div>
+          <img class="thumb-pic" src="../../img/R14_harissa-salmon.jpg" alt="Harissa salmon">
+          <div class="row-actions">
+            <button type="button" data-move="up">Move up</button>
+            <button type="button" data-move="down">Move down</button>
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Harissa salmon with crushed potatoes">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Harissa salmon with crushed potatoes">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Harissa salmon with crushed potatoes">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-26">
-        <p class="when">Thu 26</p>
-        <article class="dinner" id="d-R15" data-key="R15" data-movable="true" data-use-by="1" data-kind="dinner">
-          <header>
-            <span class="tag">Made on Sunday</span>
-          </header>
-          <img src="../../img/R15_lamb-carrot-meatballs-tagliatelle.jpg" alt="Lamb and carrot meatballs in tomato sauce with tagliatelle">
-          <h3>Lamb and carrot meatballs in tomato sauce with tagliatelle</h3>
-<p><a href="R15/">Open the card</a></p>          <p class="glance">Shortest-dated meat. Frozen on Sunday, so it can move. Defrost the night before.</p>
-          <div class="flags"><span class="flag">Quick</span><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">3 for £10</span></div>
-<p class="jude-line"><span class="jude">Jude:</span> Lift Jude&#39;s meatballs and a spoon of sauce out before you season.</p>          <div class="move">
-            <button type="button" data-move="up" aria-label="Move Lamb and carrot meatballs in tomato sauce with tagliatelle up">Up</button>
-            <button type="button" data-move="down" aria-label="Move Lamb and carrot meatballs in tomato sauce with tagliatelle down">Down</button>
-          </div>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Lamb and carrot meatballs in tomato sauce with tagliatelle: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Lamb and carrot meatballs in tomato sauce with tagliatelle: skipped">Skipped</button>
-          </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+        <article class="dinner" id="d-R15" data-key="R15" data-movable="true" data-use-by="1" data-short="Lamb and carrot meatballs in tomato sauce" data-time="Sunday: 30 min to roll and bake" data-image="R15_lamb-carrot-meatballs-tagliatelle.jpg" data-recipe="R15" data-jude="Lift Jude&#39;s meatballs and a spoon of sauce out before you season.">
+<div class="grip" aria-hidden="true"></div>          <div class="row-main">
+            <p class="when">Thu 26 Nov</p>
+            <h3>Lamb and carrot meatballs in tomato sauce with tagliatelle</h3>
+            <p>Lamb and carrot meatballs in tomato sauce. Sunday: 30 min to roll and bake.</p>
+<p class="jude-line"><span class="jude">Jude:</span> Lift Jude&#39;s meatballs and a spoon of sauce out before you season.</p><p><a href="R15/">Open the card</a></p>          </div>
+          <img class="thumb-pic" src="../../img/R15_lamb-carrot-meatballs-tagliatelle.jpg" alt="Lamb and carrot meatballs in tomato sauce">
+          <div class="row-actions">
+            <button type="button" data-move="up">Move up</button>
+            <button type="button" data-move="down">Move down</button>
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Lamb and carrot meatballs in tomato sauce with tagliatelle">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Lamb and carrot meatballs in tomato sauce with tagliatelle">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Lamb and carrot meatballs in tomato sauce with tagliatelle">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-27">
-        <p class="when">Fri 27</p>
-        <article class="dinner" id="d-R16" data-key="R16" data-movable="true" data-use-by="2" data-kind="dinner">
-          <header>
-            <span class="tag">Changed by Joe</span>
-          </header>
-          <img src="../../img/R16_gochujang-pork-shoulder-stew.jpg" alt="Gochujang pork shoulder stew with hand-ripped noodles">
-          <h3>Gochujang pork shoulder stew with hand-ripped noodles</h3>
-<p><a href="R16/">Open the card</a></p>          <p class="glance">Frozen on Sunday, so it can move. Defrost the night before.</p>
-          <div class="flags"><span class="flag">Quick</span><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">3 for £10</span><span class="flag">Uses the veg box</span></div>
-<p class="jude-line"><span class="jude">Jude:</span> Take Jude&#39;s plain pork, carrot and broth out before the gochujang.</p>          <div class="move">
-            <button type="button" data-move="up" aria-label="Move Gochujang pork shoulder stew with hand-ripped noodles up">Up</button>
-            <button type="button" data-move="down" aria-label="Move Gochujang pork shoulder stew with hand-ripped noodles down">Down</button>
-          </div>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Gochujang pork shoulder stew with hand-ripped noodles: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Gochujang pork shoulder stew with hand-ripped noodles: skipped">Skipped</button>
-          </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+        <article class="dinner" id="d-R16" data-key="R16" data-movable="true" data-use-by="2" data-short="Gochujang pork shoulder stew" data-time="Sunday: 15 min hands-on, 1 hr 15 min simmer" data-image="R16_gochujang-pork-shoulder-stew.jpg" data-recipe="R16" data-jude="Take Jude&#39;s plain pork, carrot and broth out before the gochujang.">
+<div class="grip" aria-hidden="true"></div>          <div class="row-main">
+            <p class="when">Fri 27 Nov</p>
+            <h3>Gochujang pork shoulder stew with hand-ripped noodles</h3>
+            <p>Gochujang pork shoulder stew. Sunday: 15 min hands-on, 1 hr 15 min simmer.</p>
+<p class="jude-line"><span class="jude">Jude:</span> Take Jude&#39;s plain pork, carrot and broth out before the gochujang.</p><p><a href="R16/">Open the card</a></p>          </div>
+          <img class="thumb-pic" src="../../img/R16_gochujang-pork-shoulder-stew.jpg" alt="Gochujang pork shoulder stew">
+          <div class="row-actions">
+            <button type="button" data-move="up">Move up</button>
+            <button type="button" data-move="down">Move down</button>
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Gochujang pork shoulder stew with hand-ripped noodles">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Gochujang pork shoulder stew with hand-ripped noodles">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Gochujang pork shoulder stew with hand-ripped noodles">
+          </details>
         </article>
       </div>
       <div class="slot" data-date="2026-11-28">
-        <p class="when">Sat 28</p>
-        <article class="dinner" id="d-lasagne" data-key="lasagne" data-movable="true" data-use-by="4" data-kind="freezer">
-          <header>
-            <span class="tag">From the freezer · From the freezer · Reheat only</span>
-          </header>
-          <img src="../../img/lasagne-placeholder.jpg" alt="Placeholder. Photo still to come. Freezer lasagne">
-          <h3>Freezer lasagne</h3>
-          <p class="glance">The spare shepherd&#39;s pie stays frozen as the buffer.</p>
-          <p>Reheat only. From the fridge, 180°C fan for 35–45 minutes, until piping hot in the middle. If the centre is still frozen, give it longer.</p>
-          <p class="jude-line"><span class="jude">Jude:</span> Soft mash or the soft filling from the edge. No extra salt.</p>
-          <div class="move">
-            <button type="button" data-move="up" aria-label="Move Freezer lasagne up">Up</button>
-            <button type="button" data-move="down" aria-label="Move Freezer lasagne down">Down</button>
+        <article class="dinner" id="d-lasagne" data-key="lasagne" data-movable="true" data-use-by="4" data-short="Lasagne" data-time="35 to 45 minutes" data-image="lasagne-placeholder.jpg" data-recipe="" data-jude="">
+<div class="grip" aria-hidden="true"></div>          <div class="row-main">
+            <p class="when">Sat 28 Nov</p>
+            <h3>Freezer lasagne</h3>
+            <p>Lasagne. 35 to 45 minutes.</p>
           </div>
-          <div class="actions">
-            <button type="button" data-status="cooked" aria-label="Freezer lasagne: cooked">Cooked</button>
-            <button type="button" data-status="skipped" aria-label="Freezer lasagne: skipped">Skipped</button>
-          </div>
-          <div class="skip-where" hidden>
-            <p>Where does the food go?</p>
+          <img class="thumb-pic" src="../../img/lasagne-placeholder.jpg" alt="Placeholder. Photo still to come. Lasagne">
+          <div class="row-actions">
+            <button type="button" data-move="up">Move up</button>
+            <button type="button" data-move="down">Move down</button>
+            <button type="button" data-status="cooked">Cooked</button>
+            <button type="button" data-status="skipped">Skip</button>
             <button type="button" data-skip-to="freezer">Freezer</button>
-            <button type="button" data-skip-to="tomorrow">Tomorrow</button>
-            <button type="button" data-skip-to="leave">Leave it</button>
           </div>
-          <div class="rates" aria-label="After Freezer lasagne">
-            <button type="button" data-verdict="make_again">Make again</button>
-            <button type="button" data-verdict="fine">Fine</button>
-            <button type="button" data-verdict="dont_offer">Don't offer again</button>
-          </div>
-          <p><button type="button" data-jude>He left this</button></p>
-          <input class="note" data-note type="text" placeholder="A short note, if you want" aria-label="Note on Freezer lasagne">
+          <details>
+            <summary>Rate it</summary>
+            <div class="rates">
+              <button type="button" data-verdict="make_again">Make again</button>
+              <button type="button" data-verdict="fine">Fine</button>
+              <button type="button" data-verdict="dont_offer">Don't offer again</button>
+              <button type="button" data-jude>He left this</button>
+            </div>
+            <input data-note type="text" aria-label="Note on Freezer lasagne">
+          </details>
         </article>
       </div>
     </div>
+    <section class="send-block">
+      <h2>Send to Larder</h2>
+      <p>Saved on this phone until you send it. Another phone will not see it yet.</p>
+      <p>
+        <button type="button" data-by="joe">These notes are from Joe</button>
+        <button type="button" data-by="lotte">These notes are from Lotte</button>
+      </p>
+      <p><button type="button" class="primary" id="send-changes">Email these changes</button>
+      <button type="button" id="copy-changes">Copy the note</button></p>
+      <p id="saved-note" aria-live="polite"></p>
+      <p id="plain-note"></p>
+      <textarea class="visually-hidden" id="tweak-draft" readonly aria-label="Changes to send"></textarea>
+      <label>Something missing <input id="missing" type="text" aria-label="Something missing"></label>
+    </section>
+    <details class="quiet">
+      <summary>Shop and freezer</summary>
+      <p><button type="button" id="arrived-late">Arrived after 7pm</button></p>
+      <p>9 dinners · 2 leftovers · 5 to cook · 2 from the freezer</p>
+      <h2>Out of the freezer</h2>
+      <ul>
+        <li>Sunday 22 November: take out Freezer shepherd&#39;s pie for Monday 23 November.</li>
+        <li>Friday 27 November: take out Freezer lasagne for Saturday 28 November.</li>
+      </ul>
+      <h2>Local pick-up</h2>
+      <ul><li>Gochujang, a small tub</li><li>Fresh ginger</li><li>Spring onions</li><li>Harissa paste, or use the Peppadew swap on the salmon card</li><li>A garlic bulb, if the last one is used up</li></ul>
+      <p><a href="shop/">Open the shop list</a></p>
+    </details>
+  </section>
 
-    <p><a href="sunday/">Sunday, on one screen</a></p>
-    <h2>Sunday prep</h2>
-    <ol>
-      <li>
-        <strong>On arrival.</strong> Salmon straight into the freezer. Check the use-by dates on the lamb, pork and chicken.
-      </li>
-      <li>
-        <strong>Sun 12:30.</strong> Lamb meatballs. Shortest-dated mince. Mix, roll, bake, cool and freeze.
-          <div class="step-split"><span class="jude">Jude:</span> Lift Jude&#39;s meatballs and a spoon of sauce out before you season.</div>
-      </li>
-      <li>
-        <strong>Sun 13:00.</strong> Pork stew base. Brown, simmer, then freeze both pots.
-          <div class="step-split"><span class="jude">Jude:</span> Take Jude&#39;s plain pork, carrot and broth out before the gochujang.</div>
-      </li>
-      <li>
-        <strong>Sun 15:30.</strong> Roast chicken, then potatoes and carrots. Dinner about 17:15.
-          <div class="step-split"><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</div>
-      </li>
-      <li>
-        <strong>Sun after dinner.</strong> Strip the chicken for Tuesday. Unsalted stock from the carcass. Freeze 500 ml for Friday.
-          <div class="step-split"><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</div>
-      </li>
-      <li>
-        <strong>Sun bedtime.</strong> Shepherd&#39;s pie from the freezer to the fridge for Monday football.
-      </li>
-    </ol>
-
-    <h2>Out of the freezer</h2>
-    <ul>
-      <li data-freezer="shepherds-pie">Sunday 22 November: take out Freezer shepherd&#39;s pie for Monday 23 November.
-        <span class="actions no-print">
-          <button type="button" data-freeze="out">Taken out</button>
-          <button type="button" data-freeze="used">Used</button>
-          <button type="button" data-freeze="in">Put back</button>
-        </span>
-      </li>
-      <li data-freezer="lasagne">Friday 27 November: take out Freezer lasagne for Saturday 28 November.
-        <span class="actions no-print">
-          <button type="button" data-freeze="out">Taken out</button>
-          <button type="button" data-freeze="used">Used</button>
-          <button type="button" data-freeze="in">Put back</button>
-        </span>
-      </li>
-    </ul>
-
-    <h2>Jude's plate</h2>
-    <ul>
-<li>No added salt, sugar or honey. Take his portion out before any salt, paste or sauce.</li><li>He loves mash, so chicken goes in finely chopped through mash. Salted butter stays on the adult side.</li><li>Check every bone in the salmon. Make the meatballs and noodles soft and small.</li>    </ul>
-
-    <h2>Local pick-up</h2>
-    <ul>
-<li>Gochujang, a small tub</li><li>Fresh ginger</li><li>Spring onions</li><li>Harissa paste, or use the Peppadew swap on the salmon card</li><li>A garlic bulb, if the last one is used up</li>    </ul>
-    <p><a href="shop/">Open the shop list</a></p>
-
-    <h2>Next time</h2>
-    <p>Swipe right to cook it another week, or left to leave it. The dinners above stay as they are.</p>
-    <div id="choices">
-      <article class="dinner choice" data-choice="R12">
-        <h3>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</h3>
-        <div class="actions">
-          <button type="button" data-pick="passed">Leave it</button>
-          <button type="button" data-pick="chosen">Cook this</button>
-        </div>
-      </article>
-      <article class="dinner choice" data-choice="R13">
-        <h3>Chicken shawarma bowls with flatbreads and houmous</h3>
-        <div class="actions">
-          <button type="button" data-pick="passed">Leave it</button>
-          <button type="button" data-pick="chosen">Cook this</button>
-        </div>
-      </article>
-      <article class="dinner choice" data-choice="R14">
-        <h3>Harissa salmon with crushed potatoes</h3>
-        <div class="actions">
-          <button type="button" data-pick="passed">Leave it</button>
-          <button type="button" data-pick="chosen">Cook this</button>
-        </div>
-      </article>
-      <article class="dinner choice" data-choice="R15">
-        <h3>Lamb and carrot meatballs in tomato sauce with tagliatelle</h3>
-        <div class="actions">
-          <button type="button" data-pick="passed">Leave it</button>
-          <button type="button" data-pick="chosen">Cook this</button>
-        </div>
-      </article>
-      <article class="dinner choice" data-choice="R16">
-        <h3>Gochujang pork shoulder stew with hand-ripped noodles</h3>
-        <div class="actions">
-          <button type="button" data-pick="passed">Leave it</button>
-          <button type="button" data-pick="chosen">Cook this</button>
-        </div>
-      </article>
-    </div>
-
-    <h2>Something missing?</h2>
-    <input class="note" id="missing" type="text" placeholder="What was missing?" aria-label="Something missing">
-    <p class="no-print" id="who">
-      <span>Who is sending this?</span>
-      <button type="button" data-by="joe">These notes are from Joe</button>
-      <button type="button" data-by="lotte">These notes are from Lotte</button>
-    </p>
-    <p class="no-print">
-      <button type="button" class="primary" id="send-changes">Email these changes</button>
-      <button type="button" id="copy-changes">Copy the note</button>
-    </p>
-    <p id="saved-note" class="lede" aria-live="polite"></p>
-    <p id="plain-note" class="banner"></p>
-    <textarea class="note visually-hidden" id="tweak-draft" rows="8" readonly aria-label="Changes to send"></textarea>
-  </main>
   <nav class="tabbar" aria-label="Larder">
-    <a href="#tonight">Tonight</a>
-    <a href="#dinners">Week</a>
-    <a href="sunday/">Sunday</a>
-    <a href="shop/">Shop</a>
+    <a href="?view=week"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>This week</a>
+    <a href="?view=choose"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Choose</a>
+    <a href="cookbook/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5h9.5A3.5 3.5 0 0 1 18 8v11.5H8A3 3 0 0 0 5 17z"/><path d="M5 4.5v12.5"/></svg>Cookbook</a>
+    <a href="shop/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5A3 3 0 0 1 12 3.5 3 3 0 0 1 15 6.5V8"/></svg>Shop</a>
   </nav>
   <script type="application/json" id="larder-plan">{"counter": {"cooked": 5, "dinners_covered": 9, "freezer": 2, "leftovers": 2}, "delivery": {"arrived_at": null, "window": {"date": "2026-11-20", "from": "16:00", "to": "20:00"}}, "dinners": [{"date": "2026-11-20", "key": "fri-leftovers", "kind": "leftover", "movable": false, "recipe": null, "shop": false, "title": "Fridge leftovers: lemon chicken traybake", "use_by_order": null}, {"date": "2026-11-21", "key": "sat-leftovers", "kind": "leftover", "movable": false, "recipe": null, "shop": false, "title": "Fridge leftovers: filled pasta", "use_by_order": null}, {"date": "2026-11-22", "key": "R12", "kind": "dinner", "movable": false, "recipe": "R12", "shop": "full", "title": "Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem", "use_by_order": null}, {"date": "2026-11-23", "key": "shepherds-pie", "kind": "freezer", "movable": false, "recipe": null, "shop": false, "title": "Freezer shepherd\u0027s pie", "use_by_order": null}, {"date": "2026-11-24", "key": "R13", "kind": "dinner", "movable": false, "recipe": "R13", "shop": "extras", "title": "Chicken shawarma bowls with flatbreads and houmous", "use_by_order": null}, {"date": "2026-11-25", "key": "R14", "kind": "dinner", "movable": true, "recipe": "R14", "shop": "full", "title": "Harissa salmon with crushed potatoes", "use_by_order": 3}, {"date": "2026-11-26", "key": "R15", "kind": "dinner", "movable": true, "recipe": "R15", "shop": "full", "title": "Lamb and carrot meatballs in tomato sauce with tagliatelle", "use_by_order": 1}, {"date": "2026-11-27", "key": "R16", "kind": "dinner", "movable": true, "recipe": "R16", "shop": "full", "title": "Gochujang pork shoulder stew with hand-ripped noodles", "use_by_order": 2}, {"date": "2026-11-28", "key": "lasagne", "kind": "freezer", "movable": true, "recipe": null, "shop": false, "title": "Freezer lasagne", "use_by_order": 4}], "picked": ["R12", "R13", "R14", "R15", "R16"], "week": "2026-11-23"}</script>
   <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "household_key": "21NLf46WXCZ7Xyfp_fzgVbVpqWKpJO2Bsb_WuA_kdJU", "week": "2026-11-23"}</script>
   <script src="../../assets/sync.js"></script>
   <script src="../../assets/week.js"></script>
+  <script src="../../assets/design.js"></script>
   <script src="../../assets/pwa.js"></script>
 </body>
 </html>

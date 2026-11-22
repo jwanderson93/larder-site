@@ -60,6 +60,31 @@
     bar.appendChild(prev);
     bar.appendChild(next);
     document.body.appendChild(bar);
+    var start = document.getElementById("start-cooking");
+    if (start) {
+      start.addEventListener("click", function () {
+        if (!document.body.classList.contains("cooking")) cook.click();
+      });
+    }
+    var originX = 0;
+    document.addEventListener("pointerdown", function (event) { originX = event.clientX; });
+    document.addEventListener("pointerup", function (event) {
+      if (!document.body.classList.contains("cooking")) return;
+      var dx = event.clientX - originX;
+      if (Math.abs(dx) < 40) return;
+      show(dx < 0 ? cursor + 1 : cursor - 1);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (!document.body.classList.contains("cooking")) return;
+      if (event.key === "ArrowRight") show(cursor + 1);
+      if (event.key === "ArrowLeft") show(cursor - 1);
+    });
+    if (document.documentElement.getAttribute("data-cook") === "1") start.click();
+    var frames = parseInt(new URLSearchParams(location.search).get("frame") || "0", 10);
+    if (frames && start) {
+      if (!document.body.classList.contains("cooking")) start.click();
+      show(frames - 1);
+    }
   }
   window.addEventListener("beforeprint", function () {
     steps.forEach(function (step) { step.hidden = false; });

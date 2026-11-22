@@ -15,6 +15,8 @@
 
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function todayISO() {
+    var forced = new URLSearchParams(location.search).get("asof");
+    if (forced && /^\d{4}-\d{2}-\d{2}$/.test(forced)) return forced;
     var d = new Date();
     return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
   }
@@ -247,6 +249,14 @@
     if (jude.length) lines.push("jude_left: " + jude.join(", "));
     shorts.forEach(function (key) { lines.push("short: " + key); });
     if (state.late) lines.push("late: after 7pm");
+    try {
+      var library = JSON.parse(localStorage.getItem("larder-library") || "{}");
+      Object.keys(library).forEach(function (id) {
+        var row = library[id] || {};
+        if (row.pinned) lines.push("pin: " + id);
+        if (row.note) lines.push("recipe_note: " + id + " | " + String(row.note).replace(/\s+/g, " "));
+      });
+    } catch (e) { /* the library is optional */ }
     var shopMissing = localStorage.getItem("larder-missing-lines");
     if (shopMissing) lines.push("missing: " + shopMissing);
     Object.keys(state.picks || {}).forEach(function (id) {
@@ -339,12 +349,7 @@
   }
 
   slots().forEach(function (slot) {
-    if (slot.getAttribute("data-date") === today) {
-      var title = slot.querySelector("h3");
-      if (title && title.textContent.indexOf("Tonight") !== 0) {
-        title.textContent = "Tonight. " + title.textContent;
-      }
-    }
+    slot.classList.toggle("is-today", slot.getAttribute("data-date") === today);
   });
 
   var still = document.getElementById("still-ahead");

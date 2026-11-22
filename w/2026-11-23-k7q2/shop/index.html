@@ -4,10 +4,16 @@
   <meta charset="utf-8">
   <script>
   (function () {
-    var q = new URLSearchParams(location.search).get("theme");
-    var t = q || localStorage.getItem("larder-theme") || "";
-    if (q) localStorage.setItem("larder-theme", q);
-    if (t) document.documentElement.setAttribute("data-theme", t);
+    var q = new URLSearchParams(location.search);
+    var mode = q.get("mode");
+    if (mode !== "dark" && mode !== "light") mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-mode", mode);
+    var theme = q.get("theme") || localStorage.getItem("larder-theme") || "night";
+    if (theme === "poster" || theme === "market" || theme === "03") theme = "poster";
+    else theme = "night";
+    localStorage.setItem("larder-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (q.get("shot") === "1") document.documentElement.setAttribute("data-shot", "1");
   })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,13 +22,15 @@
   <title>Shop</title>
   <link rel="manifest" href="../../../manifest.webmanifest">
   <link rel="stylesheet" href="../../../assets/site.css">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/layouts.css">
 </head>
 <body class="app">
+  <header class="nav">
+    <a class="nav-back" href="../?view=home">Tonight</a>
+    <span class="nav-inline" id="nav-inline">Shop</span>
+  </header>
   <main class="wrap">
-    <p class="kicker"><a href="../">Back to the week</a></p>
-    <h1>Shop</h1>
-    <p class="themes no-print">Directions <a href="?theme=01">Feast</a> <a href="?theme=02">Tin</a> <a href="?theme=03">Poster</a> <a href="?theme=04">Book</a> <a href="?theme=05">Desk</a></p>
+    <h1 class="large-title">Shop</h1>
     <p class="lede">Tick them off as you shop. The ticks stay on this phone. Nothing here pays or books a slot.</p>
     <h2>Morrisons delivery</h2>
     <ul class="shop">
@@ -177,11 +185,12 @@
     </ul>
   </main>
   <nav class="tabbar" aria-label="Larder">
-    <a href="../#tonight">Tonight</a>
-    <a href="../#dinners">Week</a>
-    <a href="../sunday/">Sunday</a>
-    <a href="./">Shop</a>
+    <a href="../?view=week"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>This week</a>
+    <a href="../?view=choose"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Choose</a>
+    <a href="../cookbook/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5h9.5A3.5 3.5 0 0 1 18 8v11.5H8A3 3 0 0 0 5 17z"/><path d="M5 4.5v12.5"/></svg>Cookbook</a>
+    <a href="./"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5A3 3 0 0 1 12 3.5 3 3 0 0 1 15 6.5V8"/></svg>Shop</a>
   </nav>
+  <script src="../../../assets/design.js"></script>
   <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "household_key": "21NLf46WXCZ7Xyfp_fzgVbVpqWKpJO2Bsb_WuA_kdJU", "week": "2026-11-23"}</script>
   <script src="../../../assets/sync.js"></script>
   <script src="../../../assets/pwa.js"></script>

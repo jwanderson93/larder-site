@@ -4,92 +4,116 @@
   <meta charset="utf-8">
   <script>
   (function () {
-    var q = new URLSearchParams(location.search).get("theme");
-    var t = q || localStorage.getItem("larder-theme") || "";
-    if (q) localStorage.setItem("larder-theme", q);
-    if (t) document.documentElement.setAttribute("data-theme", t);
+    var q = new URLSearchParams(location.search);
+    var mode = q.get("mode");
+    if (mode !== "dark" && mode !== "light") mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-mode", mode);
+    var theme = q.get("theme") || localStorage.getItem("larder-theme") || "night";
+    if (theme === "poster" || theme === "market" || theme === "03") theme = "poster";
+    else theme = "night";
+    localStorage.setItem("larder-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (q.get("shot") === "1") document.documentElement.setAttribute("data-shot", "1");
+    if (q.get("flip") === "1") document.documentElement.setAttribute("data-flip", "1");
+    if (q.get("cook") === "1") document.documentElement.setAttribute("data-cook", "1");
   })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="theme-color" content="#1A1208">
+  <meta name="theme-color" content="#061018">
   <title>Chicken shawarma bowls with flatbreads and houmous</title>
   <link rel="manifest" href="../../../manifest.webmanifest">
   <link rel="stylesheet" href="../../../assets/site.css">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/layouts.css">
 </head>
 <body class="app" data-recipe="R13">
+  <header class="nav">
+    <a class="nav-back" href="../?view=home">Tonight</a>
+    <span class="nav-inline" id="nav-inline">Chicken shawarma bowls</span>
+  </header>
   <main class="wrap">
-    <p class="themes no-print">Directions <a href="?theme=01">Feast</a> <a href="?theme=02">Tin</a> <a href="?theme=03">Poster</a> <a href="?theme=04">Book</a> <a href="?theme=05">Desk</a></p>
-    <p class="kicker"><a href="../">Back to the week</a> · R13 · Tue 24 Nov</p>
-    <h1>Chicken shawarma bowls with flatbreads and houmous</h1>
-    <p class="lede">25 min · Serves 2 + Jude</p>
-<div class="flags"><span class="flag">Quick</span><span class="flag">Jude&#39;s plate</span></div>    <img src="../../../img/R13_chicken-shawarma-bowls.jpg" alt="Chicken shawarma bowls with flatbreads and houmous">
-    <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
-    <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
-<details><summary>What it cost</summary><p>Deli Kitchen Greek-style flatbreads £1.90; Chickpeas 400 g £0.37; Peppadew roasted red peppers £2.75; Ramona&#39;s houmous £3.75</p></details>    <p class="card"><span class="jude">Jude, before step 1:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>
-
-    <h2>Ingredients</h2>
-    <h3>For this sitting</h3>
-    <ul>
-      <li><label><input type="checkbox" data-tick="ing-main-1"> 2–3 Greek-style flatbreads</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-2"> 1 tin chickpeas (drained)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-3"> a spoon Greek yoghurt</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-4"> a handful lettuce</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-5"> half cucumber</label></li>
-    </ul>
-    <h3>Already in the house</h3>
-    <ul>
-      <li><label><input type="checkbox" data-tick="ing-leftover-1"> about 300 g leftover roast chicken (from Sunday)</label></li>
-    </ul>
-    <h3>After his portion</h3>
-    <ul>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-1"> 4–6 Peppadew roasted red peppers (sliced)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-2"> a spoon houmous</label></li>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-3"> 1 tsp each ground cumin and paprika</label></li>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-4"> ½ tsp cinnamon</label></li>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-5"> 1 clove garlic</label></li>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-6"> a squeeze lemon</label></li>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-7"> 1 tbsp olive oil</label></li>
-    </ul>
-
-    <h2>Method</h2>
-    <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
-    <p id="step-count" aria-live="polite"></p>
-    <ol id="method">
-      <li class="step-split">
-        <label><input type="checkbox" data-tick="step-1"> Take Jude&#39;s chicken and a few chickpeas out before any spice.</label>
-<div><span class="jude">Jude:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</div>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-2"> Toss the rest of the chicken and chickpeas in the spice mix and fry until crisp at the edges and piping hot.</label>
-<button type="button" data-timer="6" data-label="Start 6 min">Start 6 min</button>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-3"> Warm the flatbreads in a dry pan, 30 seconds a side.</label>
-<button type="button" data-timer="1" data-label="Start 1 min">Start 1 min</button>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-4"> Build the bowls: lettuce, cucumber, Peppadews, chicken and chickpeas, yoghurt and houmous. Lemon over the top.</label>
-      </li>
-    </ol>
-
-    <h2>Jude's plate</h2>
-    <p><span class="jude">Jude:</span> Greek yoghurt stirred through plain mash, cucumber sticks and a strip of flatbread. A little very finely shredded plain chicken in the mash if he&#39;ll take it. Leave out the houmous and the Peppadews.</p>
-    <p><strong>Keeping it:</strong> Eat the same night. Reheat chicken only once, until piping hot.</p>
-    <h2>For the cookbook</h2>
-    <p>A note for next time. It does not change the method above.</p>
-    <input class="note" id="cookbook-note" type="text" maxlength="160" placeholder="A note for next time" aria-label="Cookbook note">
-    <p id="saved-note" class="lede" aria-live="polite"></p>
-    <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
-    <footer><a href="../">Back to the week</a></footer>
+    <section class="front" id="front">
+      <figure class="plate">
+        <img src="../../../img/R13_chicken-shawarma-bowls.jpg" alt="Chicken shawarma bowls with flatbreads and houmous">
+      </figure>
+      <p class="eyebrow">Tue 24 Nov</p>
+      <h1 class="recipe-name large-title">Chicken shawarma bowls</h1>
+      <p class="visually-hidden">Chicken shawarma bowls with flatbreads and houmous</p>
+      <p>25 min</p>
+      <p><span class="jude">Jude:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>
+      <p class="no-print">
+        <button type="button" id="turn-card" aria-pressed="false">Turn the card over</button>
+        <button type="button" id="start-cooking">Start cooking</button>
+      </p>
+    </section>
+    <section class="back" id="back" hidden>
+      <p class="kicker"><a href="../?view=home">Back to tonight</a></p>
+      <h1>Chicken shawarma bowls with flatbreads and houmous</h1>
+      <p class="lede">25 min · Serves 2 + Jude</p>
+<div class="flags"><span class="flag">Quick</span><span class="flag">Jude&#39;s plate</span></div>      <p class="facets">levantine · chicken · quick · mid</p>
+      <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
+      <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
+<details><summary>What it cost</summary><p>Deli Kitchen Greek-style flatbreads £1.90; Chickpeas 400 g £0.37; Peppadew roasted red peppers £2.75; Ramona&#39;s houmous £3.75</p></details>      <p><span class="jude">Jude, before step 1:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>
+      <h2>Ingredients</h2>
+      <h3>For this sitting</h3>
+      <ul>
+        <li><label><input type="checkbox" data-tick="ing-main-1"> 2–3 Greek-style flatbreads</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-2"> 1 tin chickpeas (drained)</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-3"> a spoon Greek yoghurt</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-4"> a handful lettuce</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-5"> half cucumber</label></li>
+      </ul>
+      <h3>Already in the house</h3>
+      <ul>
+        <li><label><input type="checkbox" data-tick="ing-leftover-1"> about 300 g leftover roast chicken (from Sunday)</label></li>
+      </ul>
+      <h3>After his portion</h3>
+      <ul>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-1"> 4–6 Peppadew roasted red peppers (sliced)</label></li>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-2"> a spoon houmous</label></li>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-3"> 1 tsp each ground cumin and paprika</label></li>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-4"> ½ tsp cinnamon</label></li>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-5"> 1 clove garlic</label></li>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-6"> a squeeze lemon</label></li>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-7"> 1 tbsp olive oil</label></li>
+      </ul>
+      <h2>Method</h2>
+      <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
+      <p id="step-count" aria-live="polite"></p>
+      <ol id="method">
+        <li class="step-split">
+          <label><input type="checkbox" data-tick="step-1"> Take Jude&#39;s chicken and a few chickpeas out before any spice.</label>
+<div><span class="jude">Jude:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</div>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-2"> Toss the rest of the chicken and chickpeas in the spice mix and fry until crisp at the edges and piping hot.</label>
+<button type="button" data-timer="6" data-label="Start 6 min">Start 6 min</button>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-3"> Warm the flatbreads in a dry pan, 30 seconds a side.</label>
+<button type="button" data-timer="1" data-label="Start 1 min">Start 1 min</button>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-4"> Build the bowls: lettuce, cucumber, Peppadews, chicken and chickpeas, yoghurt and houmous. Lemon over the top.</label>
+        </li>
+      </ol>
+      <h2>Jude's plate</h2>
+      <p><span class="jude">Jude:</span> Greek yoghurt stirred through plain mash, cucumber sticks and a strip of flatbread. A little very finely shredded plain chicken in the mash if he&#39;ll take it. Leave out the houmous and the Peppadews.</p>
+      <p><strong>Keeping it:</strong> Eat the same night. Reheat chicken only once, until piping hot.</p>
+      <h2>For the cookbook</h2>
+      <p>A note for next time. It does not change the method above.</p>
+      <input class="note" id="cookbook-note" type="text" maxlength="160" placeholder="A note for next time" aria-label="Cookbook note">
+      <p id="saved-note" class="lede" aria-live="polite"></p>
+      <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
+    </section>
   </main>
   <nav class="tabbar" aria-label="Larder">
-    <a href="../#tonight">Tonight</a>
-    <a href="../#dinners">Week</a>
-    <a href="../sunday/">Sunday</a>
-    <a href="../shop/">Shop</a>
+    <a href="../?view=week"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>This week</a>
+    <a href="../?view=choose"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Choose</a>
+    <a href="../cookbook/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5h9.5A3.5 3.5 0 0 1 18 8v11.5H8A3 3 0 0 0 5 17z"/><path d="M5 4.5v12.5"/></svg>Cookbook</a>
+    <a href="../shop/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5A3 3 0 0 1 12 3.5 3 3 0 0 1 15 6.5V8"/></svg>Shop</a>
   </nav>
   <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "household_key": "21NLf46WXCZ7Xyfp_fzgVbVpqWKpJO2Bsb_WuA_kdJU", "week": "2026-11-23"}</script>
   <script src="../../../assets/sync.js"></script>
   <script src="../../../assets/card.js"></script>
+  <script src="../../../assets/design.js"></script>
   <script src="../../../assets/pwa.js"></script>
 </body>
 </html>

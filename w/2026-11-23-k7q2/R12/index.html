@@ -4,98 +4,122 @@
   <meta charset="utf-8">
   <script>
   (function () {
-    var q = new URLSearchParams(location.search).get("theme");
-    var t = q || localStorage.getItem("larder-theme") || "";
-    if (q) localStorage.setItem("larder-theme", q);
-    if (t) document.documentElement.setAttribute("data-theme", t);
+    var q = new URLSearchParams(location.search);
+    var mode = q.get("mode");
+    if (mode !== "dark" && mode !== "light") mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-mode", mode);
+    var theme = q.get("theme") || localStorage.getItem("larder-theme") || "night";
+    if (theme === "poster" || theme === "market" || theme === "03") theme = "poster";
+    else theme = "night";
+    localStorage.setItem("larder-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (q.get("shot") === "1") document.documentElement.setAttribute("data-shot", "1");
+    if (q.get("flip") === "1") document.documentElement.setAttribute("data-flip", "1");
+    if (q.get("cook") === "1") document.documentElement.setAttribute("data-cook", "1");
   })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="theme-color" content="#1A1208">
+  <meta name="theme-color" content="#061018">
   <title>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</title>
   <link rel="manifest" href="../../../manifest.webmanifest">
   <link rel="stylesheet" href="../../../assets/site.css">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/layouts.css">
 </head>
 <body class="app" data-recipe="R12">
+  <header class="nav">
+    <a class="nav-back" href="../?view=home">Tonight</a>
+    <span class="nav-inline" id="nav-inline">Roast chicken</span>
+  </header>
   <main class="wrap">
-    <p class="themes no-print">Directions <a href="?theme=01">Feast</a> <a href="?theme=02">Tin</a> <a href="?theme=03">Poster</a> <a href="?theme=04">Book</a> <a href="?theme=05">Desk</a></p>
-    <p class="kicker"><a href="../">Back to the week</a> · R12 · Sun 22 Nov</p>
-    <h1>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</h1>
-    <p class="lede">About 1 hr 45 min (40 min hands-on) · Serves 2 + Jude, plus leftovers</p>
-<div class="flags"><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">Leaves leftovers</span></div>    <img src="../../../img/R12_corn-fed-roast-chicken.jpg" alt="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
-    <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
-    <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
-<details><summary>What it cost</summary><p>The Best corn-fed chicken 1.75 kg £12.22. Shared with Tuesday&#39;s shawarma. Not bought again.</p></details>    <p class="card"><span class="jude">Jude, before step 6:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p>
-
-    <h2>Ingredients</h2>
-    <h3>For this sitting</h3>
-    <ul>
-      <li><label><input type="checkbox" data-tick="ing-main-1"> 1.75 kg corn-fed free-range chicken</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-2"> 1 lemon (halved, for the cavity)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-3"> 3 cloves garlic (for the cavity)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-4"> about 1 kg Maris Piper potatoes (peeled and halved)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-5"> 4–5 carrots (batons)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-6"> 200 g tenderstem broccoli</label></li>
-      <li><label><input type="checkbox" data-tick="ing-main-7"> 2–3 tbsp olive oil</label></li>
-    </ul>
-    <h3>His plate</h3>
-    <ul>
-      <li><label><input type="checkbox" data-tick="ing-jude-1"> 2 potatoes (kept back for Jude&#39;s plain mash)</label></li>
-      <li><label><input type="checkbox" data-tick="ing-jude-2"> a splash whole milk (for Jude&#39;s mash)</label></li>
-    </ul>
-    <h3>After his portion</h3>
-    <ul>
-      <li><label><input type="checkbox" data-tick="ing-adults_only-1"> to taste black pepper and thyme or oregano</label></li>
-    </ul>
-
-    <h2>Method</h2>
-    <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
-    <p id="step-count" aria-live="polite"></p>
-    <ol id="method">
-      <li class="">
-        <label><input type="checkbox" data-tick="step-1"> Take the chicken out of the fridge 30 min ahead. Heat the oven to 200°C fan.</label>
-<button type="button" data-timer="30" data-label="Start 30 min">Start 30 min</button>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-2"> Put the lemon and garlic in the cavity. Rub with 1 tbsp oil. Roast until the juices run clear and the thickest part reads 75°C, about 1 hr 15 min.</label>
-<button type="button" data-timer="75" data-label="Start 75 min">Start 75 min</button>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-3"> Parboil the potatoes 8–10 min, drain and shake. Keep two back for Jude and boil those on until soft.</label>
-<button type="button" data-timer="10" data-label="Start 10 min">Start 10 min</button>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-4"> Roast the potatoes in a hot tray with 1–2 tbsp oil for 45–50 min, turning once. Add the carrots for the last 30 min.</label>
-<button type="button" data-timer="50" data-label="Start 50 min">Start 50 min</button>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-5"> Rest the chicken 15 min under foil. Steam the tenderstem for 4 min.</label>
-<button type="button" data-timer="15" data-label="Start 15 min">Start 15 min</button>      </li>
-      <li class="step-split">
-        <label><input type="checkbox" data-tick="step-6"> Carve. Set Jude&#39;s plain chicken and mash aside before any salted butter. Strip the rest of the meat the same evening, cool it within an hour, and chill it for Tuesday.</label>
-<div><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</div>      </li>
-      <li class="">
-        <label><input type="checkbox" data-tick="step-7"> Stock: carcass, a carrot, an onion and a few peppercorns, covered with water. Simmer gently 2–3 hours. No salt and no stock cube. Strain, cool, and freeze 500 ml for Friday&#39;s stew.</label>
-<button type="button" data-timer="150" data-label="Start 150 min">Start 150 min</button>      </li>
-    </ol>
-
-    <h2>Jude's plate</h2>
-    <p><span class="jude">Jude:</span> Finely chopped chicken, no skin, stirred through plain mash with a little milk or unsalted stock. Soft carrot and tenderstem florets as finger food.</p>
-<p>He manages chicken better when it is chopped very small into mash.</p>    <p><strong>Keeping it:</strong> Leftover chicken: fridge, eat by Tuesday. Stock: fridge 3 days or freezer 3 months.</p>
-    <h2>For the cookbook</h2>
-    <p>A note for next time. It does not change the method above.</p>
-    <input class="note" id="cookbook-note" type="text" maxlength="160" placeholder="A note for next time" aria-label="Cookbook note">
-    <p id="saved-note" class="lede" aria-live="polite"></p>
-    <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
-    <footer><a href="../">Back to the week</a></footer>
+    <section class="front" id="front">
+      <figure class="plate">
+        <img src="../../../img/R12_corn-fed-roast-chicken.jpg" alt="Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem">
+      </figure>
+      <p class="eyebrow">Sun 22 Nov</p>
+      <h1 class="recipe-name large-title">Roast chicken</h1>
+      <p class="visually-hidden">Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</p>
+      <p>About 1 hr 45 min (40 min hands-on)</p>
+      <p><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p>
+      <p class="no-print">
+        <button type="button" id="turn-card" aria-pressed="false">Turn the card over</button>
+        <button type="button" id="start-cooking">Start cooking</button>
+      </p>
+    </section>
+    <section class="back" id="back" hidden>
+      <p class="kicker"><a href="../?view=home">Back to tonight</a></p>
+      <h1>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</h1>
+      <p class="lede">About 1 hr 45 min (40 min hands-on) · Serves 2 + Jude, plus leftovers</p>
+<div class="flags"><span class="flag">Sunday prep</span><span class="flag">Jude&#39;s plate</span><span class="flag">Leaves leftovers</span></div>      <p class="facets">british · chicken · long · high</p>
+      <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
+      <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
+<details><summary>What it cost</summary><p>The Best corn-fed chicken 1.75 kg £12.22. Shared with Tuesday&#39;s shawarma. Not bought again.</p></details>      <p><span class="jude">Jude, before step 6:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</p>
+      <h2>Ingredients</h2>
+      <h3>For this sitting</h3>
+      <ul>
+        <li><label><input type="checkbox" data-tick="ing-main-1"> 1.75 kg corn-fed free-range chicken</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-2"> 1 lemon (halved, for the cavity)</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-3"> 3 cloves garlic (for the cavity)</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-4"> about 1 kg Maris Piper potatoes (peeled and halved)</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-5"> 4–5 carrots (batons)</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-6"> 200 g tenderstem broccoli</label></li>
+        <li><label><input type="checkbox" data-tick="ing-main-7"> 2–3 tbsp olive oil</label></li>
+      </ul>
+      <h3>His plate</h3>
+      <ul>
+        <li><label><input type="checkbox" data-tick="ing-jude-1"> 2 potatoes (kept back for Jude&#39;s plain mash)</label></li>
+        <li><label><input type="checkbox" data-tick="ing-jude-2"> a splash whole milk (for Jude&#39;s mash)</label></li>
+      </ul>
+      <h3>After his portion</h3>
+      <ul>
+        <li><label><input type="checkbox" data-tick="ing-adults_only-1"> to taste black pepper and thyme or oregano</label></li>
+      </ul>
+      <h2>Method</h2>
+      <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
+      <p id="step-count" aria-live="polite"></p>
+      <ol id="method">
+        <li class="">
+          <label><input type="checkbox" data-tick="step-1"> Take the chicken out of the fridge 30 min ahead. Heat the oven to 200°C fan.</label>
+<button type="button" data-timer="30" data-label="Start 30 min">Start 30 min</button>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-2"> Put the lemon and garlic in the cavity. Rub with 1 tbsp oil. Roast until the juices run clear and the thickest part reads 75°C, about 1 hr 15 min.</label>
+<button type="button" data-timer="75" data-label="Start 75 min">Start 75 min</button>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-3"> Parboil the potatoes 8–10 min, drain and shake. Keep two back for Jude and boil those on until soft.</label>
+<button type="button" data-timer="10" data-label="Start 10 min">Start 10 min</button>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-4"> Roast the potatoes in a hot tray with 1–2 tbsp oil for 45–50 min, turning once. Add the carrots for the last 30 min.</label>
+<button type="button" data-timer="50" data-label="Start 50 min">Start 50 min</button>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-5"> Rest the chicken 15 min under foil. Steam the tenderstem for 4 min.</label>
+<button type="button" data-timer="15" data-label="Start 15 min">Start 15 min</button>        </li>
+        <li class="step-split">
+          <label><input type="checkbox" data-tick="step-6"> Carve. Set Jude&#39;s plain chicken and mash aside before any salted butter. Strip the rest of the meat the same evening, cool it within an hour, and chill it for Tuesday.</label>
+<div><span class="jude">Jude:</span> Set Jude&#39;s plain chicken and mash aside before any salted butter or pepper.</div>        </li>
+        <li class="">
+          <label><input type="checkbox" data-tick="step-7"> Stock: carcass, a carrot, an onion and a few peppercorns, covered with water. Simmer gently 2–3 hours. No salt and no stock cube. Strain, cool, and freeze 500 ml for Friday&#39;s stew.</label>
+<button type="button" data-timer="150" data-label="Start 150 min">Start 150 min</button>        </li>
+      </ol>
+      <h2>Jude's plate</h2>
+      <p><span class="jude">Jude:</span> Finely chopped chicken, no skin, stirred through plain mash with a little milk or unsalted stock. Soft carrot and tenderstem florets as finger food.</p>
+<p>He manages chicken better when it is chopped very small into mash.</p>      <p><strong>Keeping it:</strong> Leftover chicken: fridge, eat by Tuesday. Stock: fridge 3 days or freezer 3 months.</p>
+      <h2>For the cookbook</h2>
+      <p>A note for next time. It does not change the method above.</p>
+      <input class="note" id="cookbook-note" type="text" maxlength="160" placeholder="A note for next time" aria-label="Cookbook note">
+      <p id="saved-note" class="lede" aria-live="polite"></p>
+      <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
+    </section>
   </main>
   <nav class="tabbar" aria-label="Larder">
-    <a href="../#tonight">Tonight</a>
-    <a href="../#dinners">Week</a>
-    <a href="../sunday/">Sunday</a>
-    <a href="../shop/">Shop</a>
+    <a href="../?view=week"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>This week</a>
+    <a href="../?view=choose"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Choose</a>
+    <a href="../cookbook/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5h9.5A3.5 3.5 0 0 1 18 8v11.5H8A3 3 0 0 0 5 17z"/><path d="M5 4.5v12.5"/></svg>Cookbook</a>
+    <a href="../shop/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5A3 3 0 0 1 12 3.5 3 3 0 0 1 15 6.5V8"/></svg>Shop</a>
   </nav>
   <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "household_key": "21NLf46WXCZ7Xyfp_fzgVbVpqWKpJO2Bsb_WuA_kdJU", "week": "2026-11-23"}</script>
   <script src="../../../assets/sync.js"></script>
   <script src="../../../assets/card.js"></script>
+  <script src="../../../assets/design.js"></script>
   <script src="../../../assets/pwa.js"></script>
 </body>
 </html>
