@@ -11,6 +11,10 @@
     box.addEventListener("change", function () {
       saved[id] = box.checked;
       localStorage.setItem(store, JSON.stringify(saved));
+      if (syncClient) {
+        var problem = syncClient.setField("tick.card." + recipe + "." + id, box.checked);
+        showCookbook(problem);
+      }
     });
   });
 
@@ -108,4 +112,55 @@
       }, 1000);
     });
   });
+
+  var syncClient = null;
+  var cookbook = document.getElementById("cookbook-note");
+  var savedNote = document.getElementById("saved-note");
+  function showCookbook(problem) {
+    if (!savedNote) return;
+    if (problem) {
+      savedNote.textContent = problem;
+      savedNote.setAttribute("data-sync", "waiting");
+      return;
+    }
+    if (!syncClient) return;
+    savedNote.textContent = syncClient.statusText();
+    savedNote.setAttribute("data-sync", syncClient.status());
+  }
+  var syncNode = document.getElementById("larder-sync");
+  if (syncNode && window.LarderSync) {
+    var cfg = JSON.parse(syncNode.textContent);
+    syncClient = window.LarderSync.createClient({
+      baseUrl: cfg.base_url,
+      householdKey: cfg.household_key,
+      week: cfg.week,
+      storage: localStorage,
+      onUpdate: function () {
+        var field = syncClient.fields()["cookbook." + recipe + ".note"];
+        if (cookbook && document.activeElement !== cookbook && field) cookbook.value = field.value || "";
+        document.querySelectorAll("input[type=checkbox][data-tick]").forEach(function (box) {
+          var remote = (syncClient.fields()["tick.card." + recipe + "." + box.getAttribute("data-tick")] || {}).value;
+          if (remote === true || remote === false) box.checked = remote;
+        });
+        showCookbook();
+      }
+    });
+    var seed = {};
+    try {
+      var remembered = localStorage.getItem("larder-cookbook-" + recipe);
+      if (remembered) seed["cookbook." + recipe + ".note"] = remembered;
+    } catch (e) { /* the phone can still cook */ }
+    syncClient.start(seed);
+  }
+  if (cookbook) {
+    try {
+      var storedNote = localStorage.getItem("larder-cookbook-" + recipe);
+      if (storedNote) cookbook.value = storedNote;
+    } catch (e) { /* leave the box blank */ }
+    cookbook.addEventListener("change", function () {
+      var text = cookbook.value.replace(/\s+/g, " ").trim();
+      try { localStorage.setItem("larder-cookbook-" + recipe, text); } catch (e) { /* still shown on screen */ }
+      if (syncClient) showCookbook(syncClient.setField("cookbook." + recipe + ".note", text));
+    });
+  }
 })();

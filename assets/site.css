@@ -156,6 +156,8 @@ body.app .wrap { padding-bottom: 6rem; }
 .dinner.is-cooked .rates { display: flex; }
 label { min-height: 44px; }
 .shop button { margin-top: 0.3rem; }
+.choice { touch-action: pan-y; }
+#saved-note[data-sync="waiting"] { font-weight: 800; }
 @media print {
   body { background: white; }
   button, .actions, .rates, .move, .no-print, .tabbar, .cookbar, .visually-hidden { display: none !important; }

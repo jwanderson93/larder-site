@@ -350,8 +350,20 @@
 
     <h2>Out of the freezer</h2>
     <ul>
-      <li>Sunday 22 November: take out Freezer shepherd&#39;s pie for Monday 23 November.</li>
-      <li>Friday 27 November: take out Freezer lasagne for Saturday 28 November.</li>
+      <li data-freezer="shepherds-pie">Sunday 22 November: take out Freezer shepherd&#39;s pie for Monday 23 November.
+        <span class="actions no-print">
+          <button type="button" data-freeze="out">Taken out</button>
+          <button type="button" data-freeze="used">Used</button>
+          <button type="button" data-freeze="in">Put back</button>
+        </span>
+      </li>
+      <li data-freezer="lasagne">Friday 27 November: take out Freezer lasagne for Saturday 28 November.
+        <span class="actions no-print">
+          <button type="button" data-freeze="out">Taken out</button>
+          <button type="button" data-freeze="used">Used</button>
+          <button type="button" data-freeze="in">Put back</button>
+        </span>
+      </li>
     </ul>
 
     <h2>Jude's plate</h2>
@@ -362,6 +374,46 @@
     <ul>
 <li>Gochujang, a small tub</li><li>Fresh ginger</li><li>Spring onions</li><li>Harissa paste, or use the Peppadew swap on the salmon card</li><li>A garlic bulb, if the last one is used up</li>    </ul>
     <p><a href="shop/">Open the shop list</a></p>
+
+    <h2>Next time</h2>
+    <p>Swipe right to cook it another week, or left to leave it. The dinners above stay as they are.</p>
+    <div id="choices">
+      <article class="dinner choice" data-choice="R12">
+        <h3>Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem</h3>
+        <div class="actions">
+          <button type="button" data-pick="passed">Leave it</button>
+          <button type="button" data-pick="chosen">Cook this</button>
+        </div>
+      </article>
+      <article class="dinner choice" data-choice="R13">
+        <h3>Chicken shawarma bowls with flatbreads and houmous</h3>
+        <div class="actions">
+          <button type="button" data-pick="passed">Leave it</button>
+          <button type="button" data-pick="chosen">Cook this</button>
+        </div>
+      </article>
+      <article class="dinner choice" data-choice="R14">
+        <h3>Harissa salmon with crushed potatoes</h3>
+        <div class="actions">
+          <button type="button" data-pick="passed">Leave it</button>
+          <button type="button" data-pick="chosen">Cook this</button>
+        </div>
+      </article>
+      <article class="dinner choice" data-choice="R15">
+        <h3>Lamb and carrot meatballs in tomato sauce with tagliatelle</h3>
+        <div class="actions">
+          <button type="button" data-pick="passed">Leave it</button>
+          <button type="button" data-pick="chosen">Cook this</button>
+        </div>
+      </article>
+      <article class="dinner choice" data-choice="R16">
+        <h3>Gochujang pork shoulder stew with hand-ripped noodles</h3>
+        <div class="actions">
+          <button type="button" data-pick="passed">Leave it</button>
+          <button type="button" data-pick="chosen">Cook this</button>
+        </div>
+      </article>
+    </div>
 
     <h2>Something missing?</h2>
     <input class="note" id="missing" type="text" placeholder="What was missing?" aria-label="Something missing">

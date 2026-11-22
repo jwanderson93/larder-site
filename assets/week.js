@@ -9,6 +9,9 @@
     if (saved) state = saved;
   } catch (e) { /* keep the blank state */ }
   state.dinners = state.dinners || {};
+  state.picks = state.picks || {};
+  state.freezer = state.freezer || {};
+  var syncClient = null;
 
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function todayISO() {
@@ -82,11 +85,28 @@
     return movableSlots().map(function (slot) { return card(slot).getAttribute("data-key"); });
   }
 
+  function showSaved(problem) {
+    var note = document.getElementById("saved-note");
+    if (!note) return;
+    if (problem) {
+      note.textContent = problem;
+      note.setAttribute("data-sync", "waiting");
+      return;
+    }
+    if (syncClient) {
+      note.textContent = syncClient.statusText();
+      note.setAttribute("data-sync", syncClient.status());
+    } else {
+      note.textContent = "Saved on this phone.";
+      note.removeAttribute("data-sync");
+    }
+  }
+
   function save() {
     state.order = currentOrder();
     localStorage.setItem(storeKey, JSON.stringify(state));
-    var note = document.getElementById("saved-note");
-    if (note) note.textContent = "Saved on this phone.";
+    var problem = syncClient ? syncClient.setFields(fieldsFromState()) : null;
+    showSaved(problem);
   }
 
   function swap(slot, direction) {
@@ -229,13 +249,34 @@
     if (state.late) lines.push("late: after 7pm");
     var shopMissing = localStorage.getItem("larder-missing-lines");
     if (shopMissing) lines.push("missing: " + shopMissing);
+    Object.keys(state.picks || {}).forEach(function (id) {
+      if (state.picks[id]) lines.push("pick: " + id + " " + state.picks[id]);
+    });
+    Object.keys(state.freezer || {}).forEach(function (id) {
+      var row = state.freezer[id] || {};
+      if (row.move) lines.push("freezer: " + id + " move " + row.move);
+    });
+    if (window.LarderSync && syncClient) {
+      var stored = window.LarderSync.readStored(localStorage, plan.week);
+      Object.keys(stored).forEach(function (key) {
+        var value = stored[key] && stored[key].value;
+        if (key.indexOf("tick.") === 0 && value === true) lines.push("tick: " + key.slice(5));
+        if (key.indexOf("cookbook.") === 0 && key.slice(-5) === ".note" && value) {
+          lines.push("cookbook: " + key.split(".")[1] + " | " + String(value).replace(/\s+/g, " "));
+        }
+      });
+    }
     return lines.join("\n");
   }
 
   function plainNote(text) {
     var box = document.getElementById("plain-note");
     if (!box) return;
-    var lines = ["Saved on this phone only, until you email it."];
+    var lines = [
+      syncClient
+        ? "Saved on this phone. The other phone catches up when it can. You can still email the note."
+        : "Saved on this phone only, until you email it."
+    ];
     if (state.late) lines.push("The shop arrived after 7pm, so cooking starts tomorrow.");
     Object.keys(state.dinners).forEach(function (key) {
       var row = state.dinners[key];
@@ -345,5 +386,162 @@
       refreshDraft();
       if (banner) banner.textContent = "The shop arrived after 7pm. Cook dates start " + pretty(start) + ".";
     });
+  }
+
+  function fieldsFromState() {
+    var out = {};
+    if (state.order && state.order.length) out.order = state.order.slice();
+    if (state.by === "joe" || state.by === "lotte") out.by = state.by;
+    if (state.missing) out.missing = String(state.missing).replace(/\s+/g, " ").trim();
+    if (state.late) out.late = "after 7pm";
+    Object.keys(state.dinners || {}).forEach(function (key) {
+      var row = state.dinners[key] || {};
+      if (row.status === "cooked" || row.status === "skipped") out["dinner." + key + ".status"] = row.status;
+      if (row.verdict) out["dinner." + key + ".verdict"] = row.verdict;
+      if (row.note) out["dinner." + key + ".note"] = String(row.note).replace(/\s+/g, " ").trim();
+      if (row.judeLeft) out["dinner." + key + ".jude_left"] = true;
+      if (row.short) out["dinner." + key + ".short"] = true;
+      if (row.skipTo === "freezer" || row.skipTo === "tomorrow" || row.skipTo === "leave") {
+        out["dinner." + key + ".skip_to"] = row.skipTo;
+      }
+    });
+    Object.keys(state.picks || {}).forEach(function (id) {
+      if (state.picks[id]) out["pick." + id] = state.picks[id];
+    });
+    Object.keys(state.freezer || {}).forEach(function (id) {
+      var row = state.freezer[id] || {};
+      if (row.move) out["freezer." + id + ".move"] = row.move;
+    });
+    return out;
+  }
+
+  function applyRemote(fields) {
+    if (!fields) return;
+    if (fields.order && Array.isArray(fields.order.value)) state.order = fields.order.value.slice();
+    if (fields.by && (fields.by.value === "joe" || fields.by.value === "lotte")) state.by = fields.by.value;
+    if (fields.missing) state.missing = fields.missing.value || "";
+    if (fields.late && fields.late.value === "after 7pm") state.late = true;
+    Object.keys(fields).forEach(function (key) {
+      var value = fields[key].value;
+      var parts = key.split(".");
+      if (parts[0] === "dinner" && parts.length === 3) {
+        var row = state.dinners[parts[1]] || {};
+        if (parts[2] === "status") row.status = value;
+        if (parts[2] === "verdict") row.verdict = value;
+        if (parts[2] === "note") row.note = value;
+        if (parts[2] === "jude_left") row.judeLeft = !!value;
+        if (parts[2] === "short") row.short = !!value;
+        if (parts[2] === "skip_to") row.skipTo = value;
+        state.dinners[parts[1]] = row;
+      }
+      if (parts[0] === "pick" && parts.length === 2) state.picks[parts[1]] = value;
+      if (parts[0] === "freezer" && parts.length === 3 && parts[2] === "move") {
+        state.freezer[parts[1]] = state.freezer[parts[1]] || {};
+        state.freezer[parts[1]].move = value;
+      }
+    });
+    localStorage.setItem(storeKey, JSON.stringify(state));
+  }
+
+  function paintRemote() {
+    if (state.order) applyOrder(state.order);
+    slots().forEach(function (slot) {
+      var item = card(slot);
+      if (!item) return;
+      var record = state.dinners[item.getAttribute("data-key")] || {};
+      item.classList.toggle("is-cooked", record.status === "cooked");
+      var skipWhere = item.querySelector(".skip-where");
+      if (skipWhere) skipWhere.hidden = record.status !== "skipped";
+      item.querySelectorAll("[data-status]").forEach(function (button) {
+        button.setAttribute("aria-pressed", record.status === button.getAttribute("data-status") ? "true" : "false");
+      });
+      item.querySelectorAll("[data-verdict]").forEach(function (button) {
+        button.setAttribute("aria-pressed", record.verdict === button.getAttribute("data-verdict") ? "true" : "false");
+      });
+      var note = item.querySelector("[data-note]");
+      if (note && document.activeElement !== note) note.value = record.note || "";
+      if (record.judeLeft) {
+        item.querySelectorAll("[data-jude]").forEach(function (button) { button.textContent = "Chosen: he left this"; });
+      }
+      if (record.short) {
+        item.querySelectorAll("[data-short]").forEach(function (button) { button.textContent = "Chosen: not enough left"; });
+      }
+    });
+    if (missing && document.activeElement !== missing) missing.value = state.missing || "";
+    document.querySelectorAll("[data-by]").forEach(function (button) {
+      button.setAttribute("aria-pressed", state.by === button.getAttribute("data-by") ? "true" : "false");
+    });
+    document.querySelectorAll("[data-choice]").forEach(function (article) {
+      var picked = state.picks[article.getAttribute("data-choice")];
+      article.querySelectorAll("[data-pick]").forEach(function (button) {
+        button.setAttribute("aria-pressed", button.getAttribute("data-pick") === picked ? "true" : "false");
+      });
+    });
+    document.querySelectorAll("[data-freezer]").forEach(function (row) {
+      var move = (state.freezer[row.getAttribute("data-freezer")] || {}).move;
+      row.querySelectorAll("[data-freeze]").forEach(function (button) {
+        button.setAttribute("aria-pressed", button.getAttribute("data-freeze") === move ? "true" : "false");
+      });
+    });
+    if (state.late && late) late.textContent = "Chosen: arrived after 7pm";
+  }
+
+  function choose(article, value) {
+    state.picks[article.getAttribute("data-choice")] = value;
+    article.querySelectorAll("[data-pick]").forEach(function (button) {
+      button.setAttribute("aria-pressed", button.getAttribute("data-pick") === value ? "true" : "false");
+    });
+    save();
+    refreshDraft();
+  }
+
+  document.querySelectorAll("[data-choice]").forEach(function (article) {
+    article.querySelectorAll("[data-pick]").forEach(function (button) {
+      button.addEventListener("click", function () { choose(article, button.getAttribute("data-pick")); });
+    });
+    var startX = null;
+    article.addEventListener("touchstart", function (event) {
+      startX = event.changedTouches[0].clientX;
+    }, { passive: true });
+    article.addEventListener("touchend", function (event) {
+      if (startX === null) return;
+      var dx = event.changedTouches[0].clientX - startX;
+      startX = null;
+      if (dx > 72) choose(article, "chosen");
+      else if (dx < -72) choose(article, "passed");
+    });
+  });
+
+  document.querySelectorAll("[data-freezer]").forEach(function (row) {
+    row.querySelectorAll("[data-freeze]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var id = row.getAttribute("data-freezer");
+        state.freezer[id] = state.freezer[id] || {};
+        state.freezer[id].move = button.getAttribute("data-freeze");
+        row.querySelectorAll("[data-freeze]").forEach(function (other) {
+          other.setAttribute("aria-pressed", other === button ? "true" : "false");
+        });
+        save();
+        refreshDraft();
+      });
+    });
+  });
+
+  var syncNode = document.getElementById("larder-sync");
+  if (syncNode && window.LarderSync) {
+    var syncConfig = JSON.parse(syncNode.textContent);
+    syncClient = window.LarderSync.createClient({
+      baseUrl: syncConfig.base_url,
+      householdKey: syncConfig.household_key,
+      week: syncConfig.week,
+      storage: localStorage,
+      onUpdate: function () {
+        applyRemote(syncClient.fields());
+        paintRemote();
+        refreshDraft();
+        showSaved();
+      }
+    });
+    syncClient.start(fieldsFromState());
   }
 })();
