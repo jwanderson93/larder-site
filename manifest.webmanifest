@@ -1,15 +1,15 @@
 {
   "name": "Larder",
   "short_name": "Larder",
-  "start_url": "./w/2026-11-23-k7q2/",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#F2F1EF",
-  "theme_color": "#1A1208",
+  "background_color": "#F4EEE3",
+  "theme_color": "#F4EEE3",
   "icons": [
     {
       "src": "img/stockpot.jpg",
-      "sizes": "192x192",
+      "sizes": "360x329",
       "type": "image/jpeg",
       "purpose": "any"
     }

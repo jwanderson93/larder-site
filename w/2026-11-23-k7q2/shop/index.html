@@ -4,260 +4,211 @@
   <meta charset="utf-8">
   <script>
   (function () {
+    document.documentElement.className += " js";
     var q = new URLSearchParams(location.search);
     var mode = q.get("mode");
-    if (mode !== "dark" && mode !== "light") mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    document.documentElement.setAttribute("data-mode", mode);
-    var theme = q.get("theme") || localStorage.getItem("larder-theme") || "night";
-    if (theme === "poster" || theme === "market" || theme === "03") theme = "poster";
-    else theme = "night";
-    localStorage.setItem("larder-theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-    if (q.get("shot") === "1") document.documentElement.setAttribute("data-shot", "1");
+    if (mode === "dark" || mode === "light") document.documentElement.setAttribute("data-mode", mode);
   })();
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="theme-color" content="#1A1208">
-  <title>Shop</title>
+  <meta name="theme-color" content="#1d4c9c" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#173e82" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <title>Shop · Week of Monday 23 November · Larder</title>
   <link rel="manifest" href="../../../manifest.webmanifest">
-  <link rel="stylesheet" href="../../../assets/site.css">
-  <link rel="stylesheet" href="../../../assets/layouts.css">
+  <link rel="icon" href="../../../img/stockpot.jpg">
+  <link rel="apple-touch-icon" href="../../../img/stockpot.jpg">
+  <link rel="preload" href="../../../assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../assets/fonts.css">
+  <link rel="stylesheet" href="../../../assets/larder.css">
 </head>
-<body class="app">
-  <header class="nav">
-    <a class="nav-back" href="../?view=home">Tonight</a>
-    <span class="nav-inline" id="nav-inline">Shop</span>
+<body data-page="shop" data-week="2026-11-23">
+  <a class="skip" href="#main">Skip to the page</a>
+  <header class="masthead">
+    <div class="page">
+      <a class="brand" href="../../../"><img src="../../../img/stockpot.jpg" alt="" width="40" height="40"><span class="brand-name">Larder</span></a>
+      <p class="issue"><strong>Week 48</strong><span>20–28 November</span></p>
+      <nav class="tabs" aria-label="Larder">
+        <ul>
+          <li><a href="../"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Today</a></li>
+          <li><a href="../menu/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M8 8.5h8M8 12h8M8 15.5h5"/></svg>Menu</a></li>
+          <li><a href="../shop/" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>Shop</a></li>
+          <li><a href="../cookbook/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h10.5A3.5 3.5 0 0 1 19 8v12H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>Cookbook</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <main class="wrap">
-    <h1 class="large-title">Shop</h1>
-    <p class="lede">Tick them off as you shop. The ticks stay on this phone. Nothing here pays or books a slot.</p>
-    <h2>Morrisons delivery</h2>
-    <ul class="shop">
-      <li>
-        <label>
-          <input type="checkbox" data-shop="The Best corn-fed chicken 1.75 kg" data-tick="the-best-corn-fed-chicken-1-75-kg">
-          <span>The Best corn-fed chicken 1.75 kg — for R12</span>
-        </label>
-        <button type="button" data-missing="The Best corn-fed chicken 1.75 kg">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Deli Kitchen Greek-style flatbreads" data-tick="deli-kitchen-greek-style-flatbreads">
-          <span>Deli Kitchen Greek-style flatbreads — for R13</span>
-        </label>
-        <button type="button" data-missing="Deli Kitchen Greek-style flatbreads">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Chickpeas 400 g" data-tick="chickpeas-400-g">
-          <span>Chickpeas 400 g — for R13</span>
-        </label>
-        <button type="button" data-missing="Chickpeas 400 g">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Peppadew roasted red peppers" data-tick="peppadew-roasted-red-peppers">
-          <span>Peppadew roasted red peppers — for R13</span>
-        </label>
-        <button type="button" data-missing="Peppadew roasted red peppers">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Ramona&#39;s houmous" data-tick="ramona-s-houmous">
-          <span>Ramona&#39;s houmous — for R13</span>
-        </label>
-        <button type="button" data-missing="Ramona&#39;s houmous">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Salmon fillets 220 g" data-tick="salmon-fillets-220-g">
-          <span>Salmon fillets 220 g — for R14</span>
-        </label>
-        <button type="button" data-missing="Salmon fillets 220 g">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Lamb mince 300 g" data-tick="lamb-mince-300-g">
-          <span>Lamb mince 300 g — for R15</span>
-        </label>
-        <button type="button" data-missing="Lamb mince 300 g">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Tagliatelle 500 g" data-tick="tagliatelle-500-g">
-          <span>Tagliatelle 500 g — for R15</span>
-        </label>
-        <button type="button" data-missing="Tagliatelle 500 g">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Pork shoulder steaks 500 g" data-tick="pork-shoulder-steaks-500-g">
-          <span>Pork shoulder steaks 500 g — for R16</span>
-        </label>
-        <button type="button" data-missing="Pork shoulder steaks 500 g">Not in the shop</button>
-      </li>
-    </ul>
-    <h2>Local pick-up</h2>
-    <ul class="shop">
-      <li>
-        <label>
-          <input type="checkbox" data-shop="fresh ginger" data-tick="fresh-ginger">
-          <span>fresh ginger — for R16</span>
-        </label>
-        <button type="button" data-missing="fresh ginger">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="gochujang" data-tick="gochujang">
-          <span>gochujang — for R16</span>
-        </label>
-        <button type="button" data-missing="gochujang">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="spring onions" data-tick="spring-onions">
-          <span>spring onions — for R16</span>
-        </label>
-        <button type="button" data-missing="spring onions">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Harissa paste, or use the Peppadew swap on the salmon card" data-tick="harissa-paste-or-use-the-peppadew-swap-o">
-          <span>Harissa paste, or use the Peppadew swap on the salmon card</span>
-        </label>
-        <button type="button" data-missing="Harissa paste, or use the Peppadew swap on the salmon card">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="A garlic bulb, if the last one is used up" data-tick="a-garlic-bulb-if-the-last-one-is-used-up">
-          <span>A garlic bulb, if the last one is used up</span>
-        </label>
-        <button type="button" data-missing="A garlic bulb, if the last one is used up">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="eggs" data-tick="eggs">
-          <span>eggs</span>
-        </label>
-        <button type="button" data-missing="eggs">Not in the shop</button>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="fresh fruit" data-tick="fresh-fruit">
-          <span>fresh fruit</span>
-        </label>
-        <button type="button" data-missing="fresh fruit">Not in the shop</button>
-      </li>
-    </ul>
-    <h2>Already in</h2>
-    <ul class="shop">
-      <li>
-        <label>
-          <input type="checkbox" data-shop="plain flour" data-tick="plain-flour">
-          <span>plain flour</span>
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="Greek yoghurt" data-tick="greek-yoghurt">
-          <span>Greek yoghurt</span>
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="paprika" data-tick="paprika">
-          <span>paprika</span>
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="ground cumin" data-tick="ground-cumin">
-          <span>ground cumin</span>
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" data-shop="olive oil" data-tick="olive-oil">
-          <span>olive oil</span>
-        </label>
-      </li>
-    </ul>
+  <main id="main" class="page">
+  <section class="section first" aria-labelledby="shop-h">
+    <h1 id="shop-h" class="display">Shop</h1>
+<p class="summary-line" style="margin-top:10px">Corn-fed chicken swapped; Peppadew roasted red peppers and tagliatelle handed back. <a class="link" href="#delivery">See which dinners</a></p>    <ol class="rail" aria-label="Where the shop is up to">
+      <li data-state="done"><strong>Basket</strong>13 things to deliver</li>
+      <li data-state="skipped"><strong>Priced</strong>Not kept</li>
+      <li data-state="done"><strong>Ordered</strong>Morrisons</li>
+      <li data-state="done"><strong>Delivered</strong>Fri 20 Nov</li>
+    </ol>
+  </section>
+
+  <div class="shop-grid">
+    <div>
+      <section class="section" id="delivery" aria-labelledby="delivery-h">
+        <h2 id="delivery-h">What arrived</h2>
+        <div class="alerts">
+          <div class="alert-item alert-sub">
+            <p class="alert-kind">Swapped</p>
+            <h3>Roast chicken and Chicken shawarma bowls</h3>
+            <p>Extra Large Whole Chicken 2.15kg came instead of Corn Fed Free Range Chicken 1.5kg - 2kg. The dinner can go ahead. It is heavier, so allow longer and check it is cooked through.</p>
+          </div>
+          <div class="alert-item ">
+            <p class="alert-kind">Handed back</p>
+            <h3>Chicken shawarma bowls</h3>
+            <p>No Peppadew roasted red peppers. Roasted Red Peppers (295g) was offered and handed back. Pick it up locally, or use something already in.</p>
+          </div>
+          <div class="alert-item ">
+            <p class="alert-kind">Handed back</p>
+            <h3>Lamb and carrot meatballs in tomato sauce</h3>
+            <p>No tagliatelle. Fusilli (500g) was offered and handed back. Pick it up locally, or use something already in.</p>
+          </div>
+        </div>
+        <dl class="kv">
+          <dt>Shop</dt><dd>Morrisons</dd>
+<dt>Slot booked</dt><dd>Friday 20 November, 16:00–20:00</dd><dt>Arrived</dt><dd>Between 19:07 and 20:07. After 7pm, so new cooking started the next day</dd><dt>Ordered</dt><dd>£50.27</dd><dt>Charged</dt><dd>£36.19, £14.08 less, because of the swaps and the things handed back</dd>        </dl>
+        <p class="small muted after-kv">Larder never changes a recipe because of a swap. If a dinner has to change, it shows on Menu and Today as a change.</p>
+        <details class="more">
+          <summary>Every dinner item (13 of 13 ordered)</summary>
+          <ul class="list">
+            <li class="basket-row"><span>The Best corn-fed chicken 1.75 kg<span class="for">Roast chicken, Chicken shawarma bowls. Came as Morrisons British Market Street Extra Large Whole Chicken 2.15kg</span></span>
+              <span class="outcome outcome-substituted">Swapped</span></li>
+            <li class="basket-row"><span>Maris Piper potatoes 2 kg<span class="for">Roast chicken, Harissa salmon, Gochujang pork shoulder stew</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Carrots 1 kg<span class="for">Roast chicken, Lamb and carrot meatballs in tomato sauce, Gochujang pork shoulder stew</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Tenderstem broccoli 200 g<span class="for">Roast chicken, Harissa salmon</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Deli Kitchen Greek-style flatbreads<span class="for">Chicken shawarma bowls</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Chickpeas 400 g<span class="for">Chicken shawarma bowls</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Peppadew roasted red peppers<span class="for">Chicken shawarma bowls. Came as Morrisons Roasted Red Peppers (295g)</span></span>
+              <span class="outcome outcome-refused">Handed back</span></li>
+            <li class="basket-row"><span>Ramona&#39;s houmous<span class="for">Chicken shawarma bowls</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Whole cucumber<span class="for">Chicken shawarma bowls</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Salmon fillets 220 g<span class="for">Harissa salmon</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Lamb mince 300 g<span class="for">Lamb and carrot meatballs in tomato sauce</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+            <li class="basket-row"><span>Tagliatelle 500 g<span class="for">Lamb and carrot meatballs in tomato sauce. Came as Morrisons Italian Fusilli (500g)</span></span>
+              <span class="outcome outcome-refused">Handed back</span></li>
+            <li class="basket-row"><span>Pork shoulder steaks 500 g<span class="for">Gochujang pork shoulder stew</span></span>
+              <span class="outcome outcome-delivered">Arrived</span></li>
+          </ul>
+        </details>
+        <details class="more">
+          <summary>Also in the order, not for a dinner (5)</summary>
+          <ul class="list"><li>Innocent Orange Juice with Bits 900ml</li><li>Bonne Maman Seedless Raspberry 370g 370g</li><li>Coca-Cola Zero Sugar Zero Caffeine 8 x 330ml 8 x 330ml</li><li>Morrisons Fruited Loaf 400g</li><li>Morrisons Stainless Steel Scourer 4 per pack</li></ul>
+        </details>
+      </section>
+
+    </div>
+
+    <section class="section" id="basket" aria-labelledby="basket-h">
+      <div class="section-head"><h2 id="basket-h">The basket</h2><span class="small muted"></span></div>
+      <p class="small muted">Tick things off as you unpack and pick up. Ticks show on both phones.</p>
+      <h3 class="basket-h">On the delivery <span class="count">13</span></h3>
+      <ul class="list">
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="The Best corn-fed chicken 1.75 kg" data-tick="the-best-corn-fed-chicken-1-75-kg"><span>The Best corn-fed chicken 1.75 kg<span class="for">For Roast chicken, Chicken shawarma bowls</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="The Best corn-fed chicken 1.75 kg" aria-pressed="false">Missing<span class="visually-hidden">: The Best corn-fed chicken 1.75 kg</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Maris Piper potatoes 2 kg" data-tick="maris-piper-potatoes-2-kg"><span>Maris Piper potatoes 2 kg<span class="for">For Roast chicken, Harissa salmon, Gochujang pork shoulder stew</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Maris Piper potatoes 2 kg" aria-pressed="false">Missing<span class="visually-hidden">: Maris Piper potatoes 2 kg</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Carrots 1 kg" data-tick="carrots-1-kg"><span>Carrots 1 kg<span class="for">For Roast chicken, Lamb and carrot meatballs in tomato sauce, Gochujang pork shoulder stew</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Carrots 1 kg" aria-pressed="false">Missing<span class="visually-hidden">: Carrots 1 kg</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Tenderstem broccoli 200 g" data-tick="tenderstem-broccoli-200-g"><span>Tenderstem broccoli 200 g<span class="for">For Roast chicken, Harissa salmon</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Tenderstem broccoli 200 g" aria-pressed="false">Missing<span class="visually-hidden">: Tenderstem broccoli 200 g</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Deli Kitchen Greek-style flatbreads" data-tick="deli-kitchen-greek-style-flatbreads"><span>Deli Kitchen Greek-style flatbreads<span class="for">For Chicken shawarma bowls</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Deli Kitchen Greek-style flatbreads" aria-pressed="false">Missing<span class="visually-hidden">: Deli Kitchen Greek-style flatbreads</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Chickpeas 400 g" data-tick="chickpeas-400-g"><span>Chickpeas 400 g<span class="for">For Chicken shawarma bowls</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Chickpeas 400 g" aria-pressed="false">Missing<span class="visually-hidden">: Chickpeas 400 g</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Peppadew roasted red peppers" data-tick="peppadew-roasted-red-peppers"><span>Peppadew roasted red peppers<span class="for">For Chicken shawarma bowls</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Peppadew roasted red peppers" aria-pressed="false">Missing<span class="visually-hidden">: Peppadew roasted red peppers</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Ramona&#39;s houmous" data-tick="ramona-s-houmous"><span>Ramona&#39;s houmous<span class="for">For Chicken shawarma bowls</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Ramona&#39;s houmous" aria-pressed="false">Missing<span class="visually-hidden">: Ramona&#39;s houmous</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Whole cucumber" data-tick="whole-cucumber"><span>Whole cucumber<span class="for">For Chicken shawarma bowls</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Whole cucumber" aria-pressed="false">Missing<span class="visually-hidden">: Whole cucumber</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Salmon fillets 220 g" data-tick="salmon-fillets-220-g"><span>Salmon fillets 220 g<span class="for">For Harissa salmon</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Salmon fillets 220 g" aria-pressed="false">Missing<span class="visually-hidden">: Salmon fillets 220 g</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Lamb mince 300 g" data-tick="lamb-mince-300-g"><span>Lamb mince 300 g<span class="for">For Lamb and carrot meatballs in tomato sauce</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Lamb mince 300 g" aria-pressed="false">Missing<span class="visually-hidden">: Lamb mince 300 g</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Tagliatelle 500 g" data-tick="tagliatelle-500-g"><span>Tagliatelle 500 g<span class="for">For Lamb and carrot meatballs in tomato sauce</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Tagliatelle 500 g" aria-pressed="false">Missing<span class="visually-hidden">: Tagliatelle 500 g</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Pork shoulder steaks 500 g" data-tick="pork-shoulder-steaks-500-g"><span>Pork shoulder steaks 500 g<span class="for">For Gochujang pork shoulder stew</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Pork shoulder steaks 500 g" aria-pressed="false">Missing<span class="visually-hidden">: Pork shoulder steaks 500 g</span></button>        </li>
+      </ul>
+      <h3 class="basket-h">Pick up locally <span class="count">7</span></h3>
+      <ul class="list">
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="fresh ginger" data-tick="fresh-ginger"><span>fresh ginger<span class="for">For Gochujang pork shoulder stew</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="fresh ginger" aria-pressed="false">Missing<span class="visually-hidden">: fresh ginger</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="gochujang" data-tick="gochujang"><span>gochujang<span class="for">For Gochujang pork shoulder stew</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="gochujang" aria-pressed="false">Missing<span class="visually-hidden">: gochujang</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="spring onions" data-tick="spring-onions"><span>spring onions<span class="for">For Gochujang pork shoulder stew</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="spring onions" aria-pressed="false">Missing<span class="visually-hidden">: spring onions</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Harissa paste, or use the Peppadew swap on the salmon card" data-tick="harissa-paste-or-use-the-peppadew-swap-o"><span>Harissa paste, or use the Peppadew swap on the salmon card</span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="Harissa paste, or use the Peppadew swap on the salmon card" aria-pressed="false">Missing<span class="visually-hidden">: Harissa paste, or use the Peppadew swap on the salmon card</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="A garlic bulb, if the last one is used up" data-tick="a-garlic-bulb-if-the-last-one-is-used-up"><span>A garlic bulb, if the last one is used up</span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="A garlic bulb, if the last one is used up" aria-pressed="false">Missing<span class="visually-hidden">: A garlic bulb, if the last one is used up</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="eggs" data-tick="eggs"><span>eggs<span class="for">Bought locally, not on the delivery.</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="eggs" aria-pressed="false">Missing<span class="visually-hidden">: eggs</span></button>        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="fresh fruit" data-tick="fresh-fruit"><span>fresh fruit<span class="for">Bought locally, not on the delivery.</span></span></label>
+<button type="button" class="btn btn-small btn-missing" data-missing="fresh fruit" aria-pressed="false">Missing<span class="visually-hidden">: fresh fruit</span></button>        </li>
+      </ul>
+      <h3 class="basket-h">Already in the house <span class="count">5</span></h3>
+      <ul class="list">
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="plain flour" data-tick="plain-flour"><span>plain flour</span></label>
+        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="Greek yoghurt" data-tick="greek-yoghurt"><span>Greek yoghurt</span></label>
+        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="paprika" data-tick="paprika"><span>paprika</span></label>
+        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="ground cumin" data-tick="ground-cumin"><span>ground cumin</span></label>
+        </li>
+        <li class="basket-row">
+          <label class="check"><input type="checkbox" data-shop="olive oil" data-tick="olive-oil"><span>olive oil</span></label>
+        </li>
+      </ul>
+      <p class="sync-line" data-sync-status data-state="local">Saved on this phone.</p>
+    </section>
+  </div>
   </main>
-  <nav class="tabbar" aria-label="Larder">
-    <a href="../?view=week"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>This week</a>
-    <a href="../?view=choose"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Choose</a>
-    <a href="../cookbook/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5h9.5A3.5 3.5 0 0 1 18 8v11.5H8A3 3 0 0 0 5 17z"/><path d="M5 4.5v12.5"/></svg>Cookbook</a>
-    <a href="./"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5A3 3 0 0 1 12 3.5 3 3 0 0 1 15 6.5V8"/></svg>Shop</a>
-  </nav>
-  <script src="../../../assets/design.js"></script>
-  <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "household_key": "21NLf46WXCZ7Xyfp_fzgVbVpqWKpJO2Bsb_WuA_kdJU", "week": "2026-11-23"}</script>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span></span><button type="button" hidden>Undo</button></div>
+  <script type="application/json" id="larder-week">{"alternatives": [], "basket": [{"item": "The Best corn-fed chicken 1.75 kg", "price_gbp": 12.22, "recipes": ["R12", "R13"], "source": "delivery", "tick": "the-best-corn-fed-chicken-1-75-kg"}, {"item": "Maris Piper potatoes 2 kg", "price_gbp": 1.85, "recipes": ["R12", "R14", "R16"], "source": "delivery", "tick": "maris-piper-potatoes-2-kg"}, {"item": "Carrots 1 kg", "price_gbp": 0.69, "recipes": ["R12", "R15", "R16"], "source": "delivery", "tick": "carrots-1-kg"}, {"item": "Tenderstem broccoli 200 g", "price_gbp": 1.6, "recipes": ["R12", "R14"], "source": "delivery", "tick": "tenderstem-broccoli-200-g"}, {"item": "Deli Kitchen Greek-style flatbreads", "price_gbp": 1.9, "recipes": ["R13"], "source": "delivery", "tick": "deli-kitchen-greek-style-flatbreads"}, {"item": "Chickpeas 400 g", "price_gbp": 0.37, "recipes": ["R13"], "source": "delivery", "tick": "chickpeas-400-g"}, {"item": "Peppadew roasted red peppers", "price_gbp": 2.75, "recipes": ["R13"], "source": "delivery", "tick": "peppadew-roasted-red-peppers"}, {"item": "Ramona\u0027s houmous", "price_gbp": 3.75, "recipes": ["R13"], "source": "delivery", "tick": "ramona-s-houmous"}, {"item": "Whole cucumber", "price_gbp": 0.99, "recipes": ["R13"], "source": "delivery", "tick": "whole-cucumber"}, {"item": "Salmon fillets 220 g", "price_gbp": 3.26, "recipes": ["R14"], "source": "delivery", "tick": "salmon-fillets-220-g"}, {"item": "Lamb mince 300 g", "price_gbp": 3.34, "recipes": ["R15"], "source": "delivery", "tick": "lamb-mince-300-g"}, {"item": "Tagliatelle 500 g", "price_gbp": 2.4, "recipes": ["R15"], "source": "delivery", "tick": "tagliatelle-500-g"}, {"item": "Pork shoulder steaks 500 g", "price_gbp": 3.4, "recipes": ["R16"], "source": "delivery", "tick": "pork-shoulder-steaks-500-g"}, {"item": "fresh ginger", "price_gbp": null, "recipes": ["R16"], "source": "local", "tick": "fresh-ginger"}, {"item": "gochujang", "price_gbp": null, "recipes": ["R16"], "source": "local", "tick": "gochujang"}, {"item": "spring onions", "price_gbp": null, "recipes": ["R16"], "source": "local", "tick": "spring-onions"}, {"item": "Harissa paste, or use the Peppadew swap on the salmon card", "price_gbp": null, "recipes": [], "source": "local", "tick": "harissa-paste-or-use-the-peppadew-swap-o"}, {"item": "A garlic bulb, if the last one is used up", "price_gbp": null, "recipes": [], "source": "local", "tick": "a-garlic-bulb-if-the-last-one-is-used-up"}, {"item": "plain flour", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "plain-flour"}, {"item": "Greek yoghurt", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "greek-yoghurt"}, {"item": "paprika", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "paprika"}, {"item": "ground cumin", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "ground-cumin"}, {"item": "olive oil", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "olive-oil"}, {"item": "eggs", "price_gbp": null, "recipes": [], "source": "local", "tick": "eggs"}, {"item": "fresh fruit", "price_gbp": null, "recipes": [], "source": "local", "tick": "fresh-fruit"}], "dinners": [{"date": "2026-11-20", "frozen_ahead": false, "image": null, "key": "fri-leftovers", "kind": "leftover", "leftover_days": null, "movable": false, "placeholder": false, "recipe": null, "short": "Lemon chicken traybake from the fridge", "split": "", "time": "Already in the fridge", "title": "Fridge leftovers: lemon chicken traybake", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-21", "frozen_ahead": false, "image": null, "key": "sat-leftovers", "kind": "leftover", "leftover_days": null, "movable": false, "placeholder": false, "recipe": null, "short": "Filled pasta from the fridge", "split": "", "time": "Already in the fridge", "title": "Fridge leftovers: filled pasta", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-22", "frozen_ahead": true, "image": "R12_corn-fed-roast-chicken.jpg", "key": "R12", "kind": "dinner", "leftover_days": null, "movable": false, "placeholder": false, "recipe": "R12", "short": "Roast chicken", "split": "Set Jude\u0027s plain chicken and mash aside before any salted butter or pepper.", "time": "About 1 hr 45 min (40 min hands-on)", "title": "Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-23", "frozen_ahead": false, "image": "shepherds-pie.jpg", "key": "shepherds-pie", "kind": "freezer", "leftover_days": null, "movable": false, "placeholder": false, "recipe": null, "short": "Shepherd\u0027s pie", "split": "", "time": "35 to 45 minutes", "title": "Freezer shepherd\u0027s pie", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-24", "frozen_ahead": false, "image": "R13_chicken-shawarma-bowls.jpg", "key": "R13", "kind": "dinner", "leftover_days": 2, "movable": false, "placeholder": false, "recipe": "R13", "short": "Chicken shawarma bowls", "split": "Take Jude\u0027s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.", "time": "25 min", "title": "Chicken shawarma bowls with flatbreads and houmous", "use_by_order": null, "uses_leftover_of": "R12"}, {"date": "2026-11-25", "frozen_ahead": false, "image": "R14_harissa-salmon.jpg", "key": "R14", "kind": "dinner", "leftover_days": null, "movable": true, "placeholder": false, "recipe": "R14", "short": "Harissa salmon", "split": "Cut Jude\u0027s piece of salmon and bake it plain, before the harissa.", "time": "30 min", "title": "Harissa salmon with crushed potatoes", "use_by_order": 3, "uses_leftover_of": null}, {"date": "2026-11-26", "frozen_ahead": true, "image": "R15_lamb-carrot-meatballs-tagliatelle.jpg", "key": "R15", "kind": "dinner", "leftover_days": null, "movable": true, "placeholder": false, "recipe": "R15", "short": "Lamb and carrot meatballs in tomato sauce", "split": "Lift Jude\u0027s meatballs and a spoon of sauce out before you season.", "time": "Sunday: 30 min to roll and bake", "title": "Lamb and carrot meatballs in tomato sauce with tagliatelle", "use_by_order": 1, "uses_leftover_of": null}, {"date": "2026-11-27", "frozen_ahead": true, "image": "R16_gochujang-pork-shoulder-stew.jpg", "key": "R16", "kind": "dinner", "leftover_days": null, "movable": true, "placeholder": false, "recipe": "R16", "short": "Gochujang pork shoulder stew", "split": "Take Jude\u0027s plain pork, carrot and broth out before the gochujang.", "time": "Sunday: 15 min hands-on, 1 hr 15 min simmer", "title": "Gochujang pork shoulder stew with hand-ripped noodles", "use_by_order": 2, "uses_leftover_of": null}, {"date": "2026-11-28", "frozen_ahead": false, "image": null, "key": "lasagne", "kind": "freezer", "leftover_days": null, "movable": true, "placeholder": true, "recipe": null, "short": "Lasagne", "split": "", "time": "35 to 45 minutes", "title": "Freezer lasagne", "use_by_order": 4, "uses_leftover_of": null}], "milestones": {"choice_state": "agreed", "choose_by": "2026-11-17", "delivery": {"date": "2026-11-20", "from": "16:00", "to": "20:00"}, "prep_day": "2026-11-22"}, "options": [{"base_serves": 2, "box": [], "cost_band": "high", "cuisine": "british", "facets": {"cuisine": "british", "practical": ["batch", "freezer", "leftovers", "jude"], "protein": "chicken", "search": "corn-fed roast chicken, maris piper roasties, carrots and tenderstem british roast chicken chicken british sunday-prep batch leftovers corn-fed free-range chicken lemon garlic maris piper potatoes potatoes carrots tenderstem broccoli olive oil whole milk black pepper and thyme or oregano", "type": "roast", "uses": "corn-fed free-range chicken|lemon|garlic|maris piper potatoes|potatoes|carrots|tenderstem broccoli|olive oil|whole milk|black pepper and thyme or oregano"}, "id": "R12", "image": "R12_corn-fed-roast-chicken.jpg", "jude_plate": true, "kcal": null, "kind": "recipe", "packs": [{"item": "The Best corn-fed chicken 1.75 kg", "price_gbp": 12.22, "shared_with": ["R13"]}, {"item": "Maris Piper potatoes 2 kg", "price_gbp": 1.85, "shared_with": ["R14", "R16"]}, {"item": "Carrots 1 kg", "price_gbp": 0.69, "shared_with": ["R15", "R16"]}, {"item": "Tenderstem broccoli 200 g", "price_gbp": 1.6, "shared_with": ["R14"]}], "protein": "chicken", "quick": false, "short": "Roast chicken", "time": "About 1 hr 45 min (40 min hands-on)", "title": "Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem"}, {"base_serves": 2, "box": [], "cost_band": "mid", "cuisine": "levantine", "facets": {"cuisine": "levantine", "practical": ["quick", "jude", "have"], "protein": "chicken", "search": "chicken shawarma bowls with flatbreads and houmous levantine bowl chicken chicken levantine leftovers quick leftover roast chicken greek-style flatbreads chickpeas peppadew roasted red peppers greek yoghurt houmous lettuce cucumber ground cumin and paprika cinnamon garlic lemon olive oil", "type": "bowl", "uses": "leftover roast chicken|greek-style flatbreads|chickpeas|peppadew roasted red peppers|greek yoghurt|houmous|lettuce|cucumber|ground cumin and paprika|cinnamon|garlic|lemon|olive oil"}, "id": "R13", "image": "R13_chicken-shawarma-bowls.jpg", "jude_plate": true, "kcal": 800, "kind": "recipe", "packs": [{"item": "Deli Kitchen Greek-style flatbreads", "price_gbp": 1.9, "shared_with": []}, {"item": "Chickpeas 400 g", "price_gbp": 0.37, "shared_with": []}, {"item": "Peppadew roasted red peppers", "price_gbp": 2.75, "shared_with": []}, {"item": "Ramona\u0027s houmous", "price_gbp": 3.75, "shared_with": []}, {"item": "Whole cucumber", "price_gbp": 0.99, "shared_with": []}], "protein": "chicken", "quick": true, "short": "Chicken shawarma bowls", "time": "25 min", "title": "Chicken shawarma bowls with flatbreads and houmous"}, {"base_serves": 2, "box": [], "cost_band": "low", "cuisine": "north-african", "facets": {"cuisine": "north-african", "practical": ["quick", "jude"], "protein": "fish", "search": "harissa salmon with crushed potatoes north-african traybake fish fish north-african quick salmon fillets harissa maris piper potatoes olive oil lemon lettuce or tenderstem", "type": "traybake", "uses": "salmon fillets|harissa|maris piper potatoes|olive oil|lemon|lettuce or tenderstem"}, "id": "R14", "image": "R14_harissa-salmon.jpg", "jude_plate": true, "kcal": 500, "kind": "recipe", "packs": [{"item": "Salmon fillets 220 g", "price_gbp": 3.26, "shared_with": []}], "protein": "fish", "quick": true, "short": "Harissa salmon", "time": "30 min", "title": "Harissa salmon with crushed potatoes"}, {"base_serves": 2, "box": [], "cost_band": "low", "cuisine": "italian", "facets": {"cuisine": "italian", "practical": ["batch", "freezer", "jude"], "protein": "lamb", "search": "lamb and carrot meatballs in tomato sauce with tagliatelle italian pasta lamb lamb italian mince batch freezer sunday-prep pasta lamb mince carrot onion garlic plain flour ground cumin and oregano tomato sauce or passata tagliatelle grated cheese", "type": "pasta", "uses": "lamb mince|carrot|onion|garlic|plain flour|ground cumin and oregano|tomato sauce or passata|tagliatelle|grated cheese"}, "id": "R15", "image": "R15_lamb-carrot-meatballs-tagliatelle.jpg", "jude_plate": true, "kcal": 900, "kind": "recipe", "packs": [{"item": "Lamb mince 300 g", "price_gbp": 3.34, "shared_with": []}, {"item": "Tagliatelle 500 g", "price_gbp": 2.4, "shared_with": []}], "protein": "lamb", "quick": false, "short": "Lamb and carrot meatballs in tomato sauce", "time": "Sunday: 30 min to roll and bake. Cook day: 20 min.", "title": "Lamb and carrot meatballs in tomato sauce with tagliatelle"}, {"base_serves": 2, "box": [], "cost_band": "low", "cuisine": "korean", "facets": {"cuisine": "korean", "practical": ["batch", "freezer", "jude"], "protein": "pork", "search": "gochujang pork shoulder stew with hand-ripped noodles korean stew pork pork korean batch freezer sunday-prep noodles veg-box pork shoulder steaks onion garlic fresh ginger carrots potato water gochujang soy sauce sesame oil spring onions greens plain flour water", "type": "stew", "uses": "pork shoulder steaks|onion|garlic|fresh ginger|carrots|potato|water|gochujang|soy sauce|sesame oil|spring onions|greens|plain flour|water"}, "id": "R16", "image": "R16_gochujang-pork-shoulder-stew.jpg", "jude_plate": true, "kcal": 1300, "kind": "recipe", "packs": [{"item": "Pork shoulder steaks 500 g", "price_gbp": 3.4, "shared_with": []}], "protein": "pork", "quick": false, "short": "Gochujang pork shoulder stew", "time": "Sunday: 15 min hands-on, 1 hr 15 min simmer. Cook day: 40 min including noodles.", "title": "Gochujang pork shoulder stew with hand-ripped noodles"}], "order": {"eta": {"date": "2026-11-20", "from": "19:07", "to": "20:07"}, "headline": "Corn-fed chicken swapped; Peppadew roasted red peppers and tagliatelle handed back.", "household": ["Innocent Orange Juice with Bits 900ml", "Bonne Maman Seedless Raspberry 370g 370g", "Coca-Cola Zero Sugar Zero Caffeine 8 x 330ml 8 x 330ml", "Morrisons Fruited Loaf 400g", "Morrisons Stainless Steel Scourer 4 per pack"], "impacts": [{"date": "2026-11-22", "dish": "Roast chicken and Chicken shawarma bowls", "flags": [], "item": "The Best corn-fed chicken 1.75 kg", "key": "R12", "kind": "substituted", "label": "Corn-fed chicken swapped", "suggestion": "The dinner can go ahead. It is heavier, so allow longer and check it is cooked through.", "touches": ["R12", "R13"], "what": "Extra Large Whole Chicken 2.15kg came instead of Corn Fed Free Range Chicken 1.5kg - 2kg."}, {"date": "2026-11-24", "dish": "Chicken shawarma bowls", "flags": [], "item": "Peppadew roasted red peppers", "key": "R13", "kind": "refused", "label": "No Peppadew roasted red peppers", "suggestion": "Pick it up locally, or use something already in.", "touches": ["R13"], "what": "No Peppadew roasted red peppers. Roasted Red Peppers (295g) was offered and handed back."}, {"date": "2026-11-26", "dish": "Lamb and carrot meatballs in tomato sauce", "flags": [], "item": "Tagliatelle 500 g", "key": "R15", "kind": "refused", "label": "No tagliatelle", "suggestion": "Pick it up locally, or use something already in.", "touches": ["R15"], "what": "No tagliatelle. Fusilli (500g) was offered and handed back."}], "late": true, "lines": [{"dishes": ["Roast chicken", "Chicken shawarma bowls"], "given": "Morrisons British Market Street Extra Large Whole Chicken 2.15kg", "item": "The Best corn-fed chicken 1.75 kg", "match": "matched", "outcome": "substituted", "tick": "the-best-corn-fed-chicken-1-75-kg"}, {"dishes": ["Roast chicken", "Harissa salmon", "Gochujang pork shoulder stew"], "given": "", "item": "Maris Piper potatoes 2 kg", "match": "matched", "outcome": "delivered", "tick": "maris-piper-potatoes-2-kg"}, {"dishes": ["Roast chicken", "Lamb and carrot meatballs in tomato sauce", "Gochujang pork shoulder stew"], "given": "", "item": "Carrots 1 kg", "match": "matched", "outcome": "delivered", "tick": "carrots-1-kg"}, {"dishes": ["Roast chicken", "Harissa salmon"], "given": "", "item": "Tenderstem broccoli 200 g", "match": "matched", "outcome": "delivered", "tick": "tenderstem-broccoli-200-g"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Deli Kitchen Greek-style flatbreads", "match": "matched", "outcome": "delivered", "tick": "deli-kitchen-greek-style-flatbreads"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Chickpeas 400 g", "match": "matched", "outcome": "delivered", "tick": "chickpeas-400-g"}, {"dishes": ["Chicken shawarma bowls"], "given": "Morrisons Roasted Red Peppers (295g)", "item": "Peppadew roasted red peppers", "match": "matched", "outcome": "refused", "tick": "peppadew-roasted-red-peppers"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Ramona\u0027s houmous", "match": "matched", "outcome": "delivered", "tick": "ramona-s-houmous"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Whole cucumber", "match": "matched", "outcome": "delivered", "tick": "whole-cucumber"}, {"dishes": ["Harissa salmon"], "given": "", "item": "Salmon fillets 220 g", "match": "matched", "outcome": "delivered", "tick": "salmon-fillets-220-g"}, {"dishes": ["Lamb and carrot meatballs in tomato sauce"], "given": "", "item": "Lamb mince 300 g", "match": "matched", "outcome": "delivered", "tick": "lamb-mince-300-g"}, {"dishes": ["Lamb and carrot meatballs in tomato sauce"], "given": "Morrisons Italian Fusilli (500g)", "item": "Tagliatelle 500 g", "match": "matched", "outcome": "refused", "tick": "tagliatelle-500-g"}, {"dishes": ["Gochujang pork shoulder stew"], "given": "", "item": "Pork shoulder steaks 500 g", "match": "matched", "outcome": "delivered", "tick": "pork-shoulder-steaks-500-g"}], "slot": {"date": "2026-11-20", "from": "16:00", "to": "20:00"}, "status": "delivered", "store": "Morrisons", "summary": {"basket_delivery_lines": 13, "household_lines": 5, "missing": 2, "not_ordered": 0, "ordered": 13, "paid_total_gbp": 36.19, "placed_total_gbp": 50.27, "substituted": 1, "uncertain": 0}}, "path": "w/2026-11-23-k7q2/", "picked": ["R12", "R13", "R14", "R15", "R16"], "sample": false, "version": 1, "week": "2026-11-23"}</script>
+  <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "week": "2026-11-23"}</script>
   <script src="../../../assets/sync.js"></script>
-  <script src="../../../assets/pwa.js"></script>
-  <script>
-  (function () {
-    var key = "larder-shop-ticks";
-    var saved = {};
-    try { saved = JSON.parse(localStorage.getItem(key) || "{}"); } catch (e) { saved = {}; }
-    var syncNode = document.getElementById("larder-sync");
-    var syncClient = null;
-    var status = document.createElement("p");
-    status.id = "saved-note";
-    status.className = "lede";
-    status.setAttribute("aria-live", "polite");
-    if (syncNode) document.querySelector("main").appendChild(status);
-    function paintTicks() {
-      if (!syncClient) return;
-      document.querySelectorAll("[data-shop]").forEach(function (box) {
-        var tick = box.getAttribute("data-tick");
-        var remote = (syncClient.fields()["tick.shop." + tick] || {}).value;
-        if (remote === true || remote === false) box.checked = remote;
-      });
-      status.textContent = syncClient.statusText();
-      status.setAttribute("data-sync", syncClient.status());
-    }
-    if (syncNode && window.LarderSync) {
-      var cfg = JSON.parse(syncNode.textContent);
-      syncClient = window.LarderSync.createClient({
-        baseUrl: cfg.base_url,
-        householdKey: cfg.household_key,
-        week: cfg.week,
-        storage: localStorage,
-        onUpdate: paintTicks
-      });
-      syncClient.start();
-    }
-    document.querySelectorAll("[data-shop]").forEach(function (box) {
-      var name = box.getAttribute("data-shop");
-      var tick = box.getAttribute("data-tick");
-      box.checked = !!saved[name];
-      if (syncClient && tick) {
-        var remote = (syncClient.fields()["tick.shop." + tick] || {}).value;
-        if (remote === true || remote === false) box.checked = remote;
-      }
-      box.addEventListener("change", function () {
-        saved[name] = box.checked;
-        localStorage.setItem(key, JSON.stringify(saved));
-        if (syncClient && tick) {
-          var problem = syncClient.setField("tick.shop." + tick, box.checked);
-          status.textContent = problem || syncClient.statusText();
-        }
-      });
-    });
-    document.querySelectorAll("[data-missing]").forEach(function (button) {
-      button.addEventListener("click", function () {
-        var name = button.getAttribute("data-missing");
-        var note = localStorage.getItem("larder-missing-lines") || "";
-        if (note.indexOf(name) === -1) note = (note ? note + ", " : "") + name;
-        localStorage.setItem("larder-missing-lines", note);
-        button.textContent = "Noted";
-        if (syncClient) {
-          var problem = syncClient.setField("missing", note.replace(/\s+/g, " ").trim());
-          status.textContent = problem || syncClient.statusText();
-        }
-      });
-    });
-  })();
-  </script>
-</body>
+  <script src="../../../assets/larder.js"></script>
+<script src="../../../assets/pwa.js"></script></body>
 </html>

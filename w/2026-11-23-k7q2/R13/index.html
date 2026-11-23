@@ -4,116 +4,187 @@
   <meta charset="utf-8">
   <script>
   (function () {
+    document.documentElement.className += " js";
     var q = new URLSearchParams(location.search);
     var mode = q.get("mode");
-    if (mode !== "dark" && mode !== "light") mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    document.documentElement.setAttribute("data-mode", mode);
-    var theme = q.get("theme") || localStorage.getItem("larder-theme") || "night";
-    if (theme === "poster" || theme === "market" || theme === "03") theme = "poster";
-    else theme = "night";
-    localStorage.setItem("larder-theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-    if (q.get("shot") === "1") document.documentElement.setAttribute("data-shot", "1");
-    if (q.get("flip") === "1") document.documentElement.setAttribute("data-flip", "1");
-    if (q.get("cook") === "1") document.documentElement.setAttribute("data-cook", "1");
+    if (mode === "dark" || mode === "light") document.documentElement.setAttribute("data-mode", mode);
   })();
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="theme-color" content="#061018">
-  <title>Chicken shawarma bowls with flatbreads and houmous</title>
+  <meta name="theme-color" content="#1d4c9c" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#173e82" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <title>Chicken shawarma bowls · Larder</title>
   <link rel="manifest" href="../../../manifest.webmanifest">
-  <link rel="stylesheet" href="../../../assets/site.css">
-  <link rel="stylesheet" href="../../../assets/layouts.css">
+  <link rel="icon" href="../../../img/stockpot.jpg">
+  <link rel="apple-touch-icon" href="../../../img/stockpot.jpg">
+  <link rel="preload" href="../../../assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../assets/fonts.css">
+  <link rel="stylesheet" href="../../../assets/larder.css">
 </head>
-<body class="app" data-recipe="R13">
-  <header class="nav">
-    <a class="nav-back" href="../?view=home">Tonight</a>
-    <span class="nav-inline" id="nav-inline">Chicken shawarma bowls</span>
+<body data-page="recipe" data-week="2026-11-23">
+  <a class="skip" href="#main">Skip to the page</a>
+  <header class="masthead">
+    <div class="page">
+  <a class="back" href="../" data-back><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span data-back-label>The week</span></a>
+      <p class="issue"><strong>Week 48</strong><span>20–28 November</span></p>
+      <nav class="tabs" aria-label="Larder">
+        <ul>
+          <li><a href="../"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Today</a></li>
+          <li><a href="../menu/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M8 8.5h8M8 12h8M8 15.5h5"/></svg>Menu</a></li>
+          <li><a href="../shop/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>Shop</a></li>
+          <li><a href="../cookbook/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h10.5A3.5 3.5 0 0 1 19 8v12H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>Cookbook</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <main class="wrap">
-    <section class="front" id="front">
-      <figure class="plate">
-        <img src="../../../img/R13_chicken-shawarma-bowls.jpg" alt="Chicken shawarma bowls with flatbreads and houmous">
-      </figure>
-      <p class="eyebrow">Tue 24 Nov</p>
-      <h1 class="recipe-name large-title">Chicken shawarma bowls</h1>
-      <p class="visually-hidden">Chicken shawarma bowls with flatbreads and houmous</p>
-      <p>25 min</p>
-      <p><span class="jude">Jude:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>
-      <p class="no-print">
-        <button type="button" id="turn-card" aria-pressed="false">Turn the card over</button>
-        <button type="button" id="start-cooking">Start cooking</button>
-      </p>
+  <main id="main" class="page">
+  <article class="recipe" data-recipe="R13" data-steps="4" data-split="1">
+    <header class="recipe-head">
+      <figure class="plate"><img src="../../../img/R13_chicken-shawarma-bowls.jpg" srcset="../../../img/R13_chicken-shawarma-bowls@600.jpg 600w, ../../../img/R13_chicken-shawarma-bowls.jpg 1200w" sizes="(min-width: 900px) 600px, 100vw" alt="Chicken shawarma bowls with flatbreads and houmous" width="1200" height="800"><figcaption class="tape">Tue 24 Nov, leftovers night</figcaption></figure>
+      <div class="recipe-intro">
+        <h1 class="recipe-title display">Chicken shawarma bowls with flatbreads and houmous</h1>
+        <ul class="facts">
+          <li><strong>25 min</strong></li>
+          <li>Serves 2 + Jude</li>
+<li>Quick to make</li><li>About 800 kcal per adult (estimate)</li>        </ul>
+        <div class="btn-row no-print hero-actions">
+          <button type="button" class="btn btn-primary btn-big" id="start-cook"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg>Cook step by step</button>
+          <a class="btn" href="#method">Jump to the method</a>
+        </div>
+        <div class="callout callout-jude">
+          <p><span class="who">Jude</span><strong>Before step 1.</strong> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>
+          <p>Greek yoghurt stirred through plain mash, cucumber sticks and a strip of flatbread. A little very finely shredded plain chicken in the mash if he&#39;ll take it. Leave out the houmous and the Peppadews.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="callout callout-warn delivery-note">
+      <p><strong>From this week's delivery.</strong> Extra Large Whole Chicken 2.15kg came instead of Corn Fed Free Range Chicken 1.5kg - 2kg. The dinner can go ahead. It is heavier, so allow longer and check it is cooked through.</p>
+    </div>
+    <div class="callout callout-alert delivery-note">
+      <p><strong>From this week's delivery.</strong> No Peppadew roasted red peppers. Roasted Red Peppers (295g) was offered and handed back. Pick it up locally, or use something already in.</p>
+    </div>
+
+    <div class="recipe-body">
+      <section class="ingredients" aria-labelledby="ing-h">
+        <h2 id="ing-h">Ingredients</h2>
+        <p class="small muted">Serves 2 + Jude. Tick as you go.</p>
+        <div class="ing-group">
+          <h3>For this meal</h3>
+          <ul class="list ing-list">
+            <li><label class="check"><input type="checkbox" data-tick="ing-main-1"><span>2–3 Greek-style flatbreads</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-main-2"><span>1 tin chickpeas (drained)</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-main-3"><span>a spoon Greek yoghurt</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-main-4"><span>a handful lettuce</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-main-5"><span>half cucumber</span></label></li>
+          </ul>
+        </div>
+        <div class="ing-group">
+          <h3>Already in the house</h3>
+          <ul class="list ing-list">
+            <li><label class="check"><input type="checkbox" data-tick="ing-leftover-1"><span>about 300 g leftover roast chicken (from Sunday)</span></label></li>
+          </ul>
+        </div>
+        <div class="ing-group">
+          <h3>After Jude&#39;s portion is out</h3>
+          <ul class="list ing-list">
+            <li><label class="check"><input type="checkbox" data-tick="ing-adults_only-1"><span>4–6 Peppadew roasted red peppers (sliced)</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-adults_only-2"><span>a spoon houmous</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-adults_only-3"><span>1 tsp each ground cumin and paprika</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-adults_only-4"><span>½ tsp cinnamon</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-adults_only-5"><span>1 clove garlic</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-adults_only-6"><span>a squeeze lemon</span></label></li>
+            <li><label class="check"><input type="checkbox" data-tick="ing-adults_only-7"><span>1 tbsp olive oil</span></label></li>
+          </ul>
+        </div>
+<details class="more"><summary>The packs, and what they cost</summary><p class="small">Deli Kitchen Greek-style flatbreads £1.90; Chickpeas 400 g £0.37; Peppadew roasted red peppers £2.75; Ramona&#39;s houmous £3.75; Whole cucumber £0.99. On the Morrisons order of 19 Nov 2026 (Confirmed).</p></details>      </section>
+
+      <section aria-labelledby="method-h" id="method">
+        <h2 id="method-h">Method</h2>
+        <ol class="method">
+          <li id="step-1" class="split-step">
+            <label class="check"><input type="checkbox" data-tick="step-1"><span>Take Jude&#39;s chicken and a few chickpeas out before any spice.</span></label>
+<p class="split"><span class="who">Jude</span>First: Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>          </li>
+          <li id="step-2" class="">
+            <label class="check"><input type="checkbox" data-tick="step-2"><span>Toss the rest of the chicken and chickpeas in the spice mix and fry until crisp at the edges and piping hot.</span></label>
+<button type="button" class="btn btn-small timer" data-timer="6"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 1.5M10 3h4"/></svg>Start a 6 min timer</button>          </li>
+          <li id="step-3" class="">
+            <label class="check"><input type="checkbox" data-tick="step-3"><span>Warm the flatbreads in a dry pan, 30 seconds a side.</span></label>
+<button type="button" class="btn btn-small timer" data-timer="1"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 1.5M10 3h4"/></svg>Start a 1 min timer</button>          </li>
+          <li id="step-4" class="">
+            <label class="check"><input type="checkbox" data-tick="step-4"><span>Build the bowls: lettuce, cucumber, Peppadews, chicken and chickpeas, yoghurt and houmous. Lemon over the top.</span></label>
+          </li>
+        </ol>
+<div class="keeping"><h3>Keeping it</h3><p>Eat the same night. Reheat chicken only once, until piping hot.</p></div>      </section>
+    </div>
+
+    <section class="section" id="feedback" aria-labelledby="fb-h">
+      <h2 id="fb-h">How was it?</h2>
+      <p class="lede">About tonight's dinner. If the shop swapped something, say so in the note, so the swap doesn't count against the recipe.</p>
+      <div class="verdicts" role="group" aria-label="How was Chicken shawarma bowls this time?">
+        <span class="segmented">
+          <button type="button" class="btn" data-verdict="make_again" aria-pressed="false">Loved it</button>
+          <button type="button" class="btn" data-verdict="fine" aria-pressed="false">Fine</button>
+          <button type="button" class="btn btn-danger" data-verdict="dont_offer" aria-pressed="false">Not again</button>
+        </span>
+        <button type="button" class="btn btn-toggle" data-jude-left aria-pressed="false">Jude left it</button>
+      </div>
+      <div class="fb-notes">
+      <div class="field">
+        <label for="night-note">A note about this time</label>
+        <input class="input" id="night-note" type="text" maxlength="160" placeholder="For example: the bigger chicken took longer">
+      </div>
+      <div class="field">
+        <label for="cookbook-note">A note for next time, kept on the recipe</label>
+        <input class="input" id="cookbook-note" type="text" maxlength="160" placeholder="For example: more garlic, less oil">
+      </div>
+      </div>
+      <p class="sync-line" data-sync-status data-state="local">Saved on this phone.</p>
+      <p class="small muted">Larder adds it to the cookbook after the Sunday review.</p>
     </section>
-    <section class="back" id="back" hidden>
-      <p class="kicker"><a href="../?view=home">Back to tonight</a></p>
-      <h1>Chicken shawarma bowls with flatbreads and houmous</h1>
-      <p class="lede">25 min · Serves 2 + Jude</p>
-<div class="flags"><span class="flag">Quick</span><span class="flag">Jude&#39;s plate</span></div>      <p class="facets">levantine · chicken · quick · mid</p>
-      <p class="no-print"><button type="button" id="one-adult">Just one of us tonight</button></p>
-      <p class="banner" id="one-adult-note" hidden>Jude's plate stays as written. What you do not eat can be frozen.</p>
-<details><summary>What it cost</summary><p>Deli Kitchen Greek-style flatbreads £1.90; Chickpeas 400 g £0.37; Peppadew roasted red peppers £2.75; Ramona&#39;s houmous £3.75</p></details>      <p><span class="jude">Jude, before step 1:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p>
-      <h2>Ingredients</h2>
-      <h3>For this sitting</h3>
-      <ul>
-        <li><label><input type="checkbox" data-tick="ing-main-1"> 2–3 Greek-style flatbreads</label></li>
-        <li><label><input type="checkbox" data-tick="ing-main-2"> 1 tin chickpeas (drained)</label></li>
-        <li><label><input type="checkbox" data-tick="ing-main-3"> a spoon Greek yoghurt</label></li>
-        <li><label><input type="checkbox" data-tick="ing-main-4"> a handful lettuce</label></li>
-        <li><label><input type="checkbox" data-tick="ing-main-5"> half cucumber</label></li>
-      </ul>
-      <h3>Already in the house</h3>
-      <ul>
-        <li><label><input type="checkbox" data-tick="ing-leftover-1"> about 300 g leftover roast chicken (from Sunday)</label></li>
-      </ul>
-      <h3>After his portion</h3>
-      <ul>
-        <li><label><input type="checkbox" data-tick="ing-adults_only-1"> 4–6 Peppadew roasted red peppers (sliced)</label></li>
-        <li><label><input type="checkbox" data-tick="ing-adults_only-2"> a spoon houmous</label></li>
-        <li><label><input type="checkbox" data-tick="ing-adults_only-3"> 1 tsp each ground cumin and paprika</label></li>
-        <li><label><input type="checkbox" data-tick="ing-adults_only-4"> ½ tsp cinnamon</label></li>
-        <li><label><input type="checkbox" data-tick="ing-adults_only-5"> 1 clove garlic</label></li>
-        <li><label><input type="checkbox" data-tick="ing-adults_only-6"> a squeeze lemon</label></li>
-        <li><label><input type="checkbox" data-tick="ing-adults_only-7"> 1 tbsp olive oil</label></li>
-      </ul>
-      <h2>Method</h2>
-      <p class="no-print"><button type="button" id="cook-mode">Show one step at a time</button></p>
-      <p id="step-count" aria-live="polite"></p>
-      <ol id="method">
-        <li class="step-split">
-          <label><input type="checkbox" data-tick="step-1"> Take Jude&#39;s chicken and a few chickpeas out before any spice.</label>
-<div><span class="jude">Jude:</span> Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</div>        </li>
-        <li class="">
-          <label><input type="checkbox" data-tick="step-2"> Toss the rest of the chicken and chickpeas in the spice mix and fry until crisp at the edges and piping hot.</label>
-<button type="button" data-timer="6" data-label="Start 6 min">Start 6 min</button>        </li>
-        <li class="">
-          <label><input type="checkbox" data-tick="step-3"> Warm the flatbreads in a dry pan, 30 seconds a side.</label>
-<button type="button" data-timer="1" data-label="Start 1 min">Start 1 min</button>        </li>
-        <li class="">
-          <label><input type="checkbox" data-tick="step-4"> Build the bowls: lettuce, cucumber, Peppadews, chicken and chickpeas, yoghurt and houmous. Lemon over the top.</label>
-        </li>
-      </ol>
-      <h2>Jude's plate</h2>
-      <p><span class="jude">Jude:</span> Greek yoghurt stirred through plain mash, cucumber sticks and a strip of flatbread. A little very finely shredded plain chicken in the mash if he&#39;ll take it. Leave out the houmous and the Peppadews.</p>
-      <p><strong>Keeping it:</strong> Eat the same night. Reheat chicken only once, until piping hot.</p>
-      <h2>For the cookbook</h2>
-      <p>A note for next time. It does not change the method above.</p>
-      <input class="note" id="cookbook-note" type="text" maxlength="160" placeholder="A note for next time" aria-label="Cookbook note">
-      <p id="saved-note" class="lede" aria-live="polite"></p>
-      <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
-    </section>
+  </article>
+
+  <section class="cook" id="cook" role="dialog" aria-modal="true" aria-labelledby="cook-count" hidden>
+    <div class="cook-top">
+      <button type="button" class="btn btn-small" id="cook-exit"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>Close</button>
+      <div class="cook-title">
+        <p>Chicken shawarma bowls</p>
+        <div class="progress" aria-hidden="true" style="--steps: 4"><span id="cook-bar" style="width:0"></span></div>
+      </div>
+      <button type="button" class="btn btn-small" id="cook-ing" aria-expanded="false" aria-controls="cook-ing-list">Ingredients</button>
+    </div>
+    <div class="cook-body">
+      <div class="cook-main" id="cook-main">
+        <p class="cook-count" id="cook-count" aria-live="polite">Step 1 of 4</p>
+<p class="small callout callout-warn cook-note">Extra Large Whole Chicken 2.15kg came instead of Corn Fed Free Range Chicken 1.5kg - 2kg. The dinner can go ahead. It is heavier, so allow longer and check it is cooked through.</p><p class="small callout callout-warn cook-note">No Peppadew roasted red peppers. Roasted Red Peppers (295g) was offered and handed back. Pick it up locally, or use something already in.</p>        <p class="cook-text" id="cook-text"></p>
+        <div class="callout callout-jude" id="cook-jude" hidden><p><span class="who">Jude</span>First: Take Jude&#39;s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.</p></div>
+        <p id="cook-timer-slot"></p>
+        <div class="cook-upnext" id="cook-upnext-box" hidden><p class="cook-upnext-label">Then</p><p id="cook-upnext"></p></div>
+        <div id="cook-done" hidden>
+          <p class="lede">That's the last step. How was it?</p>
+          <a class="btn btn-primary" href="#feedback" id="cook-rate">Rate it</a>
+        </div>
+      </div>
+      <div id="cook-ing-list" class="sheet cook-side" hidden>
+        <h2>Ingredients</h2>
+        <ul><li>about 300 g leftover roast chicken (from Sunday)</li><li>2–3 Greek-style flatbreads</li><li>1 tin chickpeas (drained)</li><li>4–6 Peppadew roasted red peppers (sliced)</li><li>a spoon Greek yoghurt</li><li>a spoon houmous</li><li>a handful lettuce</li><li>half cucumber</li><li>1 tsp each ground cumin and paprika</li><li>½ tsp cinnamon</li><li>1 clove garlic</li><li>a squeeze lemon</li><li>1 tbsp olive oil</li></ul>
+      </div>
+    </div>
+    <div class="cook-foot">
+      <button type="button" class="btn" id="cook-prev"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Previous</button>
+      <button type="button" class="btn btn-primary" id="cook-next">Next step</button>
+    </div>
+  </section>
+  <p id="timer-live" class="visually-hidden" aria-live="assertive"></p>
+  <script type="application/json" id="larder-steps">["Take Jude\u0027s chicken and a few chickpeas out before any spice.", "Toss the rest of the chicken and chickpeas in the spice mix and fry until crisp at the edges and piping hot.", "Warm the flatbreads in a dry pan, 30 seconds a side.", "Build the bowls: lettuce, cucumber, Peppadews, chicken and chickpeas, yoghurt and houmous. Lemon over the top."]</script>
+  <script type="application/json" id="larder-timers">[null, 6, 1, null]</script>
   </main>
-  <nav class="tabbar" aria-label="Larder">
-    <a href="../?view=week"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>This week</a>
-    <a href="../?view=choose"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="17" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Choose</a>
-    <a href="../cookbook/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4.5h9.5A3.5 3.5 0 0 1 18 8v11.5H8A3 3 0 0 0 5 17z"/><path d="M5 4.5v12.5"/></svg>Cookbook</a>
-    <a href="../shop/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5A3 3 0 0 1 12 3.5 3 3 0 0 1 15 6.5V8"/></svg>Shop</a>
-  </nav>
-  <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "household_key": "21NLf46WXCZ7Xyfp_fzgVbVpqWKpJO2Bsb_WuA_kdJU", "week": "2026-11-23"}</script>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span></span><button type="button" hidden>Undo</button></div>
+  <script type="application/json" id="larder-week">{"alternatives": [], "basket": [{"item": "The Best corn-fed chicken 1.75 kg", "price_gbp": 12.22, "recipes": ["R12", "R13"], "source": "delivery", "tick": "the-best-corn-fed-chicken-1-75-kg"}, {"item": "Maris Piper potatoes 2 kg", "price_gbp": 1.85, "recipes": ["R12", "R14", "R16"], "source": "delivery", "tick": "maris-piper-potatoes-2-kg"}, {"item": "Carrots 1 kg", "price_gbp": 0.69, "recipes": ["R12", "R15", "R16"], "source": "delivery", "tick": "carrots-1-kg"}, {"item": "Tenderstem broccoli 200 g", "price_gbp": 1.6, "recipes": ["R12", "R14"], "source": "delivery", "tick": "tenderstem-broccoli-200-g"}, {"item": "Deli Kitchen Greek-style flatbreads", "price_gbp": 1.9, "recipes": ["R13"], "source": "delivery", "tick": "deli-kitchen-greek-style-flatbreads"}, {"item": "Chickpeas 400 g", "price_gbp": 0.37, "recipes": ["R13"], "source": "delivery", "tick": "chickpeas-400-g"}, {"item": "Peppadew roasted red peppers", "price_gbp": 2.75, "recipes": ["R13"], "source": "delivery", "tick": "peppadew-roasted-red-peppers"}, {"item": "Ramona\u0027s houmous", "price_gbp": 3.75, "recipes": ["R13"], "source": "delivery", "tick": "ramona-s-houmous"}, {"item": "Whole cucumber", "price_gbp": 0.99, "recipes": ["R13"], "source": "delivery", "tick": "whole-cucumber"}, {"item": "Salmon fillets 220 g", "price_gbp": 3.26, "recipes": ["R14"], "source": "delivery", "tick": "salmon-fillets-220-g"}, {"item": "Lamb mince 300 g", "price_gbp": 3.34, "recipes": ["R15"], "source": "delivery", "tick": "lamb-mince-300-g"}, {"item": "Tagliatelle 500 g", "price_gbp": 2.4, "recipes": ["R15"], "source": "delivery", "tick": "tagliatelle-500-g"}, {"item": "Pork shoulder steaks 500 g", "price_gbp": 3.4, "recipes": ["R16"], "source": "delivery", "tick": "pork-shoulder-steaks-500-g"}, {"item": "fresh ginger", "price_gbp": null, "recipes": ["R16"], "source": "local", "tick": "fresh-ginger"}, {"item": "gochujang", "price_gbp": null, "recipes": ["R16"], "source": "local", "tick": "gochujang"}, {"item": "spring onions", "price_gbp": null, "recipes": ["R16"], "source": "local", "tick": "spring-onions"}, {"item": "Harissa paste, or use the Peppadew swap on the salmon card", "price_gbp": null, "recipes": [], "source": "local", "tick": "harissa-paste-or-use-the-peppadew-swap-o"}, {"item": "A garlic bulb, if the last one is used up", "price_gbp": null, "recipes": [], "source": "local", "tick": "a-garlic-bulb-if-the-last-one-is-used-up"}, {"item": "plain flour", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "plain-flour"}, {"item": "Greek yoghurt", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "greek-yoghurt"}, {"item": "paprika", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "paprika"}, {"item": "ground cumin", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "ground-cumin"}, {"item": "olive oil", "price_gbp": null, "recipes": [], "source": "in_house", "tick": "olive-oil"}, {"item": "eggs", "price_gbp": null, "recipes": [], "source": "local", "tick": "eggs"}, {"item": "fresh fruit", "price_gbp": null, "recipes": [], "source": "local", "tick": "fresh-fruit"}], "dinners": [{"date": "2026-11-20", "frozen_ahead": false, "image": null, "key": "fri-leftovers", "kind": "leftover", "leftover_days": null, "movable": false, "placeholder": false, "recipe": null, "short": "Lemon chicken traybake from the fridge", "split": "", "time": "Already in the fridge", "title": "Fridge leftovers: lemon chicken traybake", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-21", "frozen_ahead": false, "image": null, "key": "sat-leftovers", "kind": "leftover", "leftover_days": null, "movable": false, "placeholder": false, "recipe": null, "short": "Filled pasta from the fridge", "split": "", "time": "Already in the fridge", "title": "Fridge leftovers: filled pasta", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-22", "frozen_ahead": true, "image": "R12_corn-fed-roast-chicken.jpg", "key": "R12", "kind": "dinner", "leftover_days": null, "movable": false, "placeholder": false, "recipe": "R12", "short": "Roast chicken", "split": "Set Jude\u0027s plain chicken and mash aside before any salted butter or pepper.", "time": "About 1 hr 45 min (40 min hands-on)", "title": "Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-23", "frozen_ahead": false, "image": "shepherds-pie.jpg", "key": "shepherds-pie", "kind": "freezer", "leftover_days": null, "movable": false, "placeholder": false, "recipe": null, "short": "Shepherd\u0027s pie", "split": "", "time": "35 to 45 minutes", "title": "Freezer shepherd\u0027s pie", "use_by_order": null, "uses_leftover_of": null}, {"date": "2026-11-24", "frozen_ahead": false, "image": "R13_chicken-shawarma-bowls.jpg", "key": "R13", "kind": "dinner", "leftover_days": 2, "movable": false, "placeholder": false, "recipe": "R13", "short": "Chicken shawarma bowls", "split": "Take Jude\u0027s chicken and a few chickpeas out before any spice. Leave out the houmous and the Peppadews.", "time": "25 min", "title": "Chicken shawarma bowls with flatbreads and houmous", "use_by_order": null, "uses_leftover_of": "R12"}, {"date": "2026-11-25", "frozen_ahead": false, "image": "R14_harissa-salmon.jpg", "key": "R14", "kind": "dinner", "leftover_days": null, "movable": true, "placeholder": false, "recipe": "R14", "short": "Harissa salmon", "split": "Cut Jude\u0027s piece of salmon and bake it plain, before the harissa.", "time": "30 min", "title": "Harissa salmon with crushed potatoes", "use_by_order": 3, "uses_leftover_of": null}, {"date": "2026-11-26", "frozen_ahead": true, "image": "R15_lamb-carrot-meatballs-tagliatelle.jpg", "key": "R15", "kind": "dinner", "leftover_days": null, "movable": true, "placeholder": false, "recipe": "R15", "short": "Lamb and carrot meatballs in tomato sauce", "split": "Lift Jude\u0027s meatballs and a spoon of sauce out before you season.", "time": "Sunday: 30 min to roll and bake", "title": "Lamb and carrot meatballs in tomato sauce with tagliatelle", "use_by_order": 1, "uses_leftover_of": null}, {"date": "2026-11-27", "frozen_ahead": true, "image": "R16_gochujang-pork-shoulder-stew.jpg", "key": "R16", "kind": "dinner", "leftover_days": null, "movable": true, "placeholder": false, "recipe": "R16", "short": "Gochujang pork shoulder stew", "split": "Take Jude\u0027s plain pork, carrot and broth out before the gochujang.", "time": "Sunday: 15 min hands-on, 1 hr 15 min simmer", "title": "Gochujang pork shoulder stew with hand-ripped noodles", "use_by_order": 2, "uses_leftover_of": null}, {"date": "2026-11-28", "frozen_ahead": false, "image": null, "key": "lasagne", "kind": "freezer", "leftover_days": null, "movable": true, "placeholder": true, "recipe": null, "short": "Lasagne", "split": "", "time": "35 to 45 minutes", "title": "Freezer lasagne", "use_by_order": 4, "uses_leftover_of": null}], "milestones": {"choice_state": "agreed", "choose_by": "2026-11-17", "delivery": {"date": "2026-11-20", "from": "16:00", "to": "20:00"}, "prep_day": "2026-11-22"}, "options": [{"base_serves": 2, "box": [], "cost_band": "high", "cuisine": "british", "facets": {"cuisine": "british", "practical": ["batch", "freezer", "leftovers", "jude"], "protein": "chicken", "search": "corn-fed roast chicken, maris piper roasties, carrots and tenderstem british roast chicken chicken british sunday-prep batch leftovers corn-fed free-range chicken lemon garlic maris piper potatoes potatoes carrots tenderstem broccoli olive oil whole milk black pepper and thyme or oregano", "type": "roast", "uses": "corn-fed free-range chicken|lemon|garlic|maris piper potatoes|potatoes|carrots|tenderstem broccoli|olive oil|whole milk|black pepper and thyme or oregano"}, "id": "R12", "image": "R12_corn-fed-roast-chicken.jpg", "jude_plate": true, "kcal": null, "kind": "recipe", "packs": [{"item": "The Best corn-fed chicken 1.75 kg", "price_gbp": 12.22, "shared_with": ["R13"]}, {"item": "Maris Piper potatoes 2 kg", "price_gbp": 1.85, "shared_with": ["R14", "R16"]}, {"item": "Carrots 1 kg", "price_gbp": 0.69, "shared_with": ["R15", "R16"]}, {"item": "Tenderstem broccoli 200 g", "price_gbp": 1.6, "shared_with": ["R14"]}], "protein": "chicken", "quick": false, "short": "Roast chicken", "time": "About 1 hr 45 min (40 min hands-on)", "title": "Corn-fed roast chicken, Maris Piper roasties, carrots and tenderstem"}, {"base_serves": 2, "box": [], "cost_band": "mid", "cuisine": "levantine", "facets": {"cuisine": "levantine", "practical": ["quick", "jude", "have"], "protein": "chicken", "search": "chicken shawarma bowls with flatbreads and houmous levantine bowl chicken chicken levantine leftovers quick leftover roast chicken greek-style flatbreads chickpeas peppadew roasted red peppers greek yoghurt houmous lettuce cucumber ground cumin and paprika cinnamon garlic lemon olive oil", "type": "bowl", "uses": "leftover roast chicken|greek-style flatbreads|chickpeas|peppadew roasted red peppers|greek yoghurt|houmous|lettuce|cucumber|ground cumin and paprika|cinnamon|garlic|lemon|olive oil"}, "id": "R13", "image": "R13_chicken-shawarma-bowls.jpg", "jude_plate": true, "kcal": 800, "kind": "recipe", "packs": [{"item": "Deli Kitchen Greek-style flatbreads", "price_gbp": 1.9, "shared_with": []}, {"item": "Chickpeas 400 g", "price_gbp": 0.37, "shared_with": []}, {"item": "Peppadew roasted red peppers", "price_gbp": 2.75, "shared_with": []}, {"item": "Ramona\u0027s houmous", "price_gbp": 3.75, "shared_with": []}, {"item": "Whole cucumber", "price_gbp": 0.99, "shared_with": []}], "protein": "chicken", "quick": true, "short": "Chicken shawarma bowls", "time": "25 min", "title": "Chicken shawarma bowls with flatbreads and houmous"}, {"base_serves": 2, "box": [], "cost_band": "low", "cuisine": "north-african", "facets": {"cuisine": "north-african", "practical": ["quick", "jude"], "protein": "fish", "search": "harissa salmon with crushed potatoes north-african traybake fish fish north-african quick salmon fillets harissa maris piper potatoes olive oil lemon lettuce or tenderstem", "type": "traybake", "uses": "salmon fillets|harissa|maris piper potatoes|olive oil|lemon|lettuce or tenderstem"}, "id": "R14", "image": "R14_harissa-salmon.jpg", "jude_plate": true, "kcal": 500, "kind": "recipe", "packs": [{"item": "Salmon fillets 220 g", "price_gbp": 3.26, "shared_with": []}], "protein": "fish", "quick": true, "short": "Harissa salmon", "time": "30 min", "title": "Harissa salmon with crushed potatoes"}, {"base_serves": 2, "box": [], "cost_band": "low", "cuisine": "italian", "facets": {"cuisine": "italian", "practical": ["batch", "freezer", "jude"], "protein": "lamb", "search": "lamb and carrot meatballs in tomato sauce with tagliatelle italian pasta lamb lamb italian mince batch freezer sunday-prep pasta lamb mince carrot onion garlic plain flour ground cumin and oregano tomato sauce or passata tagliatelle grated cheese", "type": "pasta", "uses": "lamb mince|carrot|onion|garlic|plain flour|ground cumin and oregano|tomato sauce or passata|tagliatelle|grated cheese"}, "id": "R15", "image": "R15_lamb-carrot-meatballs-tagliatelle.jpg", "jude_plate": true, "kcal": 900, "kind": "recipe", "packs": [{"item": "Lamb mince 300 g", "price_gbp": 3.34, "shared_with": []}, {"item": "Tagliatelle 500 g", "price_gbp": 2.4, "shared_with": []}], "protein": "lamb", "quick": false, "short": "Lamb and carrot meatballs in tomato sauce", "time": "Sunday: 30 min to roll and bake. Cook day: 20 min.", "title": "Lamb and carrot meatballs in tomato sauce with tagliatelle"}, {"base_serves": 2, "box": [], "cost_band": "low", "cuisine": "korean", "facets": {"cuisine": "korean", "practical": ["batch", "freezer", "jude"], "protein": "pork", "search": "gochujang pork shoulder stew with hand-ripped noodles korean stew pork pork korean batch freezer sunday-prep noodles veg-box pork shoulder steaks onion garlic fresh ginger carrots potato water gochujang soy sauce sesame oil spring onions greens plain flour water", "type": "stew", "uses": "pork shoulder steaks|onion|garlic|fresh ginger|carrots|potato|water|gochujang|soy sauce|sesame oil|spring onions|greens|plain flour|water"}, "id": "R16", "image": "R16_gochujang-pork-shoulder-stew.jpg", "jude_plate": true, "kcal": 1300, "kind": "recipe", "packs": [{"item": "Pork shoulder steaks 500 g", "price_gbp": 3.4, "shared_with": []}], "protein": "pork", "quick": false, "short": "Gochujang pork shoulder stew", "time": "Sunday: 15 min hands-on, 1 hr 15 min simmer. Cook day: 40 min including noodles.", "title": "Gochujang pork shoulder stew with hand-ripped noodles"}], "order": {"eta": {"date": "2026-11-20", "from": "19:07", "to": "20:07"}, "headline": "Corn-fed chicken swapped; Peppadew roasted red peppers and tagliatelle handed back.", "household": ["Innocent Orange Juice with Bits 900ml", "Bonne Maman Seedless Raspberry 370g 370g", "Coca-Cola Zero Sugar Zero Caffeine 8 x 330ml 8 x 330ml", "Morrisons Fruited Loaf 400g", "Morrisons Stainless Steel Scourer 4 per pack"], "impacts": [{"date": "2026-11-22", "dish": "Roast chicken and Chicken shawarma bowls", "flags": [], "item": "The Best corn-fed chicken 1.75 kg", "key": "R12", "kind": "substituted", "label": "Corn-fed chicken swapped", "suggestion": "The dinner can go ahead. It is heavier, so allow longer and check it is cooked through.", "touches": ["R12", "R13"], "what": "Extra Large Whole Chicken 2.15kg came instead of Corn Fed Free Range Chicken 1.5kg - 2kg."}, {"date": "2026-11-24", "dish": "Chicken shawarma bowls", "flags": [], "item": "Peppadew roasted red peppers", "key": "R13", "kind": "refused", "label": "No Peppadew roasted red peppers", "suggestion": "Pick it up locally, or use something already in.", "touches": ["R13"], "what": "No Peppadew roasted red peppers. Roasted Red Peppers (295g) was offered and handed back."}, {"date": "2026-11-26", "dish": "Lamb and carrot meatballs in tomato sauce", "flags": [], "item": "Tagliatelle 500 g", "key": "R15", "kind": "refused", "label": "No tagliatelle", "suggestion": "Pick it up locally, or use something already in.", "touches": ["R15"], "what": "No tagliatelle. Fusilli (500g) was offered and handed back."}], "late": true, "lines": [{"dishes": ["Roast chicken", "Chicken shawarma bowls"], "given": "Morrisons British Market Street Extra Large Whole Chicken 2.15kg", "item": "The Best corn-fed chicken 1.75 kg", "match": "matched", "outcome": "substituted", "tick": "the-best-corn-fed-chicken-1-75-kg"}, {"dishes": ["Roast chicken", "Harissa salmon", "Gochujang pork shoulder stew"], "given": "", "item": "Maris Piper potatoes 2 kg", "match": "matched", "outcome": "delivered", "tick": "maris-piper-potatoes-2-kg"}, {"dishes": ["Roast chicken", "Lamb and carrot meatballs in tomato sauce", "Gochujang pork shoulder stew"], "given": "", "item": "Carrots 1 kg", "match": "matched", "outcome": "delivered", "tick": "carrots-1-kg"}, {"dishes": ["Roast chicken", "Harissa salmon"], "given": "", "item": "Tenderstem broccoli 200 g", "match": "matched", "outcome": "delivered", "tick": "tenderstem-broccoli-200-g"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Deli Kitchen Greek-style flatbreads", "match": "matched", "outcome": "delivered", "tick": "deli-kitchen-greek-style-flatbreads"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Chickpeas 400 g", "match": "matched", "outcome": "delivered", "tick": "chickpeas-400-g"}, {"dishes": ["Chicken shawarma bowls"], "given": "Morrisons Roasted Red Peppers (295g)", "item": "Peppadew roasted red peppers", "match": "matched", "outcome": "refused", "tick": "peppadew-roasted-red-peppers"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Ramona\u0027s houmous", "match": "matched", "outcome": "delivered", "tick": "ramona-s-houmous"}, {"dishes": ["Chicken shawarma bowls"], "given": "", "item": "Whole cucumber", "match": "matched", "outcome": "delivered", "tick": "whole-cucumber"}, {"dishes": ["Harissa salmon"], "given": "", "item": "Salmon fillets 220 g", "match": "matched", "outcome": "delivered", "tick": "salmon-fillets-220-g"}, {"dishes": ["Lamb and carrot meatballs in tomato sauce"], "given": "", "item": "Lamb mince 300 g", "match": "matched", "outcome": "delivered", "tick": "lamb-mince-300-g"}, {"dishes": ["Lamb and carrot meatballs in tomato sauce"], "given": "Morrisons Italian Fusilli (500g)", "item": "Tagliatelle 500 g", "match": "matched", "outcome": "refused", "tick": "tagliatelle-500-g"}, {"dishes": ["Gochujang pork shoulder stew"], "given": "", "item": "Pork shoulder steaks 500 g", "match": "matched", "outcome": "delivered", "tick": "pork-shoulder-steaks-500-g"}], "slot": {"date": "2026-11-20", "from": "16:00", "to": "20:00"}, "status": "delivered", "store": "Morrisons", "summary": {"basket_delivery_lines": 13, "household_lines": 5, "missing": 2, "not_ordered": 0, "ordered": 13, "paid_total_gbp": 36.19, "placed_total_gbp": 50.27, "substituted": 1, "uncertain": 0}}, "path": "w/2026-11-23-k7q2/", "picked": ["R12", "R13", "R14", "R15", "R16"], "sample": false, "version": 1, "week": "2026-11-23"}</script>
+  <script type="application/json" id="larder-sync">{"base_url": "https://larder-sync.andersonjosephwilliam.workers.dev", "week": "2026-11-23"}</script>
   <script src="../../../assets/sync.js"></script>
-  <script src="../../../assets/card.js"></script>
-  <script src="../../../assets/design.js"></script>
-  <script src="../../../assets/pwa.js"></script>
-</body>
+  <script src="../../../assets/larder.js"></script>
+<script src="../../../assets/pwa.js"></script></body>
 </html>
